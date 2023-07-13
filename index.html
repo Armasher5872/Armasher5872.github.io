@@ -1,1 +1,8347 @@
-Hello World!
+Super Smash Bros: EXO
+
+A Smash Ultimate Overhaul by PhazoGanon
+
+Overview:
+
+Legend:
+
+Green: A change that buffs the character
+Red: A change that nerfs the character
+Brown: Either a mix of a buff and nerf, or something that (to my knowledge) doesn’t change anything significantly
+Blue: An overhaul to how a move or mechanic works
+Purple: A planned change or overhaul
+
+Terminology:
+
+Wavedashing/Wavedash: 
+
+A physics engine exploit (in Super Smash Bros Melee), or technique in Super Smash Bros Ultimate, which is performed by airdodging diagonally into the ground. Doing this will cause the character to slide some distance, which depends on your traction.
+
+Edge Canceling:
+
+A technique present in all Smash games, where if you hit the ledge or the end of a platform during a move, all endlag you’d normally receive is canceled.
+
+B Reversing:
+
+A technique that was first introduced in Super Smash Bros Brawl, where you can reverse the facing direction and momentum of a move by flicking the control stick in the opposite direction.
+
+Fallouts Fixed:
+
+Usually means that a move has been given sufficient knockback increases to make it more consistently connect towards the center of the move, and an autolink angle, which tries to pull opponents towards the center of the hitbox. If it’s different, clarification will be given.
+
+Land Canceling:
+
+A technique mainly present in Super Smash Bros Melee, where certain moves would have all of their landing lag canceled if they landed during a portion of the move.
+
+Hitfall/Hitfalling:
+
+A technique that debuted in Rivals of Aether, where during the hitlag of a move, you can fast fall.
+
+Hitflow:
+
+Upon hitting an opponent (and not hitting shield), the rest of the animation will be sped up by a listed multiplier until the end of the move. For example, if you hit Lucario’s Down Tilt, it goes from being active on frame 7 and having an FaF of 20, it now starts on frame 4 and has an FaF of 12.
+
+KO Percent is based on Mario with no DI/ASDI (clarified later on) from the center of FD/ledge of FD
+
+/*   CODE SECTION (Changes that affect the mechanics of the game)   */
+
+Universal Mechanics:
+
+Credit to the HDR Development Team for certain bits and pieces of code and other assets for usage in this modpack
+(https://github.com/HDR-Development)
+
+Credit to WuBoyTH for status script edits
+(https://github.com/HDR-Development)
+
+Credit to Chrispo for making a bunch of these mechanics
+(https://gamebanana.com/members/1762815)
+
+Engine Changes:
+
+Balloon Knockback Lower Threshold (In Hitstun Frames): 30 -> 37
+Balloon Knockback Upper Threshold (In Hitstun Frames): 80 -> 70
+Multiplier to Velocity/Acceleration to reach end of knockback trajectory: 70 -> 55
+Launch Angle Range from Base Angle Param to apply extra deceleration and further reduced hitstun scaling: 45 -> 80
+Maximum Grounded Initial Launch Speed: 8.3 -> 75
+
+Edge Canceling now applies to a variety of statuses, which includes the following:
+
+Taunts, Idling, Initial Dashes, Turns, Dash Turns, Item Grabs, Item Tosses, Soft/Hard Landings, Aerial Landing Lag, Special Fall Landing Lag, Airdodge Landing Lag, Ledge Teetering, and several attacks and specials (usually listed)
+
+Maximum Reflects increased to 999
+Max Hitlag Frames: 30 -> 60
+The Maximum Speed a character can go on the ground: 3.0 -> 5.0
+Shorthop Damage Multiplier: 0.8 -> 1.0
+Hitstun Multiplier for Bouncing off a wall: 0.8 -> 1.0
+Multiplier in Gravity Based Vertical Knockback Boost Formula: 5 -> 0
+Ledge Trumped Lag: 28 -> 33
+Soft/Hard Landings have been standardized to 4 frames
+Damage Removed from the Ledge Intangibility Time Formula
+Maximum Ledge Intangibility Based on Airtime Decreased (60 -> 41)
+Footstool Intangibility: 4 -> 0
+Held Buffer Window: 2 -> 0
+
+Movement Changes:
+
+Frame during initial dash to be able to instantly turn around: 5 -> -1
+Amount of frames to accelerate to full initial dash speed: 6 -> 4
+Maximum Directional Airdodge Landing Lag: 20 -> 10
+You can perform a max length wavedash by holding the control stick horizontally
+Jostle no longer applies to most attack and special statuses
+
+You can now drop through platforms during the following statuses: Initial Dashes, Running, Turns, Dash Turns, Ledge Teetering, Crouches, Airdodge Landing Lag, Item Grabs, Item Tosses, and Shield. You can hold the special button to disable the ability to platform drop during Airdodge Landing Lag and Item Pickups.
+
+You can now crouch during the following statuses: Walk, Walk Brake, Dash, Turn Dash, Run, Run Brake, Turn Run, and Turn Run Brake. Said crouching can be done as soon as the status starts.
+
+During most statuses, whenever you jump from the ground to the air, your momentum will be preserved, so for instance, if Captain Falcon jumps from a run, he will continue to move at the same speed in the air as he did on the ground.
+
+In relation to this, all the following params have been adjusted:
+
+Ground to Air Horizontal Momentum Multiplier: Original Value -> 1.0
+Maximum Initial Horizontal Air Speed from Grounded Jump: Original Value -> Initial Dash/Run Speed (Whichever ones slower)
+Maximum Horizontal Velocity from Jump: Original Value -> Initial Dash/Run Speed (Whichever ones faster)
+Maximum Initial Horizontal Air Speed from Aerial Jump: Original Value -> Initial Dash/Run Speed (Whichever ones faster)
+
+These values are the case for most fighters, but will be adjusted depending on a fighter by fighter case.
+
+Characters with floaty jumps can halt their vertical momentum by letting go of jump and doing any aerial. Yoshi, Ness, Mewtwo, Lucas, Kazuya, and Sora are the only ones who can Double Jump Cancel.
+While you are airborne and actionable (Or landing an aerial or special), you can double tap the control stick in the opposite direction you’re facing to switch direction. This is only doable once per airtime.
+
+Defense:
+
+Shielding can now be performed out of an initial dash
+Shield Max HP: 50 -> 45
+Minimum Shield Size: 0.15 -> 1 (Removes Shield Poking)
+Minimum Shield Hold Frames to Drop Shield: 3 -> 0
+Shield HP Degeneration per Frame: 0.15 -> 0.2
+Shield HP Regeneration per Frame: 0.08 -> 0.125
+Extra Shield Damage: 1.19 -> 1
+Maximum Shield Pushback Speed: 1.3 -> 2.5
+
+Parrying projectiles now reflects them with these multipliers:
+
+Power Multiplier: 0.5x
+Speed Multiplier: 1.0x
+Life Multiplier: 0.8x
+
+Parry Activation Window from Shield Drop (Measured in Frames): 3 -> 1
+
+Shield Breaking has been overhauled for everyone (aside from Jigglypuff): Instead of having the character jump and fly upwards, then fall down and begin their dizzy animation, they instead enter the crumpled animation, then enter the dizzy animation. Shield Breaking also inflicts special zoom.
+
+Dodge Staling Removed
+Spotdodge Canceling Removed
+
+Dodges now have standardized intangibility and FaF:
+
+Dodge Intangibility Duration: 2-15 (Spotdodge), 4-18 (Forward Roll/Back Roll)
+Dodge FaF: 29 (Spotdodge), 38 (Forward Roll/Back Roll)
+
+Dodge Canceled Item Throw Frame Increased (2 -> 5)
+
+Canceling a Dodge into an Item Throw will enable a Glide Toss. Glide Tossing effectively transfers the momentum you’d normally move during the roll into sliding actionable momentum.
+
+Airdodge Staling Removed
+
+Airdodge Sling Removed:
+
+Direction Airdodge Pullback Distance: 7 -> 1
+Direction Airdodge Pullback Duration: 4 -> 0
+
+Airdodges now have standardized intangibility and FaF:
+
+Airdodge Intangibility Duration: 3-23 (Neutral), 3-33 (Directional)
+Airdodge FaF: 50 (Neutral), 70 (Directional)
+
+Airdodges can now be canceled into an item throw from frames 1-5. Doing so enables an aerial glide toss, functioning similar to a grounded glide toss.
+Airdodges can now be canceled into a Zair from frames 1-5.
+
+Airdodge Momentum has been completely overhauled: Instead of falling and controlling your drift, you move a short distance, before freezing in place. The freeze starts on frame 18, and ends on frame 34, after which, you'll fall straight down and can begin drifting again.
+
+Maximum DI Angle: 9.74 -> 12
+SDI has been completely removed, being replaced with ASDI. ASDI stands for Automatic Smash Directional Influence, which means that for every infliction of hitlag you take, you get teleported a certain distance in the direction you’re holding in. The multiplier is 2.15, and is measured in the smallest training mode units
+Tumble can now be fast fallen
+Attack Hitstun Cancel Frame: 45 -> 999
+Airdodge Hitstun Cancel Frame: 40 -> 999
+Tech Input Window (measured in frames): 12 -> 20
+Tech Lockout Window (measured in frames): 28 -> 40
+Tech Airdodge Lockout Window (measured in frames): 15 -> 1
+
+The way mashing works has been overhauled to now be automatic. Holding down the attack or special button will now automatically mash out of the status. It mashes at an approximate rate of 12 times per second.
+
+Grab:
+
+How much the grab timer should decrease based on inputs: 8 -> 0
+
+(Internally this is known as clatter so I will refer to it as clatter timer)
+
+Dizzy (Shield Break):
+
+Dizzy Clatter Timer: 3 -> 0
+Dizzy Base Timer Decreased: 400 -> 300
+
+Sleep:
+
+Sleep Clatter Timer: 8 -> 0
+
+Stun:
+
+Stun Clatter Timer: 5 -> 0
+
+Bury:
+
+Bury Clatter Timer: 3 -> 0
+
+Frozen:
+
+Frozen Clatter Timer: 4 -> 0
+
+Crouch Cancel Multiplier: 0.85 -> 1.0
+Bury now gives 33% knockback resistance
+
+Offense:
+
+Maximum Rage KB Multiplier: 1.1 -> 1.0
+Phantom Hits have been removed
+Jabs can now only be input via a neutral attack input
+With the exception of Samus, Dash Attack is cancellable into Up Smash from the start of the move until 1 frame after the attack comes out. Dash Attack can also be canceled into Down Smash (doesn’t exclude Samus). The DACUS/DACDS framedata will be listed with each character.
+Regrab Immunity Frames: 60 -> 40
+Dash Grab Friction: 1.6 -> 0.5
+All Grabboxes now use a single catchbox that can grab grounded and aerial opponents
+All standard grabs can pick up light and heavy items
+Most fighters now gain a new move or ability by pressing special while in shield. Some examples include Ness's PSI Offense Up, Captain Falcon’s Boost Install, and Mewtwo’s Stored Power.
+Most moves in the game now use the POS LR Facing Angle. This means the direction they’re sent depends on if you’re in front of them or behind them.
+
+Game Modes: A vast majority of the game modes that exist in the Custom Smash menu have now been replaced with new gamemodes. Here’s what each gamemode replaces:
+
+Mega Smash -> Fast Smash
+Mini Smash -> Slow Smash
+Flower Smash -> Turbo Smash
+Bunny Smash -> Hitstunless Smash
+Tail Smash -> Volleyball Smash
+Rocket Belt Smash -> Free Launch Smash
+Screw Attack Smash -> One Hit Smash
+Back Shield Smash -> Smashketball Smash
+Curry Smash -> Inverse Knockback Smash
+Reflect Smash -> Traditional Fighter Smash
+
+Fast Smash:
+
+Increases the mobility, fall speed, and various other stats of characters, making them faster paced.
+
+Slow Smash:
+
+Decreases the mobility, fall speed, and various other stats of characters, making them slower paced.
+
+Turbo Smash:
+
+Whenever you hit someone with an attack, the endlag of the move can be instantly canceled, sorta like Ryu/Ken’s Special Canceling, but it can be canceled into any move.
+
+Hitstunless Smash:
+
+Moves no longer have hitstun, so you can now instantly act whenever you’re attacked.
+
+Volleyball Smash:
+
+Instead of knocking each other into the blastzone, you now spawn with a soccerball. Your goal is to knock it to the opponent's side, and if they fail to send it back, they will be KO’d.
+
+Free Launch Smash:
+
+The direction you hold the control stick indicates the direction you will be launched whenever being hit.
+
+One Hit Smash:
+
+Any move that you land will instantly KO the opponent. Anytime you’re hit, you also get instantly KO’d.
+
+Smashketball Smash:
+
+Instead of knocking each other into the blastzone, your goal is to knock your opponent into your hoop (indicated by a windy vortex). Knocking them into this will instantly KO them.
+
+Inverse Knockback Smash:
+
+Moves will now send in the opposite direction they would normally send, so spikes now send upwards, and moves that send forward will knock them behind you.
+
+Traditional Fighter Smash:
+
+A planned mode that makes the game more akin to Traditional Fighting Games. Includes things like auto turnaround, command inputs, stamina mode, etc…
+
+Mario:
+
+Stats:
+
+Traction Decreased (0.102 -> 0.0663)
+Initial Dash Speed Decreased (1.936 -> 1.765)
+Run Speed Decreased (1.76 -> 1.7)
+Initial Jump Height Increased (19.9815 -> 20.75)
+Fullhop Height Increased (36.33 -> 37.85)
+Shorthop Height Increased (17.54 -> 18.0)
+Air Jump Height Increased (36.33 -> 37.85)
+Air Speed Decreased (1.208 -> 1.05)
+Gravity Increased (0.087 -> 0.09)
+Fall Speed Increased (1.5 -> 1.6)
+Fast Fall Speed Increased (2.4 -> 2.55)
+Weight Decreased (98 -> 95)
+DACUS/DACDS Window: Frames 1-7
+
+Grounded Moves:
+
+Forward Tilt BKB Increased (55 -> 60)
+Forward Tilt Active Duration Increased (5-7 -> 5-8)
+
+Up Tilt Startup Reduced (5 -> 4)
+Up Tilt BKB Increased (28 -> 40)
+Up Tilt KBG Decreased (130 -> 120)
+Up Tilt Angle Increased (96 -> 108)
+
+Down Tilt Tipper Angle Increased (80 -> 92)
+
+Dash Attack is now the Mario Odyssey Dive Roll.
+
+Dash Attack Stats:
+
+Damage: 8.0%/7.0%/6.0%/5.0% (Early/Mid 1/Mid 2/Late)
+BKB: 100
+KBG: 43/48/53/58 (Early/Mid 1/Mid 2/Late)
+Angle: 50/48/46/44 (Early/Mid 1/Mid 2/Late)
+Framedata: 6-12/13-22/23-34/35-42 (Early/Mid 1/Mid 2/Late)
+FaF: 55
+Shield Safety: -43/-7 (Minimum/Maximum)
+
+Up Smash Active Duration Adjusted (9-12 -> 10-16)
+Up Smash Late Duration Angles Adjusted (Frames 13-16: 83 -> 300)
+Up Smash Endlag Increased (39 -> 45)
+
+Aerials:
+
+Nair is now the NSMBW Air Stall.
+
+Nair Stats:
+
+Damage: 5.0%/2.0%
+BKB: 30
+KBG: 90
+Angle: 361
+Framedata: 3-5 (Early), then 6-12 (Late)
+FaF: 25
+Autocancel Window: 1-3, then 25+
+Landing Lag: 6
+Shield Safety: -4/-3 (Minimum/Maximum)
+
+Fair now has Fire Effects
+Fair Angles Adjusted (Frames 16-17: 361 -> 60, Frame 21: 361 -> 30)
+Fair BKB Adjusted (Frames 16-17: 30 -> 55, Frame 21: 20 -> 40)
+Fair Hitlag Increased (1.0x -> 1.3)
+Fair FaF Reduced (59 -> 50)
+Fair Landing Lag Reduced (17 -> 12)
+
+Bair Angle Decreased (361 -> 28)
+Bair Vertical Offset Decreased (0.0 -> -1.6)
+Bair Size Decreased (4.5/5.9/5.3 -> 4.0/4.0/4.0)
+Bair Landing Lag Increased (6 -> 8)
+Bair Autocancel Window Increased (19 -> 28)
+
+Uair BKB Increased (10 -> 25)
+Uair Angle Decreased (75 -> 70)
+Uair Active Duration Adjusted (4-7 -> 3-9)
+Uair Landing Lag Increased (6 -> 8)
+Uair Autocancel Window Increased (17 -> 30)
+
+Dair is now a Corkscrew Stomp.
+
+Dair Stats:
+
+Damage: 1.5%/1.0%/2.0% (9.5% Total)
+FKB: 55 (First Hit)/20 (Multihits)
+BKB: 0 (First Hit)/0 (Multihits)/20 (Finisher)
+KBG: 155 (First Hit)/100 (Multihits)/110 (Finisher)
+Angle: 85 (First Hit)/367 (Multihits)/270 (Finisher)
+Framedata: 10-12, then 14-27, then 28-30
+FaF: 45
+Autocancel Window: 1-2, then 40+
+Landing Lag: 8
+Shield Safety: -6
+
+Specials:
+
+Side Special is now Cape Twirl: Cape Twirl has Mario reel back before twirling forward with his Cape.
+
+Cape Twirl Stats:
+
+Damage: 11.0%/9.0%/7.0%
+BKB: 85/80/75
+KBG: 70/60/50
+Angle: 75/70/65
+Framedata: 12-17, then 18-29, then 30-42
+FaF: 80
+Shield Safety: -57/-30 (Minimum/Maximum)
+
+Super Jump Punch can now be canceled into Wall Jump from frames 19-37
+
+F.L.U.D.D is now B Reversable
+
+Donkey Kong:
+
+Stats
+
+
+Walk Speed Increased (1.365 -> 1.5)
+
+
+Walk Acceleration Increased (Base: 0.105 -> 0.115, Additional: 0.105 -> 0.185)
+
+
+Traction Decreased (0.123 -> 0.07995)
+
+
+Initial Dash Speed Decreased (2.09 -> 1.75)
+
+
+Run Speed Increased (1.873 -> 1.975)
+
+
+Initial Jump Velocity Decreased (18.7 -> 14.325)
+
+
+Short Hop Height Decreased (17.3 -> 14.0)
+
+
+Full Hop Height Decreased (35.5 -> 35)
+
+
+Air Jump Height Decreased (35.5 -> 35)
+
+
+Air Acceleration Adjusted (Base: 0.01 -> 0.04, Additional: 0.05 -> 0.03)
+
+
+Air Speed Decreased (1.203 -> 1.075)
+
+
+Gravity Increased (0.085 -> 0.115)
+
+
+Fall Speed Increased (1.63 -> 2.26)
+
+
+Fast Fall Speed Increased (2.608 -> 2.94)
+
+
+Weight Decreased (127 -> 116)
+
+
+Donkey Kong now has a wall jump and wall cling
+
+
+Wall Jump Height Velocity Decreased (1.3 -> 1.25)
+
+
+Removed Tie Hurtboxes
+
+
+DK now has arm intangibility during shield release from frames 3 - 12
+
+
+DACUS/DACDS Window: Frames 1-10
+
+
+Grounded Moves
+
+Jab 1 Damage Decreased (4.0% -> 3.0%)
+
+
+Jab 1 Tipper Adjusted (BKB: 20 -> 45, KBG: 20 -> 25, Angle: 180 -> 130)
+
+Jab 1 FAF Decreased (24 -> 18)
+
+
+Jab 2 Damage Decreased (6.0% -> 4.0%)
+
+
+Jab 2 BKB Increased (40 -> 70)
+
+
+Jab 2 FAF Decreased (31 -> 26)
+
+
+Forward Tilt Arm Damage Standardized (8.0%/9.0% -> 9.0%)
+
+
+Forward Tilt Angles Adjusted (High: 361 -> 35, Middle: 361 -> 15, Low: 361 -> 345)
+
+
+Forward Tilt KBG Decreased (High: 78 -> 70, Middle: 78 -> 62, Low: 78 -> 62)
+
+
+Forward Tilt Shoulder Hitbox Size Increased (3.5 -> 5.5)
+
+
+Forward Tilt Startup Decreased (7 -> 6)
+
+
+Forward Tilt FAF Decreased (34 -> 30)
+
+
+Donkey Kong leans back further during Forward Tilt
+
+
+Forward Tilt no longer has intangibility
+
+
+Up Tilt BKB Decreased (40 -> 35)
+
+
+Up Tilt Duration Increased (Active: 5-11 -> 5-12)
+
+
+Up Tilt FAF Decreased (38 -> 30)
+
+
+Up Tilt no longer has intangibility
+
+
+Down Tilt Hand Hitbox Trip Chance Increased (0.4 -> 1.0)
+
+
+Down Tilt Hand Hitbox X Offset Increased (8.5 -> 9.0)
+
+
+Down Tilt FAF Decreased (25 -> 22)
+
+
+Donkey Kong leans back further during Up Tilt
+
+Down Tilt no longer has intangibility
+
+
+Dash Attack now edge cancels past frame 8
+
+
+Dash Attack is jump cancelable past frame 9 
+
+Jump Canceling this move incurs a 0.85x damage multiplier for your next move, alongside a frame 8 jumpsquat. It can also only be jump canceled when not hitting shield
+
+
+Dash Attack gains a speed boost on hit (not on shield)
+
+
+Dash Attack now covers Donkey Kong’s entire body
+
+
+Dash Attack Damage Decreased (Early: 12.0% -> 10.0%, Late: 9.0% -> 7.0%)
+
+
+Dash Attack Angle Increased (53 -> 60)
+
+
+Forward Smash Hitboxes Adjusted to match Donkey Kong's Arms
+
+
+Forward Smash no longer has intangibility
+
+
+Up Smash Knockback Adjusted (BKB: 40 -> 48, KBG: 84 -> 80)
+
+
+Up Smash now has launcher hits while the hands are rising (Active: 10-12)
+
+
+Up Smash FaF Decreased (49 -> 55)
+
+
+Up Smash no longer has intangibility
+
+
+Down Smash Sweetspot Angle Decreased (82 -> 350)
+
+
+Down Smash Sweetspot BKB Increased (30 -> 35)
+
+
+Down Smash Sweetspot KBG Decreased (88 -> 55)
+
+
+Down Smash Sourspot Angle Increased (70 -> 115)
+
+
+Down Smash Startup Decreased (Active: 11 -> 10)
+
+
+Down Smash Hitboxes Adjusted to more closely match the arm
+
+
+Down Smash FaF Increased (55 -> 60)
+
+
+Down Smash no longer has intangibility
+
+Aerials
+
+
+Nair Duration Adjusted (Active: 10-26 -> 7-22)
+
+
+The hitboxes on Nair have been adjusted to fully cover Donkey Kong's Body
+
+
+Nair Landing Lag Decreased (10 -> 8)
+
+
+Nair Late Autocancel Window Increased (27 -> 38)
+
+
+Fair Landing Lag Decreased (17 -> 14)
+
+
+Fair Early Hit has been adjusted to be more accurate to Donkey Kong's Arms
+
+
+Fair Early Hit Angle Increased (361 -> 60)
+
+
+Fair Hitbox Size Increased (5.5 -> 7.0)
+
+
+Fair FaF Decreased (56 -> 49)
+
+
+Fair Late Autocancel Window Decreased (56 -> 49)
+
+
+Bair Foot Hitbox Size Decreased (7.0 -> 5.0)
+
+
+Bair Landing Lag Increased (11 -> 14)
+
+
+Bair Early Hit KBG Decreased (97 -> 80)
+
+
+Bair Early Hit KBG Increased (20 -> 40)
+
+
+Uair Active Duration Increased (Active: 6-10 -> 5-11)
+
+
+Uair now covers Donkey Kong's Torso and Arms
+
+
+Uair now has more dynamic angles (Frame 5 Arm/Torso Hit: 90 -> 120, Frame 7 Arm/Torso Hit: 90 -> 75, Frame 9 Hit: 90 -> 65)
+
+
+Uair Damage Decreased (13.0% -> 10.0%)
+
+
+Uair Landing Lag Decreased (15 -> 12)
+
+
+Uair Autocancel Window Increased (26 -> 30)
+
+
+Uair no longer has intangibility
+
+Grabs/Throws
+
+
+Cargo Throw Base Frame Value Decreased (50 -> 25)
+
+
+Cargo Throw Frame Multiplier Decreased (1.5 -> 1.15)
+
+
+Cargo Up Throw KBG Decreased (53 -> 40)
+
+
+Cargo Down Throw Angle Decreased (46 -> 30)
+
+
+Specials
+
+
+The Grounded and Aerial versions of Uncharged Punch now have the same stats
+
+
+Uncharged Giant Punch BKB Increased (45 -> 65)
+
+
+Hitbox of Uncharged Giant Punch is now the same as Charged
+
+Uncharged Giant Punch FaF Decreased (62 -> 47)
+
+
+Charged Giant Punch Armor Startup Decreased (Active: 9-20 -> 1-20)
+
+
+Charged Giant Punch Armor Strength Reduced (Infinite -> 20%)
+
+
+Charged Giant Punch FaF Increased (47 -> 60)
+
+
+Giant Punch is now B Reversable
+
+
+Both variants of Side Special have been replaced with Hand Slap
+
+
+Grounded Side Special:
+
+
+Now resembles the animation from Donkey Kong Country: Tropical Freeze
+
+
+Grounded Side Special Stats:
+
+No longer has Armor
+Damage: 9.5% for hands, 8.0% for arms
+BKB: 30 for all hits
+KBG: 85 for all hits
+Angle: 90 for all hits
+Framedata: 11-12 for first hits, 20-22 for second hits
+Minimum Shield Safety: -34
+Maximum Shield Safety: -31
+FAF of 63
+
+Aerial Side Special:
+
+Almost identical to Vanilla Aerial Down Special
+
+First Hit Angle Adjusted (90 -> 367)
+
+Second Hit Size Increased (8.0 -> 9.0)
+
+Grounded Spinning Kong Armor Removed
+
+
+Grounded Spinning Kong Armor Duration Adjusted (Active: 5-17 -> 1-63)
+
+
+Grounded Spinning Kong Arm Intangibility Removed
+
+
+Grounded Spinning Kong's Hitboxes Adjusted to cover Donkey Kong's Upper Body and Arms
+
+
+Grounded Spinning Kong now ignores projectiles
+
+
+Grounded Spinning Kong’s is now Transcendent
+
+
+Grounded Spinning Kong Maximum Horizontal Speed Increased (1.1 -> 1.5)
+
+
+Grounded Spinning Kong Damage Decreased (19.0% -> 15.6%)
+
+
+Final Hit of Grounded Spinning Kong KBG Decreased (157 -> 120)
+
+
+Aerial Up Special:
+
+Now replaced with Barrel Cannon. Barrel Cannon works similarly to the Stage Hazard.
+
+
+Credit to WuBoytH for the Donkey Kong Barrel Code (https://gamebanana.com/members/1511396)
+
+
+Grounded Down Special has been changed to Barrel Pull
+
+Upon using it, Donkey Kong will pull out the barrel item and begin to carry it around. Due to this being identical to the barrel item, DK can jump around and move with the barrel in his hands. He can also throw it in one of the 4 cardinal directions.
+
+Donkey Kong can only have one barrel every 15 seconds. If he tries to pull more during cooldown, he will do Down Taunt instead.
+
+Barrels have a 6% chance to explode on contact, which deals 6% to anyone, including Donkey Kong.
+
+Barrels have an increased hurtbox size.
+
+Barrels can be hit back to Donkey Kong, which will do damage to him.
+
+
+Aerial Down Special has been changed to Megaton Clap
+
+Megaton Clap has Donkey Kong do a massive clap diagonally downwards. This move acts as a command grab, automatically forcing Donkey Kong into the Cargo Throw animation
+
+Aerial Down Special Stats:
+
+Damage: N/A
+BKB: N/A
+KBG: N/A
+Angle: N/A
+Framedata: 22, lasts for 1 frame
+Shield Safety: N/A
+Landing Lag: 30
+FAF of 50
+
+
+Final Smash is called Lunar Knockout. Donkey Kong will slam his fists in front of him and jump forward. If anyone is caught by this slam, they will be transported to a cutscene where Donkey Kong punches the moon straight down onto the stage, which deals colossal damage and knockback.
+
+Link
+
+
+
+
+Stats
+
+
+Traction Decreased (0.113 -> 0.07345)
+
+
+Initial Dash Speed Decreased (1.98 -> 1.75)
+
+
+Run Speed Increased (1.534 -> 1.6)
+
+
+Air Speed Increased (0.924 -> 0.955)
+
+
+Initial Jump Velocity Decreased (15.29 -> 9.55)
+
+
+Short Hop Height Decreased (13.38 -> 11.0)
+
+
+Gravity Increased (0.09 -> 0.12)
+
+
+Fall Speed Increased (1.6 -> 2.0)
+
+
+Link can now Wall Jump
+
+
+DACUS/DACDS Window: Frames 1-21
+
+
+Grounded Moves
+
+Jab 1 Startup Reduced (7 -> 4)
+
+
+Up Tilt Damage Decreased (11.0% -> 10.0%)
+
+
+Up Tilt Duration Increased (8-12 -> 8-14)
+
+
+Down Tilt Horizontal Disjoint Increased (12.0 -> 13.5)
+
+
+Forward Smash 1 Sword Beam now has fixed knockback for the first 3 frames
+
+
+Up Smash Horizontal Offsets Removed
+
+
+Up Smash 1/2 are now Transcendent
+
+Aerials
+
+Nair Early Hitbox Size Reduced (5.0/3.0 -> 4.0/2.5)
+
+
+Nair Late Hitbox Size Reduced (4.5/3.0 -> 3.5/2.0)
+
+
+Nair Duration Adjusted (7-31 -> 7-26)
+
+
+Nair FaF Increased (38 -> 45)
+
+
+Nair Landing Lag Increased (6 -> 8)
+
+
+Nair Autocancel Window Increased (36 -> 45)
+
+Uair Late Hit KBG Decreased (85 -> 55)
+
+
+Specials
+
+
+Remote Bomb is now B Reversable
+Samus
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.87 -> 1.77)
+
+
+Run Speed Increased (1.654 -> 1.8)
+
+
+Traction Decreased (0.082 -> 0.0533)
+
+
+Fall Speed Increased (1.33 -> 1.44)
+
+
+Fast Fall Speed Increased (2.128 -> 2.3)
+
+
+Gravity Increased (0.075 -> 0.08)
+
+
+DACUT/DACDS Window: Frames 1-9
+
+
+Grounded Moves
+
+Jab is now a single Jab composed of Vanilla Jab 2
+
+
+Jab Startup Decreased (6 -> 5)
+
+
+Jab now has Cannon intangibility
+
+
+Forward Tilt now has Lower Leg Intangibility
+
+
+Forward Tilt FaF Decreased (33 -> 30)
+
+
+Up Tilt is now the Melee Counter
+
+Up Tilt Stats:
+
+Up Tilt has Arm Invincibility from frames 12-17
+Up Tilt is Transcendent
+Damage: 13.0%/12.0%
+BKB: 40
+KBG: 100
+Angle: 361
+Framedata: 12-17
+Shield Safety: -31/-26 (Minimum/Maximum)
+FAF: 55
+
+
+Down Tilt is now the Slide Action from Metroid Dread
+
+Down Tilt Stats:
+
+Damage: 9.6%/7.0%
+BKB: 60
+KBG: 70
+Angle: 35
+Framedata: 8-16 for Early Hit, 17-27 for Late Hit
+Shield Safety: -32/-15 (Minimum/Maximum)
+FAF: 50
+
+
+Instead of having a DACUS, Samus has a DACUT (Dash Attack Canceled Up Tilt).
+
+
+Forward Smash Startup Increased (10 -> 14)
+
+
+Forward Smash now inflicts Ice
+
+
+Up Smash now inflicts Ice
+
+
+Down Smash now comprises of 3 hitboxes, being a hip hitbox, a knee hitbox, and a foot hitbox.
+
+The foot hitbox has an angle of 30, the knee hitbox has an angle of 75, and the hip hitbox has an angle of 120.
+
+
+                                     Aerial Moves
+
+
+Fair Startup Increased (6 -> 9)
+
+
+Fair Landing Lag Decreased (14 -> 12)
+
+
+Zair is now a single hit
+
+
+Grabs/Throws
+
+
+Down Throw FaF Increased (37 -> 42)
+
+
+Down Throw Angle Decreased (74 -> 65)
+
+
+Specials
+
+
+Homing Missile is now B Reversable
+
+
+Super Missile is now B Reversable
+
+
+Super Missile KBG Increased (65 -> 75)
+
+
+Landing during Homing Missile and Super Missile incurs 10 frames of landing lag
+
+
+Screw Attack now only covers Samus's body
+
+
+Screw Attack Startup Increased (4 -> 6)
+
+
+Bomb is now B Reversable
+Dark Samus
+
+
+
+
+Stats
+
+Max Walk Speed Increased (1.115 -> 1.225)
+
+
+Initial Dash Speed Decreased (1.87 -> 1.82)
+
+
+Starting Run Acceleration Decreased (0.044 -> 0.02)
+
+
+Additional Run Acceleration Decreased (0.132 -> 0.06)
+
+
+Max Run Speed Decreased (1.654 -> 1.55)
+
+
+Traction Decreased (0.082 -> 0.0533)
+
+
+Initial Jump Velocity Increased (20 -> 26)
+
+
+Fullhop Height Increased (37 -> 43.65)
+
+
+Shorthop Height Increased (18 -> 23)
+
+
+Air Jump Height Increased (37 -> 55.65)
+
+
+Initial Air Acceleration Increased (0.04 -> 0.06)
+
+
+Additional Air Acceleration Increased (0.05 -> 0.06)
+
+
+Max Air Speed Increased (1.103 -> 1.215)
+
+
+Air Friction Increased (0.0075 -> 0.03)
+
+
+Fall Speed Decreased (1.3 -> 1.0)
+
+
+Fast Fall Speed Decreased (2.128 -> 1.9)
+
+
+Weight Decreased (108 -> 90)
+
+
+DACUS/DACDS Window: Frames 1-9
+
+
+Grounded Moves
+
+All of Dark Samus’s moves that have Phazon inflict poison damage, which deal damage over the course of the listed time frame.
+
+
+Dark Samus now only has one Jab, being her vanilla Jab 1
+
+
+Forward Tilt has been changed to Phazon Shot
+
+Phazon Shot has Dark Samus twirl forward before blasting a large cone of phazon from her arm cannon.
+
+Forward Tilt Stats:
+
+Can be angled
+Damage: 11.0% (3.0% + 8.0% Poison Damage)
+Poison Time: 5 Seconds
+BKB: 40
+KBG: 80
+Angle: 30
+Framedata: 10-13
+Shield Safety: -31
+FAF: 45
+
+
+Up Tilt has been changed to Cannon Crusher
+
+Cannon Crusher has Dark Samus lean back before slamming the arm cannon in an overhead arc.
+
+Up Tilt Stats:
+
+Damage: 9.0%
+BKB: 40
+KBG: 100
+Angle: 70/300
+Framedata: 12-16 for the early hit, 17-19 for the late hit
+Shield Safety: -33/-26 (Minimum/Maximum)
+FAF: 54
+
+
+Down Tilt is now a multihit
+
+Down Tilt Stats:
+
+Damage: 8.0% (Multihits: 0.1% x2/Finisher: 1.8%/Poison Damage: 6.0%)
+Poison Time: 5 Seconds
+FKB: 40
+BKB: 70
+KBG: 65
+Angle: 270/70
+Framedata: 9-21 for the multihits, 23 for the finisher
+Shield Safety: -21
+FAF: 47
+
+
+Dash Attack has been reworked to be a multihit twirling shoulder tackle
+
+Dash Attack Stats:
+
+Damage: 14.0% (Multihits: 0.3% x4/Finisher: 2.8%/Poison Damage: 10.0%)
+Poison Time: 5 Seconds
+FKB: 40 for multihits
+BKB: 60
+KBG: 80
+Angle: 30/70
+Framedata: 8-17 for the multihits, 19 for the finisher hit. 
+Shield Safety: -23
+FAF: 46
+
+
+Forward Smash is now the needle spray attack from Metroid Prime 3
+
+Forward Smash Stats:
+
+Damage: 14.6%/16.6% Uncharged (Multihits: 0.1% x6/Finisher: 6.0%/8.0%/Poison Damage: 8.0%)
+Poison Time: 7 Seconds
+FKB: 5
+BKB: 40
+KBG: 5/90
+Angle: 0/361
+Framedata: Can start charging on frame 4, 18-27 for Multihits, 30-31 for Finisher
+Shield Safety: -27
+FAF: 65
+
+
+Up Smash is now the Phazon Orbs from the Assist Trophy version
+
+Up Smash Stats:
+
+Damage: 12.0% (4.0% + 8.0% Poison Damage)
+Poison Time: 7 Seconds
+BKB: 80
+KBG: 162
+Angle: 80
+Framedata: Can start charging on frame 7, 11-57
+Shield Safety: -64/-31 (Minimum/Maximum)
+FAF: 79
+
+
+Down Smash is now the tendril wall from Metroid Prime 3
+
+Down Smash Stats:
+
+Damage: 18.0% Uncharged (10.0% + 8.0% Poison Damage)
+Poison Time: 7 Seconds
+BKB: 90
+KBG: 60
+Angle: 90
+Framedata: Can start charging on frame 6, 16-24 for main hit
+Shield Safety: -38/-27 (Minimum/Maximum)
+FAF: 65
+                              Aerial Moves
+
+
+Nair is changed to Phazon Overcharge
+
+Dark Samus convulses with Phazon Energy, before creating an explosion around herself
+
+Nair Stats:
+
+Damage: 9.5% (Multihits: 0.1% x10/Finisher: 3.5%/Poison Damage: 5.0%)
+Poison Time: 5 Seconds
+FKB: 80 for multihits
+BKB: 50 for finisher
+KBG: 100 for multihits, 80 for finisher
+Angle: 367 for multihits, 361 for finisher
+Framedata: 9-25 for multihits, 32-35 for finisher
+Shield Safety: -7/-6
+Landing Lag: 9
+FAF: 55
+
+
+Fair is changed to Cannon Chop
+
+Dark Samus slams her cannon from top to bottom in a downward arc
+
+Fair Stats:
+
+Damage: 11.0%
+BKB: 40
+KBG: 70
+Angle: 25
+Framedata: 12-15
+Shield Safety: -6
+Landing Lag: 11
+FAF: 45
+
+
+Bair has been changed to Back Buster
+
+Dark Samus does a reverse overhead punch with the arm cannon, akin to King K Rool’s Bair
+
+Bair Stats:
+
+Damage: 12.5%/14.5%/16.5%, then 10.5%/12.5%/14.5%
+BKB: 40/20/40, then 40/20/10, then 40/20/40
+KBG: 80
+Angle: 270 for sweetspot, 361 for rest
+Framedata: 15-19
+Shield Safety: -9/-8 (Minimum/Maximum)
+Landing Lag: 14
+FAF of 55
+
+
+Uair has been changed to Cannon Sweep
+
+Dark Samus sweeps the area above her with her Cannon
+
+Uair Stats:
+
+Damage: 10.5%
+BKB: 40
+KBG: 60
+Angle: 85
+Framedata: 10-16
+Shield Safety: -8
+Landing Lag: 13
+FAF of 50
+
+
+Dair has been changed to Drilling Corkscrew
+
+Dark Samus performs a slightly diagonal stomp, then torques into a corkscrew motion
+
+Dair Stats:
+
+Damage: 8.5%/6.5%/4.5%, then 0.5%, then 0.2%
+FKB: 70 for multihits
+BKB: 40 for initial hit
+KBG: 40 for initial hit, 100 for multihits
+Angle: 290 for initial hit, 367 for multihits
+Framedata: 12-14 for initial hit, 16-33 for multihits
+Shield Safety: -8/-6 (Minimum/Maximum)
+Landing Lag: 10
+FAF of 55
+
+
+Dark Samus no longer has a Zair
+
+
+                              Specials
+
+Charge Shot is now Phazon’s Corruptor:
+
+Instead of starting out small and growing larger, Phazon’s Corruptor starts out large and shrinks in size over time.
+
+The Uncharged Variant fires an extremely slow moving Phazon Orb, and moves faster the more you charge the move. When fully charged, it becomes a Sniper Bullet like projectile.
+
+Phazon Corruptor’s Stats:
+
+Dark Samus can only have one Phazon’s Corruptor active at a time, otherwise she will perform Down Taunt. The cooldown is 3 seconds.
+
+The Uncharged Variant inflicts paralysis, and the Charged Variant inflicts Crumple.
+
+Required Charge Time to reach Max Charge Increased (110 -> 150)
+
+Life (Measured in Frames): 60 -> 180
+
+Minimum Speed (Starting Speed): 1.6 -> 0.2 
+
+Maximum Speed (Fully Charged Speed): 3.3 -> 6.0
+
+Minimum Scale (Starting Size): ~0.3 -> 1.0
+
+Maximum Scale (Fully Charged Size): 1.0 -> 0.22
+
+Can Penetrate (Can hit multiple opponents): 0 -> 1
+
+Startup Increased (16 -> 23)
+
+Uncharged Damage Decreased (5.0% -> 2.5%, plus 2.0% Poison Damage)
+
+Charged Damage Decreased (28.0% -> 20.0%, plus 2.0% Poison Damage)
+
+Uncharged Angle Increased (40 -> 140)
+
+
+Homing Missile is now B Reversable
+
+
+Super Missile is now B Reversable
+
+
+Homing Missile Stats Altered:
+
+Max Amount Decreased (2 -> 1)
+
+Max Life Increased (120 -> 250)
+
+Initial Speed Decreased (1.15 -> 0.5)
+
+Max Homing Angle Increased (0.65 -> 360)
+
+Angling Capacity Increased (0.65 -> 2.5)
+
+
+Deceleration Frame Decreased (85 -> 40)
+
+Secondary Velocity Decreased (0.95 -> 0.75)
+
+Damage Decreased (8.0% -> 3.0% plus 2.6% Poison Damage)
+
+
+Super Missile Stats Altered:
+
+Max Life Increased (50 -> 75)
+
+Acceleration Frame (How long it takes to reach max speed) Decreased (26 -> 13)
+
+X Acceleration Per Frame Increased (0.16 -> 0.45)
+
+Max Speed Decreased (4.2 -> 3.8)
+
+Damage Decreased (12.5% -> 6.5% plus 2.6% Poison Damage)
+
+
+Up Special has been replaced with an omnidirectional float.
+
+This float lasts for 72 frames, but you aren’t actionable during the float. You also cannot use it more than once unless you’re hit or land again.
+
+Bomb is now B Reversable
+
+
+Bomb Stats Altered:
+
+Max Life Increased (72 -> 300)
+
+Initial Vertical Velocity Decreased (0.5 -> 0.0)
+
+Gravity Decreased (0.03 -> 0.0)
+
+Maximum Falling Speed Decreased (1.2 -> 0.0)
+
+Bombs now deal 4.0% Poison Damage
+Yoshi
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.98 -> 1.745)
+
+
+Run Speed Decreased (2.046 -> 1.75)
+
+
+Traction Decreased (0.095 -> 0.06175)
+
+
+Double Jump Armor Reduced (Partial: 60 -> 0, Full: 120 -> 0)
+
+
+Yoshi now regains his double jump when hit out of it
+
+
+Air Speed Decreased (1.344 -> 1.15)
+
+
+Weight Increased (104 -> 108)
+
+
+DACUS/DACDS Window: Frames 1-11
+
+
+Grounded Moves
+
+
+Jab 1 Duration Increased (Active: 3 -> 3-4)
+
+
+Jab 1 Size Increased (1.8/2.2 -> 3.0/3.5)
+
+Forward Tilt Angle Adjusted (88/85 -> 70/95)
+
+Up Tilt Startup Decreased (8 -> 7)
+
+
+Up Tilt Inner Hitbox Size Increased (2.5 -> 4.0)
+
+
+Up Tilt now has tail intangibility for it's active duration
+
+
+Down Tilt now has tail intangibility for it's active duration
+
+Dash Attack now has a hip hitbox
+
+
+Dash Attack Angle Decreased (65 -> 33)
+
+
+Aerial Moves
+
+
+Nair is now an Egg Spin
+
+Nair Stats:
+
+Damage: 8.0%/6.0%/4.0%
+BKB: 20
+KBG: 110
+Angle: 361
+Framedata: 3-7/8-15/16-23 (Early/Middle/Late)
+FaF: 45
+Autocancel Window: 45+
+Landing Lag: 10
+Shield Safety: -7/-6 (Minimum/Maximum)
+
+
+Fair Spike Hitbox Size Increased (4.0 -> 6.0)
+
+Bair Finisher Hit Damage Decreased (5.5 -> 3.5)
+
+
+Bair KBG Decreased (184 -> 120)
+
+
+Dair Reworked:
+
+Dair now comprises of 5 hits
+Holding down the attack button significantly reduces your fall speed
+Damage: 3.0%/5.0% (Multihits/Finisher)
+FKB: 5
+BKB: 50
+KBG: 80/100
+Angle: 367/361
+Framedata: 12-16/18-22/24-28/30-34/38-40
+FaF: 56
+Autocancel Window: 50+
+Landing Lag: 17
+Shield Safety: -14
+
+
+
+                                     Specials
+
+
+Egg Rolls Jump Angle can be adjusted between 80 and 10 degrees depending on control stick strength (Fully Up makes it 80, Fully Forward makes it 10)
+
+
+Egg Roll Startup Decreased (32 -> 24)
+
+
+Egg Roll Hitbox Adjusted to match the egg visual
+
+
+Initial Egg Roll Vertical Speed Decreased (2 -> 0)
+
+
+Initial Grounded Egg Roll Speed Increased (0.9 -> 1.1)
+
+
+Initial Aerial Egg Roll Speed Increased (0 -> 0.35)
+
+
+Minimum Aerial Egg Roll Speed Increased (0.7 -> 1.2)
+
+
+Egg Roll Cancel Frame Decreased (25 -> 20)
+
+Maximum Egg Toss Angle Range Increased (72 -> 110)
+
+
+Maximum Egg Lifespan Increased (47 -> 90)
+Kirby
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.9 -> 1.8)
+
+Run Speed Increased (1.727 -> 1.8)
+
+
+Traction Decreased (0.116 -> 0.0754)
+
+
+Multijump Velocity Adjusted (1.674/1.572/1.46/1.339/1.209 -> 1.7/1.7/1.7/1.7/1.7)
+
+
+Air Acceleration Adjusted (Base: 0.03 -> 0.015, Additional: 0.065 -> 0.045)
+
+
+Air Friction Decreased (0.015 -> 0.01)
+
+
+DACUS/DACDS Window: Frames 1-10
+
+
+Grounded Moves
+
+
+Jab 1 Size Increased (1.5/1.8 -> 2.5/2.8)
+
+
+Jab 2 Vertical Position Decreased (5.2 -> 4.5)
+
+Forward Tilt now has foot intangibility for it's active duration
+
+Down Angled Forward Tilt Trip Chance Increased (0.0 -> 1.0)
+
+Down Tilt is now Slide (A slide kick akin to Cloud and Sephiroths Down Tilts)
+
+Down Tilt Stats:
+
+Down Tilt bounces off of opponents and shields
+Damage: 7.0%/5.0%
+BKB: 60
+KBG: 55
+Angle: 85
+Framedata: 6-13, then 14-17
+FaF: 36 (10 on bounce)
+Shield Safety: -4/-2 (Minimum/Maximum)
+
+Dash Attack is now a multihit.
+
+Dash Attack Stats:
+
+Goes off of ledges (The move can be canceled on frame 25 if going off ledges)
+Damage: 0.5%/9.5%
+FKB: 50
+BKB: 60
+KBG: 80
+Angle: 0/46
+Framedata: 9-30 for multihits (hits 5 times), then 32-34 for finisher 
+FaF: 51
+Shield Safety: -40/-9 (Minimum/Maximum)
+
+
+Forward Smash is now Umbrella.
+
+Umbrella has Kirby wind back before swinging his Umbrella forward.
+
+Umbrella Stats:
+
+
+Damage: 14.0% (Uncharged)
+BKB: 60
+KBG: 78
+Angle: 48
+Framedata: 6 for Charge Frame, 16-17 for hitbox
+FaF: 65
+Shield Safety: -39/-36 (Minimum/Maximum)
+
+
+Up Smash is now Hammer Flip.
+
+Hammer Flip has Kirby wind back before swinging his Hammer in an upward fiery strike.
+
+Hammer Flip Stats:
+
+
+Damage: 16.0% (Uncharged)
+BKB: 60
+KBG: 80
+Angle: 75
+Framedata: 1 for Charge Frame, 11-20 for hitbox
+FaF: 70
+Shield Safety: -48/-35 (Minimum/Maximum)
+
+
+Down Smash is now Sword Spin.
+
+Sword Spin has Kirby twirl in a circle whilst holding the sword out
+
+Sword Spin Stats:
+
+
+Damage: 3.0%/3.0%/8.0% (Uncharged)
+FKB: 60
+BKB: 70
+KBG: 60/90
+Angle: 180/30
+Framedata: 5 for Charge Frame, 6-30 for hitbox
+FaF: 50
+Shield Safety: -40/-12 (Minimum/Maximum)
+
+
+Aerial Moves
+
+
+Nair Damage Adjusted (10.0%/8.0%/6.0%/4.0% -> 8.0%/7.0%/6.0%/5.0%)
+
+
+Nair Angle Increased (46 -> 66)
+
+
+Nair Startup Decreased (8 -> 5)
+
+
+Nair Landing Lag Increased (6 -> 7)
+
+
+Nair Late Hitbox Size Increased (8.0/7.0/6.0 -> 8.0)
+
+Fair 1 now uses Fixed Knockback
+
+
+Fair 1 FKB Increased (43/35 -> 60)
+
+
+Fair 1 KBG Increased (38/39 -> 60)
+
+Fair 2 now uses Fixed Knockback
+
+
+Fair 2 FKB Increased (28 -> 60)
+
+
+Fair 2 KBG Increased (30 -> 60)
+
+Bair now has a further late hit
+
+Bair Late Hit Stats:
+
+Damage: 5.0%
+BKB: 0
+KBG: 60
+Angle: 60
+Framedata: 13-26
+
+Uair Damage Decreased (10.0% -> 7.0%)
+
+
+Uair Startup Decreased (8 -> 5)
+
+
+Uair FaF Decreased (35 -> 30)
+
+Dair Startup Decreased (18 -> 12)
+
+
+Dair Landing Lag Decreased (16 -> 10)
+
+
+Grabs/Throws
+
+
+Up Throw KBG Increased (74 -> 95)
+
+Down Throw now puts opponents in Okizeme
+
+
+Specials
+
+
+Neutral Special Eat FaF Decreased (51 -> 1)
+
+
+Neutral Special Minimum Hold Time Decreased (34 -> 1)
+
+Any new mechanic regarding Neutral Specials can now be utilized by Kirby, as follows:
+
+Captain Falcon: All moves except Falcon Punch can cancel into Falcon Punch on hit
+
+
+Lucario: Hitflow on all moves
+
+
+Ryu/Ken/Terry: Most moves can cancel into specials
+
+Side Special is now Wheel. 
+
+Wheel has Kirby curl up into a wheel shape, before transforming into the Wheel Copy Ability and dashing forward.
+
+Wheel Stats:
+
+Wheel's distance and damage is dependent on how long the move is charged for, maxing out at 2 seconds.
+
+
+You can perform up to 3 jumps during Wheel if you're on the ground.
+
+
+You can turn around up to 6 times during Wheel. This turnaround has similar functionality to Dashing (In essence allowing for Wheel Dashdancing on the ground and in air).
+
+
+Wheel instantly cancels when going from ground to air, and has 17 frames of landing lag when going from air to ground.
+
+
+Wheel has a charge hitbox.
+
+Wheel Charge Stats:
+
+Damage: 0.3%
+FKB: 70
+KBG: 50
+Angle: 90
+
+Wheel Stats:
+
+Distance: ~Length of Battlefield Platform to 3/4th Final Destination
+Damage: 10.0%/8.0%/6.0% (15.0%/12.0%/9.0% when fully charged)
+BKB: 40
+KBG: 60
+Angle: 75
+Framedata: 15-29/30-39/40-44 (Uncharged: Early/Middle/Late)
+FaF: 74/69 (Aerial/Grounded) (Non Shield On-Hit FaF is 10)
+Shield Safety: -49/-16 (Minimum/Maximum)
+
+Up Special has been significantly overhauled
+
+Up Special now has Kirby perform the normal start of Vanilla Up Special, but after reaching the peak, he instead enters freefall. 
+
+Pressing Attack will have him perform the diving portion of the move, whereas pressing Special will have him perform an outward slash. 
+
+Up Special can also be angled by 10 degrees forwards or backwards depending on control stick input.
+
+Up Special Rise Stats:
+
+Damage: 5.0%
+BKB: 100/50
+KBG: 100
+Angle: 90
+Framedata: 7-11 (Input Window from 11-20)
+FaF: NaN
+Shield Safety: NaN
+
+Up Special Slash Stats:
+
+Damage: 8.0%
+BKB: 60
+KBG: 80
+Angle: 30
+Framedata: 7-11 (From start of Up Special, effectively ranges from 18-22 to 27-31)
+FaF: NaN
+Shield Safety: NaN
+
+The Dive is identical to Vanilla.
+
+Grounded Stone now transfers all previous grounded momentum
+
+
+Aerial Stone Startup Decreased (29 -> 24)
+
+
+Aerial Stone can now combo into the landing hit of Stone
+
+
+Stone Escape FaF Decreased (35 -> 24)
+Fox
+
+
+
+
+Stats
+
+Initial Dash Speed Decreased (2.09 -> 1.95)
+
+
+Run Speed Decreased (2.402 -> 2.33)
+
+
+Traction Decreased (0.115 -> 0.07475)
+
+
+Initial Jump Velocity Decreased (19.25 -> 14)
+
+
+Shorthop Height Decreased (16.4 -> 15.0)
+
+
+Fall Speed Increased (2.1 -> 2.2)
+
+
+Fast Fall Speed Increased (3.36 -> 3.5)
+
+
+Weight Decreased (77 -> 75)
+
+
+DACUS/DACDS Window: Frames 1-5
+
+Grounded Moves
+
+Up Taunt can be canceled into Firefox on frames 41-44
+
+Fox can Jab Cancel into any Tilt
+
+Forward Tilt Damage Standardized
+
+
+Forward Tilt X Disjoint Increased (6.4 -> 8.0)
+
+Down Tilt Angles Adjusted (72/75/77 -> 70/80/90)
+
+
+Down Tilt Negative Y Disjoint Increased (0.0 -> 3.0)
+
+Forward Smash KBG Decreased (100 -> 90)
+
+
+Forward Smash FaF Increased (45 -> 50)
+
+
+Forward Smash travels notably further
+
+Up Smash has Head Intangibility from frames 1-7
+
+
+Up Smash FaF Increased (55 -> 60)
+
+
+Up Smash Hitboxes adjusted to use the Late Hit Size
+
+
+                              Aerial Moves
+
+
+Nair Early BKB Increased (10 -> 15)
+
+
+Nair Late BKB Increased (0 -> 5)
+
+
+Nair Landing Lag Increased (7 -> 8)
+
+Fair Landing Lag Decreased (18 -> 12)
+
+
+Fair Multihit Angle Adjusted (367 -> 365)
+
+
+Fair Landing Hit Removed
+
+Bair now has a late hit 
+
+(Angle Increased: 30 -> 70, Damage Decreased: 13.0% -> 7.0%, Active Duration: 12-17)
+
+
+Bair Late Autocancel Window Increased (18 -> 35)
+
+
+Bair Landing Lag Increased (9 -> 10)
+
+
+Bair Leg Shaking Removed
+
+Uair Hit 2 Hitlag Increased (1.0 -> 1.6)
+
+
+Uair Fallouts Fixed
+
+
+Uair Late Autocancel Window Increased (25 -> 35)
+
+Dair Multihit Angle Adjusted (325/110 -> 363)
+
+
+Dair Landing Lag Decreased (17 -> 14)
+
+
+                              Specials
+
+
+Blaster can be fast fallen
+
+
+Blaster can Edge Cancel
+
+
+Blaster can Land Cancel
+
+
+Blaster can go through multiple opponents
+
+Fox Illusion can grab ledge for its entire duration
+
+
+Fox Illusion can now cross up shield
+
+
+Fox Illusion can Edge Cancel
+
+
+Grounded Fox Illusion Traction Decreased (0.15 -> 0.07)
+
+
+Aerial Fox Illusion Speed Decreased (2.3 -> 1.75)
+
+
+Aerial Fox Illusion FAF Decreased (73 -> 62)
+
+Fire Fox can grab ledge for its entire duration
+
+
+Fire Fox Initial Hitbox Size Decreased (7.2 -> 5.0)
+
+
+Fire Fox Negative Horizontal Disjoint Increased (0.0 -> -3.0) 
+
+
+Fire Fox Distance Multiplier Decreased (3.8 -> 3.25)
+
+
+Fire Fox End Speed Multiplier Increased (0.85 -> 1.0)
+
+
+Fire Fox Special Fall X Speed Multiplier Increased (0.85 -> 1.0)
+
+
+Fire Fox Rebound no longer sends into Freefall
+
+Reflector is jump cancelable on frame 3 on hit
+
+If Reflector is hit on shield or whiff, it's jump cancel window is frame 8
+
+Reflector Angle Decreased (10 -> 330)
+
+
+Reflector Additional Hitstun Increased (0 -> 3)
+
+
+Reflector out of Parry inflicts Paralysis (Paralysis Window lasts for 3 seconds)
+Pikachu
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.98 -> 1.78)
+
+
+Run Speed Decreased (2.039 -> 1.81)
+
+
+Traction Decreased (0.132 -> 0.0858)
+
+
+Scale Increased (0.96 -> 1.0)
+
+
+Pikachu now has Ear Hurtboxes
+
+
+DACUS/DACDS Window: Frames 1-7
+
+Grounded Moves
+
+
+Jab Damage Standardized (1.0%/1.2%/1.4% -> 1.2%)
+
+
+Jab BKB Increased (18 -> 20)
+
+
+Jab FaF Decreased (18 -> 14)
+
+
+Jab Additional Hitstun Increased (0 -> 3)
+
+
+After 2 held loops of Jab, Jab will automatically cancel into a notably weaker Dash Attack.
+
+Jab Dash Attack Stats:
+
+Damage: 5.0%
+BKB: 40
+KBG: 50
+Angle: 70
+Framedata: 3-8
+FaF: 24
+Shield Safety: -12/-7 (Minimum/Maximum)
+
+Forward Tilt Damage Standardized (9.0%/10.0%/8.0% -> 9.0%)
+
+
+Forward Tilt Knee Hitbox Negative Y Position Adjusted (0.0 -> -1.0)
+
+
+Forward Tilt Foot Hitbox Negative Y Position Adjusted (0.0 -> -2.0)
+
+Up Tilt Inner Hitbox Size Increased (2.0 -> 3.0)
+
+
+Up Tilt Angle Adjusted (105/105/110 -> 107)
+
+
+Down Tilt FaF Increased (18 -> 24)
+
+
+Down Tilt Trip Chance Increased (0.3 -> 1.0)
+
+Initial Dash Attack Damage Decreased (11.0% -> 9.0%)
+
+
+Initial Dash Attack Size Decreased (5.0 -> 3.0)
+
+
+Dash Attack now covers Pikachu’s body
+
+
+Dash Attack Angle Increased (60 -> 75)
+
+
+Dash Attack Startup Decreased (6 -> 5)
+
+Forward Smash Early Hit Damage Decreased (15.0%/15.0% -> 12.0%/12.0%)
+
+
+Forward Smash Early Hit BKB Decreased (50/50 -> 40/40)
+
+
+Forward Smash Early Hit KBG Adjusted (73/73 -> 80/60)
+
+
+Forward Smash Middle Hit Damage Decreased (18.0%/18.0% -> 15.0%/15.0%)
+
+
+Forward Smash Middle Hit BKB Decreased (50/60 -> 50/50)
+
+
+Forward Smash Middle Hit KBG Decreased (75/75 -> 73/73)
+
+
+Forward Smash Late Hit Damage Increased (12.0%/12.0% -> 18.0%/18.0%)
+
+
+Forward Smash Late Hit BKB Increased (40/40 -> 50/60)
+
+
+Forward Smash Late Hit KBG Decreased (102/102 -> 75/75)
+
+                                 Aerials
+
+
+Pikachu Pancaking removed on Nair, Fair, and Bair
+
+Nair Multihit Hitlag Reduced (0.8 -> 0.5)
+
+
+Nair ASDI Multiplier Increased (1.0 -> 1.25)
+
+
+Fair now uses a single hitbox that covers its entire body
+
+
+Fair Angle Adjusted (35/290/60/280 -> 365)
+
+
+Fair Late Autocancel Window Increased (32 -> 41)
+
+Bair Landing Lag Decreased (18 -> 15)
+
+
+Bair Ending Autocancel Window Increased (38 -> 48)
+
+Uair Early Hit Damage Standardized (6.0%/5.0% -> 5.0%)
+
+
+Uair Late Hit Damage Increased (4.0% -> 5.0%)
+
+
+Uair Middle Hitbox Size Decreased (5.0 -> 4.0)
+
+
+Uair Tipper Hitbox Size Increased (4.0 -> 5.0)
+
+
+Uair Late Hit Duration Increased (7-8 -> 7-10)
+
+
+Uair Angle Decreased (55 -> 320) on frames 9-10 
+
+
+Uair Landing Lag Decreased (14 -> 10)
+
+
+Uair Ending Autocancel Window Increased (18 -> 24)
+
+
+                              Specials
+
+
+Side Special is now Iron Tail. Pikachu jumps forward and performs a somersaulting tail slash, with a metallic clang on hit.
+
+
+Iron Tail Stats:
+
+Makes a slashing sound
+Makes Pikachu's Tail have a gray trail
+Iron Tail is Transcendent
+Iron Tail can only be done once per airtime
+Iron Tail Edge Cancels and has 12 frames of landing lag when going from Air to Ground
+Damage: 12.0%
+BKB: 60
+KBG: 60
+Angle: 30
+Framedata: 13-15
+FaF: 46
+Shield Safety: -21
+Luigi
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.815 -> 1.8)
+
+
+Run Speed Increased (1.65 -> 1.75)
+
+
+Traction Decreased (0.096 -> 0.024)
+
+
+DACUS/DACDS Window: Frames 1-5
+Ness
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.826 -> 1.8)
+
+
+Run Speed Decreased (1.609 -> 1.58)
+
+
+Traction Decreased (0.131 -> 0.06)
+
+
+Air Speed Increased (1.007 -> 1.05)
+
+DACUS/DACDS Window: Frames 1-9
+
+Grounded Moves
+
+
+Jab 1 now spawns PSI Effects beyond the fist (Extends it’s horizontal reach)
+
+PSI Hitbox Damage Decreased (2.0% -> 1.0%)
+
+
+Jab 2 now spawns PSI Effects beyond the fist (Extends it’s horizontal reach)
+
+PSI Hitbox Damage Decreased (1.5% -> 0.75%)
+
+
+Jab 3 now spawns PSI Effects beyond the foot (Extends it’s horizontal reach)
+
+PSI Hitbox Damage Decreased (4.0% -> 2.0%)
+
+
+All Forward Tilt Variants spawn PSI Effects beyond the foot (Extends it’s horizontal reach)
+
+
+PSI Hitbox Damage Decreased (10.0% -> 7.0%)
+
+
+Up Tilt has the PSI Effect spawn higher above Ness (Extends it’s vertical reach)
+
+
+Up Tilt Damage Decreased (9.0%/7.0% -> 7.0%/5.0%)
+
+
+Dash Attack Active Duration Increased (8/15/23-24 -> 8-10/15-17/22-24)
+
+
+Final Hit of Dash Attack Angle Changed (75 -> 95)
+
+
+Forward Smash Damage Decreased (18.0%/20.0%/22.0% -> 15.0%/17.0%/19.0%)
+
+
+Charging Forward Smash to full capacity enables a tipper critical hit.
+
+Tipper Critical Hit Stats
+
+Tipper Critical Hit plays the HRC Bat SFX
+Damage: 25.0%
+BKB: 70
+KBG: 67
+Angle: 361
+
+
+Up Smash no longer normally has a charge hitbox
+
+
+Down Smash no longer normally has a charge hitbox
+
+Aerials
+
+Nair's hitboxes now match the PSI Effects
+
+
+Nair Body Hit Size Decreased (5.4 -> 3.0)
+
+
+Nair's Late Hit Duration Increased (13-15 -> 9-15)
+
+
+Nair Body Hit Angle Increased (361 -> 87)
+
+
+Nair Body Hit KBG Decreased (100 -> 80)
+
+
+Nair Hand Early Hit Angle Decreased (361 -> 25)
+
+
+Fair Multihit BKB changed to FKB
+
+
+Fair Multihit BKB Increased (15 -> 70)
+
+
+Fair Multihit KBG Increased (60 -> 70)
+
+
+Fair Landing Lag Decreased (12 -> 10)
+
+
+Bair's hitboxes now match the PSI Effects
+
+
+Bair Sweetspot Damage Decreased (15.0% -> 13.0%)
+
+
+Uair Fallouts Fixed
+
+
+Grabs/Throws
+
+
+Standing Grab Startup Increased (6 -> 10)
+
+
+Dash Grab Startup Increased (9 -> 12)
+
+
+Pivot Grab Startup Increased (10 -> 13)
+
+
+Standing Grab Disjoint Increased (4.0 -> 10.0)
+
+
+Dash Grab Disjoint Increased (5.8 -> 11.0)
+
+
+Pivot Grab Disjoint Increased (10.0 -> 12.0)
+
+
+Forward Throw Angle Decreased (45 -> 25)
+
+
+Up Throw Damage Decreased (12.0% -> 10.0%)
+
+
+Up Throw BKB Decreased (105 -> 65)
+
+
+Up Throw KBG Decreased (40 -> 25)
+
+
+Up Throw FaF Decreased (55 -> 46)
+
+
+Down Throw is Jump Cancelable on frames 39-45
+
+
+Down Throw now inflicts the Lay Status, making it an Okizeme (Tech Chase Scenario)
+
+Specials
+
+
+Shield Special is now PSI Offense Up (Acronym is PSIOU).
+
+Upon activation, Ness will begin to charge up PSI Energy. This takes about 2 seconds to activate, which is indicated by Ness’s hands glowing with PSI Effects, and his face having the entrance face.
+
+When active, Ness gains several attributes, of which include:
+
+Attack Damage Multiplier: 1.0x -> 1.15x
+Damage Taken Multiplier Increased: 1.0x -> 1.15x
+Knockback Taken Multiplier Increased: 1.0x -> 1.15x
+
+All of Ness’s Attacks now inflict the Magic Status.
+
+Forward Smash Damage Increased (15.0%/17.0%/19.0% -> 17.0%/19.0%/21.0%)
+Up Smash now gains its charge hitbox back
+Down Smash now gains its charge hitbox back
+
+This status will last for 5 seconds.
+
+Using PSIOU while Offense Up is active will instead perform PSI Offense Burst.
+
+PSI Offense Burst Stats:
+
+Invincible from frames 1-6, Head and Arm Intangibility from frames 7-18
+Damage: 19.6%/13.8%
+BKB: 48
+KBG: 77
+Angle: 95/85
+Framedata: 18-23
+Minimum Shield Safety: -33
+Maximum Shield Safety: -23
+FAF of 64
+
+
+PK Flash Horizontal Acceleration Increased (0.02 -> 0.06)
+
+
+PK Flash Maximum Speed Increased (0.85 -> 2.0)
+
+
+PK Flash Button Release Detonation Time Decreased (15 -> 10)
+
+
+PK Flash Maximum Charge Time Increased (92 -> 120)
+
+
+PK Flash Power Increase (per frame) Decreased (0.2 -> 0.1)
+
+
+PK Flash now has randomized effects when fully charged
+
+Paralysis: 47%
+Reverse Controls: 34% 
+Poison: 14%
+Instant KO: 3%
+
+When PSIOU is active, the percents for these change to their stats from Earthbound:
+
+Instant KO: 40%
+Reverse Controls: 35%
+Paralysis: 15%
+Poison: 10%
+
+
+Ness can grab ledge during PK Thunder 1 and PK Thunder Rebound
+
+
+PK Thunder 1 and PK Thunder Rebound are Land Cancelable
+
+
+PK Thunder 1 Speed Increased (2 -> 2.5)
+
+
+PK Thunder 1 Life Increased (120 -> 180)
+
+
+PK Thunder 1 Maximum Angle Control Increased (8 -> 11)
+
+
+PK Thunder 1 Penetration Frame Increased (10 -> 1)
+
+
+PK Thunder 1 Angle Adjusted (110 -> 362)
+
+
+PK Thunder 1 BKB Decreased (70 -> 60)
+
+
+PK Thunder 1 KBG Decreased (55 -> 50)
+
+
+PK Thunder 1 Size Decreased (4.4 -> 3.5)
+
+
+PK Thunder 1 Graphic Size Decreased (1.0 -> 0.85)
+
+
+PK Thunder 1 Gravity Decreased (0.017 -> 0.01)
+
+
+PK Thunder 1 Gravity Startup Increased (30 -> 35)
+
+PK Thunder 2 Ledgegrab Boxes Adjusted:
+
+P1_x: 15 -> 13
+P1_y: 22 -> 15
+P2_x: -9 -> -11
+P2_y: 3 -> -4
+
+(Overall makes it smaller, but properly covers his top and bottom)
+
+
+PK Thunder 2 Distance Decreased (3.7 -> 3.3)
+
+
+PK Thunder 2 is now edge cancelable
+
+
+Ness takes 3% self damage when using PK Thunder 2
+
+
+PK Thunder 2 Late Hit Damage Decreased (21.0% -> 17.0%)
+Captain Falcon
+
+
+
+
+Stats
+
+
+Initial Dash Speed Increased (1.98 -> 2.0)
+
+
+Run Speed Decreased (2.552 -> 2.35)
+
+
+Run Acceleration Adjusted (Base: 0.11 -> 0.12, Additional: 0.066 -> 0.06)
+
+
+Traction Decreased (0.105 -> 0.06825)
+
+
+Air Speed Increased (1.218 -> 1.25)
+
+
+Air Acceleration Adjusted (Base: 0.01 -> 0.0075, Additional: 0.065 -> 0.1)
+
+
+Air Friction Decreased (0.0075 -> 0.005)
+
+
+Fall Speed Increased (1.865 -> 2.05)
+
+
+Fast Fall Speed Increased (2.984 -> 3.3)
+
+
+Gravity Increased (0.12 -> 0.2)
+
+
+Weight Decreased (104 -> 100)
+
+DACUS/DACDS Window: Frames 1-8
+
+Grounded Moves
+
+Jab 1 Shoulder Hitbox Increased (2.0 -> 3.5)
+
+
+Jab 1 Angle Increased (361 -> 80)
+
+
+Jab 2 Angle Increased (361 -> 80)
+
+
+Jab 3 has Electric Properties
+
+
+Jab 3 Angle Increased (361 -> 55)
+
+
+Forward Tilt Damage Decreased (8.0%/9.0% -> 7.0%)
+
+
+Forward Tilt FaF Decreased (29 -> 25)
+
+
+Forward Tilt Angle Decreased (361 -> 37)
+
+
+Forward Tilt High Angle Increased (361 -> 50)
+
+
+Forward Tilt Low Angle Decreased (361 -> 25)
+
+
+Up Tilt Animation Adjusted to have Falcon slam his leg on the ground
+
+
+Up Tilts Ground and Air hitboxes are now combined into a single hitbox that can hit aerial and grounded opponents
+
+Up Tilt gains left hand intangibility from frames 5-15
+
+
+Up Tilt Angle now changes every frame (Frame 14: 285 -> 350, Frame 15: 285 -> 315, Frame 16: 285, Frame 17: 285 -> 245)
+
+
+Down Tilt Damage Decreased (10.0% -> 8.0%)
+
+
+Down Tilt Hip Hitbox Angle Increased (25 -> 60)
+
+
+Down Tilt Knee Hitbox Angle Increased (25 -> 80)
+
+
+Down Tilt Foot Hitbox Angle Increased (25 -> 100)
+
+
+Dash Attack travels much further, traveling approximately 50-65% of FD
+
+
+Dash Attack Horizontal Displacement Decreased (12.0 -> 4.0)
+
+
+Dash Attack Late Hit BKB Decreased (90 -> 50)
+
+All Smash Attacks now have the Fire Attribute and emit fire effects
+
+
+Forward Smash is now a lunging elbow strike.
+
+
+Forward Smash Hi Angle Increased (361 -> 70)
+
+
+Forward Smash Lw Angle Decreased (361 -> 40)
+
+Up Smash Damage Decreased (First Hit: 12.0% -> 9.0%, Second Hit: 14.0% -> 11.0%)
+
+
+Up Smash’s Scooper Hitbox is much tighter to Falcon
+
+
+Down Smash Hip Hitbox Angle Increased (28 -> 120)
+
+
+Down Smash Knee Hitbox Angle Increased (28 -> 60)
+
+
+Down Smash FaF Increased (48 -> 55)
+
+Aerials
+
+
+Nair 1 Duration Increased (7-8 -> 7-9)
+
+
+Fair Early Sweetspot Damage Decreased (22.0% -> 20.0%)
+
+
+Bair Hand Late Hit Angle Increased (361 -> 60)
+
+
+Bair Arm Late Hit Angle Increased (361 -> 55)
+
+
+Bair Shoulder Late Hit Angle Increased (361 -> 50)
+
+
+Uair Duration Increased (7-12 -> 7-17)
+
+
+Uair now has an aerial only hitbox that spawns on frame 6. Said hitbox has an angle of 361
+
+
+Uair Middle Hit Angle Increased (30 -> 120)
+
+
+Uair Late Hit Damage Decreased (8.0% -> 5.0%)
+
+
+Dair Startup Increased (16 -> 18)
+
+
+Dair now has the Nipple Spike (Dair now covers the entirety of Falcon’s body and all sweetspots spike)
+
+
+Feet Hitbox has the Electric Effect
+
+
+Nipple Spike has the Fire Effect
+
+Grabs/Throws
+
+Falcon slides much further if he lands a Dash Grab
+
+
+Pummel now has electric attributes
+
+
+Forward Throw Angle Adjusted (45 -> 25)
+
+
+Up Throw Damage Decreased (4.0%/5.0% -> 3.0%/2.0%)
+
+
+Up Throw Angle Increased (84 -> 115)
+
+
+Up Throw KBG Decreased (100 -> 50)
+
+
+Down Throw Angle Decreased (68 -> 22)
+
+Specials
+
+Shield Special is Boost Install. 
+
+Upon activation, Falcon gains several new changes, of which include:
+
+Opponent Damage Multiplier Increased (1.0x -> 1.25x, this means you take 25% more damage)
+
+Falcon can now hitfall his aerials.
+
+Falcons moves can now snowball in speed (dubbed Accelerating Hitflow). Initially, the moves start out at 1.0x speed, but for every hit Falcon lands, the multiplier increases by 0.05x, with it maxing out at 1.3x speed.
+
+Up Tilt is now Falcon Strike (Basically the hit portion of Side Special). The stats are identical to the Hit Portion of Side Special.
+
+
+Falcon Punch gains a notable horizontal boost.
+Falcon Dive Throw Release spikes people.
+Falcon Kick is now Thunder Kick.
+
+Grounded Thunder Kick Stats:
+
+Damage: 10.0%/6.0%
+BKB: 60
+KBG: 70
+Angle: 60/75
+Framedata: 13-23 for Early Hit, 24-33 for Late Hit
+Minimum Shield Safety: -45
+Maximum Shield Safety: -28
+FAF of 68
+
+Aerial Thunder Kick Stats:
+
+Damage: 10.0%/6.0%
+BKB: 80
+KBG: 57
+Angle: 85
+Framedata: 14-20 for Early Hit, 21-27 for Late Hit
+Shield Safety: NaN
+FAF of 56
+
+Thunder Kick Landing Stats:
+
+Paralyzes on hit
+Damage: 6.0%
+BKB: 80
+KBG: 35
+Angle: 100
+Framedata: 1-2
+Shield Safety: -28
+Landing Lag of 35
+
+
+Aerial Falcon Kick restores his Double Jump.
+
+Boost Install lasts for 10 seconds, however, 2 seconds are lost on the timer every time Falcon gets hit.
+
+
+Boost Install can be charged by hitting Falcon Punch or Fair Sweetspot when the moves aren’t shielded.
+
+Falcon will lose Boost Install if he is KO'd.
+
+
+Neutral Special can be turned around up to 15 times. Neutral Special’s Damage increases by a multiplier, of which the formula looks like this:
+
+Damage Multiplier = (Turn Count * Turn Count)
+
+
+After 10 Turns, Falcon Punch’s Hitbox now matches the graphic of the Falcon
+
+
+Falcon now has 20% heavy armor on all variants of Falcon Punch. This armor starts on frame 1 and deactivates when the hitbox is finished (this armor still applies during multi turns)
+
+
+Falcon Punch On Hit FaF Decreased (103/117 -> 70/84)
+
+
+All moves except for Neutral Special can be canceled into Neutral Special on hit
+
+
+Falcon Punch is now B Reversable
+
+
+Grounded Raptor Boost now uses a single detection box for both grounded and aerial opponents
+
+
+Grounded Raptor Boost no longer activates on items
+
+
+Grounded Raptor Boost Heavy Armor removed
+
+
+Aerial Raptor Boost can now grab ledge for the entire move
+
+
+Falcon Dive Height Multiplier Decreased (1.0x -> 0.88x)
+
+
+Falcon can now choose between sending opponents upward or forward. 
+
+If angled upwards, it has an angle of 80, and if angled forward, it has an angle of 35.
+
+
+If no angles are held, it sends at an angle of 50.
+
+
+Falcon Kick is now B Reversable
+
+
+Grounded Falcon Kick and Aerial Falcon Kick Landing edge cancel
+
+
+Aerial Falcon Kick now spikes at the start. It's active for 2 frames
+
+
+Aerial Falcon Kick now covers the whole leg
+
+
+Aerial Falcon Kick can be canceled into a wall jump if you’re next to one
+Jigglypuff
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.65 -> 1.5)
+
+
+Run Speed Increased (1.271 -> 1.3)
+
+
+Traction Decreased (0.087 -> 0.05655)
+
+
+DACUS/DACDS Window: Frames 1-6
+
+
+Specials
+
+
+Sing is now B Reversable
+
+
+Rest is now B Reversable
+Peach
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.826 -> 1.7)
+
+
+Run Speed Decreased (1.595 -> 1.55)
+
+
+Traction Decreased (0.111 -> 0.07215)
+
+
+DACUS/DACDS Window: Frames 1-7
+
+
+Specials
+
+
+Turnip is now B Reversable
+Daisy
+
+
+
+
+Stats
+
+
+Initial Dash Speed Increased (1.826 -> 1.83)
+
+
+Run Speed Increased (1.595 -> 2.0)
+
+
+Traction Decreased (0.111 -> 0.07215)
+
+DACUS/DACDS Window: Frames 1-7
+
+
+Specials
+
+
+Down Special is now B Reversable
+Bowser
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.255 -> 1.78)
+
+
+Run Speed Decreased (1.971 -> 1.85)
+
+
+Traction Decreased (0.104 -> 0.0676)
+
+
+Air Speed Decreased (1.155 -> 1.05)
+
+
+Gravity Decreased (0.125 -> 0.11)
+
+
+Model Scale Increased (0.82 -> 0.9)
+
+
+Shield Size Increased (18.5 -> 21.0)
+
+
+Footstooling Bowser will make opponents take 5% self damage
+
+
+DACUS/DACDS Window: Frames 1-12
+
+Grounded Moves
+
+Side Taunt has a weak hitbox
+
+Side Taunt Stats:
+
+Damage: 6.0%
+BKB: 80
+KBG: 60
+Angle: 40
+Framedata: 32-35, then 56-59, then 73-76
+
+
+Jab 1 Startup Decreased (7 -> 5)
+
+
+Jab 1 Hand Hitbox Size Increased (3.8 -> 4.5)
+
+
+Forward Tilt is now a Hammer Punch
+
+Forward Tilt Stats:
+
+4% heavy armor from frames 5-8
+Damage: 11.0%
+BKB: 45
+KBG: 83
+Angle: 361
+Framedata: 9-13
+Minimum Shield Safety: -17
+Maximum Shield Safety: -13
+
+
+Down Tilt is now a tail sweep. It has a slight fire disjoint.
+
+Down Tilt Stats:
+
+Damage: 10.0%
+BKB: 50
+KBG: 50
+Angle: 80
+Framedata: 11-13
+FaF: 33
+Minimum Shield Safety: -12
+Maximum Shield Safety: -10
+
+
+Dash Attack now has Bowser dive forward and get into his shell before rolling on his side.
+
+Dash Attack Stats:
+
+
+Damage: 1.0% (Hits 5 Times), then 6.0%
+FKB: 60
+BKB: 70
+KBG: 80/100
+Angle: 30
+Framedata: 11-21 for Multihits, 23 for Finisher
+FaF: 50
+Shield Safety: -20
+
+
+Forward Smash is now a massive hook punch, based on the main attack Bowser uses in Bowser's Inside Story
+
+Forward Smash Stats:
+
+
+While only cosmetic, timing Bowser's Forward Smash to be released within 3 frames of being fully charged will inflict special zoom
+12% heavy armor from frames 15-23
+Damage: 24.0%
+BKB: 25
+KBG: 90
+Angle: 35
+Framedata: 22-23
+FaF: 60
+Minimum Shield Safety: -22
+Maximum Shield Safety: -16
+
+
+Up Smash now has a falling hitbox
+
+Falling Hitbox Stats:
+
+Damage: 10.0%
+BKB: 23
+KBG: 90
+Angle: 270
+Framedata: 31-34
+Minimum Shield Safety: -21
+Maximum Shield Safety: -17
+
+Up Smash Landing Hitbox Size Increased (5.0 -> 10.0)
+
+
+Up Smash Landing Hitbox Startup Decreased (37 -> 35)
+
+
+Up Smash FaF Decreased (54 -> 60)
+
+
+Down Smash now has arm hitboxes
+
+
+Down Smash Back Hitbox Damage Increased (15.0% -> 17.0%)
+
+
+Down Smash Angle Increased (40 -> 50)
+
+Aerials
+
+
+Nair is now a close handed lariat, somewhat based on the Galaxy Spin Bowser performs in Super Mario Galaxy
+
+
+Nair inflicts the darkness effect
+Damage: 12.0%/10.0%/8.0% for Early Hit, and 8.0%/6.0%/4.0% for Late Hit
+BKB: 60
+KBG: 60
+Angle: 50
+Framedata: 7-14 for Early Hit, 15-21 for Late Hit
+Landing Lag: 11
+Autocancel Window: 45
+FaF: 55
+Minimum Shield Safety: -8
+Maximum Shield Safety: -6
+
+
+Fair is now a duel fist slam, based on the Bomber Dunk from Mario Hoops: Three on Three
+
+Fair Stats:
+
+Damage: 13.0%
+BKB: 30
+KBG: 80/70
+Angle: 50/290
+Framedata: 14-16 for Upward Hit, 17-19 for Spike
+Landing Lag: 12
+Autocancel Window: 45
+FaF: 50
+Shield Safety: -7
+
+
+Bair Damage Decreased (19.0% -> 16.0%)
+
+
+Bair now has a late hit
+
+Bair Late Hit Stats:
+
+Damage: 8.0%
+BKB: 30
+KBG: 70
+Angle: 361
+Framedata: 12-20
+
+
+Uair is now an upward slash with both claws.
+
+Uair Stats:
+
+Damage: 13.0%/12.0%/11.0%
+BKB: 35
+KBG: 85
+Angle: 85
+Framedata: 10-15
+Landing Lag: 17
+Autocancel Window: 50
+FaF: 44
+Minimum Shield Safety: -14
+Maximum Shield Safety: -12
+
+
+Dair is now a massive downward punch, somewhat based on an attack he performs in Super Mario Galaxy
+
+Dair Stats:
+
+Damage: 18.0%/17.0%/16.0% for early hit, 16.0%/15.0%/14.0% for late hit
+BKB: 30
+KBG: 60
+Angle: 270/361
+Framedata: 18-19 for spike, 20-21 for late hit
+Landing Lag: 20
+Autocancel Window: 45
+FaF: 60
+Shield Safety: -7
+
+Specials
+
+
+Neutral Special is now Fireball/Flame Breath
+
+Letting go of Neutral Special within the first 22 frames of Neutral Special will make Bowser perform Fireball. Fireball has Bowser fire off a single Fireball, which is about twice as big as Hadoken 
+
+Fireball Stats:
+
+Bowser can only have one Fireball out at a time. He can also only shoot a fireball every 3 seconds.
+Fireball can land cancel.
+Fireball travels ~50% of Final Destination
+Fireball pushes Bowser backwards
+Damage: 10.0%
+BKB: 40
+KBG: 50
+Angle: 361
+Framedata: 23, lasts for 40 frames
+FaF: 77
+Minimum Shield Safety: -44
+Maximum Shield Safety: +6
+
+If you don't let go of Special, he will perform Flame Breath instead.
+
+Flame Breath Damage Decreased (1.8% -> 1.0%)
+
+
+Flame Breath also pushes Bowser backwards
+
+
+Whirling Fortress is now B Reversable
+
+
+Whirling Fortress Startup Increased (6 -> 8)
+
+
+Whirling Fortress now falls off ledges
+
+
+Bowser Bomb is now B Reversable
+Ice Climbers
+
+
+
+
+Stats
+
+
+Initial Dash Speed Increased (1.68 -> 1.7)
+
+
+Run Speed Increased (1.683 -> 1.7)
+
+
+Traction Decreased (0.077 -> 0.066)
+
+
+DACUS/DACDS Window: Frames 1-10
+
+
+Specials
+
+
+Squall Hammer is now B Reversable
+Sheik
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.178 -> 1.91)
+
+
+Run Speed Decreased (2.42 -> 2.2)
+
+
+Traction Decreased (0.106 -> 0.0689)
+
+
+DACUS/DACDS Window: Frames 1-6
+Zelda
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.958 -> 1.725)
+
+
+Run Speed Increased (1.43 -> 1.56)
+
+
+Traction Decreased (0.116 -> 0.0754)
+
+
+DACUS/DACDS Window: Frames 1-7
+
+
+Specials
+
+
+Faore’s Wind is now B Reversable
+
+
+Phantom is now B Reversable
+Doctor Mario
+
+
+
+
+Stats
+
+
+Initial Dash Speed Increased (1.537 -> 1.65)
+
+
+Run Speed Increased (1.397792 -> 1.55)
+
+
+Traction Decreased (0.106 -> 0.0689)
+
+
+DACUS/DACDS Window: Frames 1-7
+Pichu
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.98 -> 1.77)
+
+
+Run Speed Decreased (1.892 -> 1.8)
+
+
+Traction Decreased (0.11 -> 0.0715)
+
+
+Initial Jump Velocity (20.2125 -> 13.138125)
+
+
+Short Hop Height Decreased (17.43 -> 15.0)
+
+
+Fast Fall Speed Increased (2.5 -> 2.8)
+
+
+Gravity Increased (0.14 -> 0.155)
+
+
+Weight Increased (62 -> 70)
+
+
+Model Scale Decreased (0.92 -> 0.9)
+
+
+Shield Radius Decreased (7.7 -> 7.4)
+
+
+Ear Hurtboxes have been removed
+
+
+The general amount of Recoil Pichu receives has been increased by 1.75x times, however, Pichu can prevent recoil damage by hitting the opponent with a clean hit. If they hit shield, it will deal half recoil damage instead.
+
+
+(The only moves that don't get Recoil canceled on hit are Pummel, Forward Throw, and Neutral Special)
+
+
+DACUS/DACDS Window: Frames 1-7
+
+Grounded Moves
+
+Jab Sweetspot Size Increased (3.0 -> 4.5)
+
+
+Jab Sweetspot X Disjoint Decreased (10 -> 8)
+
+
+Jab Sourspot X Disjoint Decreased (6 -> 4)
+
+
+Forward Tilt Self Damage Increased (1.2% -> 2.1%)
+
+
+Forward Tilt KBG Increased (130 -> 145)
+
+
+Up Tilt Duration Increased (7-14 -> 6-14)
+
+
+Up Tilt Damage Decreased (5.0% -> 4.0%)
+
+
+Up Tilt BKB Increased (32 -> 40)
+
+
+Up Tilt KBG Decreased (105 -> 98)
+
+
+Dash Attack Early Hit KBG Decreased (100 -> 80)
+
+
+Dash Attack Early Hit Angle Increased (70 -> 80)
+
+
+Forward Smash Self Damage Increased (2.4% -> 4.2%)
+
+
+Forward Smash Angle Decreased (361 -> 30)
+
+
+Forward Smash BKB Decreased (68 -> 60)
+
+
+Forward Smash KBG Decreased (123 -> 120)
+
+
+Up Smash Damage Decreased (14.0% -> 12.0%)
+
+
+Up Smash FaF Decreased (40 -> 35)
+
+
+Down Smash Self Damage Increased (1.5% -> 2.6%)
+
+
+Down Smash Finisher KBG Decreased (150 -> 100)
+
+
+Down Smash Finisher Angle Increased (50 -> 70)
+
+
+Down Smash FaF Decreased (50 -> 35)
+
+Aerials
+
+Nair is now a triple hit
+
+Nair Stats:
+
+Damage: 3.0%/3.0%/4.0%
+FKB: 60
+BKB: 45
+KBG: 90/60
+Angle: 367/50
+Framedata: 3-6, then 8-11, then 13-27
+FaF: 39
+Autocancel Window: 35
+Landing Lag: 8
+Shield Safety: -5
+
+
+Fair Self Damage Increased (1.8% -> 3.2%)
+
+
+Fair Finisher Hit KBG Decreased (140 -> 130)
+
+
+Fair Landing Lag Decreased (12 -> 10)
+
+
+Bair Self Damage Increased (1.8% -> 3.2%)
+
+
+Uair Landing Lag Decreased (11 -> 9)
+
+
+Dair Self Damage Increased (1.8%/0.5% -> 3.2%/0.9%)
+
+
+Dair's Early Hit now resembles the Late Hit (Dair Early Body Hitbox has the same stats as the Late Hit)
+
+
+Dair Landing Lag Decreased (22 -> 14)
+
+
+Grabs/Throws
+
+
+Pummel Self Damage Increased (0.1% -> 0.2%)
+
+
+Forward Throw Self Damage Increased (0.5% -> 0.9%)
+
+Specials
+
+
+Shield Special is Discharge. Discharge will have Pichu charge up before unleashing a shock of electricity (deals about 5% to opponents and 2% to Pichu). This also Discharges Pichu, which has several effects on how Pichu's moves work.
+
+While Discharge is active, Pichu no longer takes normal recoil damage, instead constantly taking self damage, dealing 1% every second. However, recoil damage is disabled during this time, and any hit that Pichu lands will heal Pichu. The amount it heals is equal to the self damage Pichu would normally take.
+
+
+Discharge Forward Smash KBG Increased (123 -> 133)
+
+Discharge Up Smash now deals Electrical Damage
+Discharge Up Smash Damage Increased (10.0% -> 16.0%)
+Discharge Up Smash BKB Increased (40/15 -> 50/40)
+Discharge Up Smash KBG Increased (85 -> 105)
+Discharge Up Smash FaF Increased (35 -> 40)
+
+
+Discharge Down Smash Finisher KBG Increased (100 -> 150)
+Discharge Down Smash Finisher Angle Decreased (70 -> 30)
+Discharge Down Smash FaF Increased (35 -> 50)
+
+Nair becomes a single hit akin to Vanilla, but also discharges Electricity, making it larger
+
+Nair Stats:
+
+Damage: 12.0%/9.0%
+BKB: 18/0
+KBG: 100
+Angle: 45
+Framedata: 3-9, then 10-27
+FaF: 39
+Autocancel Window: 35
+Landing Lag: 7
+Shield Safety: -2
+
+Dair now becomes a drilling diving multihit, akin to Head-On Assault
+
+Dair Stats:
+
+Damage: 0.5% (Rehits every frame)/10.0%
+FKB: 60 
+KBG: 100
+Angle: 270/50
+Framedata: 14-26
+FaF: 47
+Autocancel Window: 47
+Landing Lag: 14
+Shield Safety: -9
+
+All of Pichu's Specials are changed when Discharge is active.
+
+Discharge is not lost when you don't use a special move, but is lost whenever using a special move.
+
+
+Neutral Special is Paralyze/Electroweb.
+
+Paralyze is a short ranged attack that inflicts paralysis.
+
+Paralyze Stats:
+
+Recoil Damage: 1.4%
+Paralyzes on hit
+Damage: 6.0%
+BKB: 80
+KBG: 35
+Angle: 100
+Framedata: 18-23
+FaF: 51
+Minimum Shield Safety: -26
+Maximum Shield Safety: -21
+
+
+When Discharge is active, Neutral Special becomes Electroweb. Pichu places down an electrical orb. Electroweb has the same stats as vanilla Thunderjolt, but lasts 3 seconds, and paralyzes on hit. Pichu can only have one Electroweb out at a time.
+
+
+Side Special is Tackle/Skull Bash. 
+
+Tackle has Pichu somersault forward, dealing low damage, but being very quick for a burst option. Tackle can't be charged up, and can only be used once per airtime.
+
+Tackle Stats:
+
+Can cancel into a jump, aerial, or special (aside from Tackle) on hit (not on shield).
+Damage: 8.0%
+BKB: 65
+KBG: 55
+Angle: 40
+Framedata: 6-18
+FaF: 40
+Minimum Shield Safety: -24
+Maximum Shield Safety: -14
+
+When Discharge is active, Side Special becomes Skull Bash, which works identically to Vanilla.
+
+
+Up Special is Agility/Volt Switch.
+
+Agility works similarly to vanilla up special, however, it goes slightly more distance for the single dash, and can only be done once.
+
+When Discharge is active, Up Special becomes Volt Switch, working akin to Pikachu’s Up Special
+
+
+Down Special is Thunder/Thunder Discharge
+
+Thunder works the same as vanilla.
+
+When Discharge is active, Down Special becomes Thunder Discharge, where Pichu performs the shocking portion of Down Special.
+Falco
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.035 -> 1.65)
+
+
+Run Speed Decreased (1.619 -> 1.52)
+
+
+Traction Decreased (0.127 -> 0.08255)
+
+
+Air Acceleration Decreased (Base: 0.01 -> 0.0, Additional: 0.09 -> 0.03)
+
+
+Air Speed Increased (0.977 -> 1.15)
+
+
+Air Friction Decreased (0.01 -> 0.0025)
+
+
+Fall Speed Decreased (1.8 -> 1.65)
+
+
+Fast Fall Speed Increased (2.88 -> 3.0)
+
+
+Weight Decreased (82 -> 75)
+
+
+DACUS/DACDS Window: Frames 1-9
+
+
+                          Grounded Moves
+
+
+Jab 2 Active Duration Increased (Active: 3 -> 2-4)
+
+
+Rapid Jab Finisher Active Duration Increased (Active: 5-6 -> 4-7)
+
+
+Forward Tilt Up Tipper Angle Increased (361 -> 60)
+
+
+Forward Tilt Down Tipper Angle Decreased (361 -> 350)
+
+
+Up Tilt Startup Increased (5 -> 7)
+
+
+Up Tilt Initial Hitbox Size Decreased (6.0 -> 4.0)
+
+
+Up Tilt Second Hit BKB Increased (30 -> 55)
+
+
+Up Tilt Second Hit KBG Decreased (150 -> 130)
+
+
+Up Tilt Second Hit Damage Decreased (4.0% -> 3.0%)
+
+
+Down Tilt Damage Reduced (13.0%/12.0%/10.0% -> 6.0%/8.0%/9.0%)
+
+
+Down Tilt no longer trips
+
+
+Down Tilt Tipper Angle Increased (85 -> 105)
+
+
+Dash Attack Early Angle Increased (65 -> 75)
+
+
+Dash Attack Late Angle Increased (40 -> 95)
+
+
+Forward Smash's Sweet and Sourspots have been swapped, so the sweetspot is now at the tip of the wings, and the sourspot is up close 
+
+
+Up Smash now has a scooper hitbox
+
+
+Up Smash Final Hit Damage Decreased (13.0% -> 10.0%)
+
+
+Down Smash is now a spinning breakdance kick. Falco swings his legs in a breakdance while hand standing.
+
+Down Smash Stats:
+Damage: 12.5%
+BKB: 30
+KBG: 80
+Angle: 361
+Framedata: Can start charging on frame 5, Active from 12-19
+Minimum Shield Safety: -39
+Maximum Shield Safety: -29
+FaF: 60
+
+(Easter Egg: Canceling Down Taunt right before Falco says "Prey" into Down Smash without charging Down Smash makes Down Smash crumple the opponent)
+
+Aerials
+
+Nair now has feet hitboxes
+
+
+Nair Multihit Hitlag Multiplier Decreased (1.0 -> 0.5)
+
+
+Nair Body Hitbox Size Decreased (5.0 -> 4.0)
+
+
+Nair Final Angle Increased (361 -> 55)
+
+
+Nair Landing Lag Increased (9 -> 11)
+
+
+Fair now fully covers Falco
+
+
+Fair Final Hit KBG Decreased (130 -> 110)
+
+
+Fair Landing Hit now fully covers Falco
+
+
+Fair Multihit Hitlag Multiplier Decreased (1.0 -> 0.5)
+
+
+Fair gives Falco a Speed Boost on hit
+
+
+Fair ignores projectiles from frames 6-28
+
+
+Bair has Falco hold his leg out for longer (Increases total duration of the animation, both in active duration, and FaF)
+
+
+Bair Sweetspot Duration Adjusted (9-10 -> 5-6)
+
+
+Bair Sweetspot Damage Decreased (13.0% -> 10.0%)
+
+
+Bair Sourspot Duration Increased (11-16 -> 7-25)
+
+
+Bair FaF Increased (37 -> 45)
+
+
+Bair Landing Lag Decreased (13 -> 11)
+
+
+Uair Angles Adjusted (85/75/65 -> 65/75/85)
+
+
+Uair Landing Lag Increased (9 -> 11)
+
+
+Uair FaF Decreased (33 -> 25)
+
+
+Uair KBG Decreased (95 -> 80)
+
+
+Dair now covers the entirety of Falco's legs
+
+
+Dair Damage Decreased (13.0% -> 11.0%)
+
+Grabs/Throws
+
+
+Back Throw Initial Hit ASDI Multiplier Decreased (1.0 -> 0.0)
+
+
+Back Throw Laser ASDI Multiplier Increased (1.0 -> 1.5)
+
+
+Up Throw Initial Hit ASDI Multiplier Decreased (1.0 -> 0.0)
+
+
+Up Throw Laser ASDI Multiplier Increased (1.0 -> 1.5)
+
+Specials
+
+Falco's Lasers now decrease in damage over time, akin to Fox's Lasers (Frame 3-7: 3.0%, Frame 8-14: 2.0%, Frame 15+: 1.0%)
+
+
+Falco can Land Cancel Lasers
+
+
+Laser Angle Increased (361 -> 140)
+
+
+Grounded Side Special Speed Decreased (2.2 -> 1.5)
+
+
+Grounded Side Special Traction Increased (0.11 -> 0.15)
+
+
+Grounded Side Special FaF Increased (50 -> 66)
+
+
+Aerial Side Special Speed Increased (2.2 -> 2.7)
+
+
+Aerial Side Special Traction Decreased (0.05 -> 0.02)
+
+
+Aerial Side Special FaF Decreased (66 -> 50)
+
+
+Up Special Travel Speed Increased (4.2 -> 5.0)
+
+
+Down Special now comprises of 2 hits that deal 8.0% total. One sends out while the other sends in.
+
+
+Early/Late Hit Damage Decreased (5.0% -> 4.0%)
+
+
+Early Hit Angle Increased (361 -> 65)
+
+Early/Late Hit BKB Increased (35 -> 80)
+
+
+Early/Late Hit KBG Decreased (30 -> 20)
+
+
+Early Hit Duration: 5-16
+
+
+Late Hit Angle Increased (361 -> 125)
+
+
+Late Hit Duration: 17-31
+
+
+Grounded FaF Increased (44 -> 53)
+
+
+Aerial FaF Decreased (44 -> 37)
+Marth
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.255 -> 1.81)
+
+
+Run Speed Decreased (1.964 -> 1.7)
+
+
+Traction Decreased (0.114 -> 0.0741)
+
+
+Initial Jump Velocity Decreased (18.513 -> 16.215)
+
+
+Air Acceleration Adjusted (Base: 0.07 -> 0.02, Additional: 0.01 -> 0.06)
+
+
+Air Speed Reduced (1.071 -> 1.045)
+
+
+Air Traction Increased (0.00375 -> 0.005)
+
+
+DACUS/DACDS Window: Frames 1-11
+
+
+                          Grounded Moves
+
+
+Jab 1 Startup Decreased (5 -> 4)
+
+
+Jab 1 Hand BKB Increased (30 -> 38)
+
+
+Jab 1 Hand KBG Increased (15 -> 35)
+
+
+Jab 1 Hilt BKB Increased (30 -> 35)
+
+
+Jab 1 Hilt KBG Increased (12 -> 30)
+
+
+Jab 1 Tipper BKB Increased (12 -> 15)
+
+
+Jab 1 Tipper KBG Increased (30 -> 40)
+
+
+Jab 1 Tipper Angles Adjusted (180/361 -> 95)
+
+
+Jab 2 Startup Decreased (4 -> 3)
+
+Forward Tilt Tipper KBG Decreased (85 -> 65)
+
+
+Forward Tilt Frames 10-12 Angle Adjusted (361/361/361 -> 125/115/105)
+
+
+Forward Tilt Active Duration Increased (Active: 8-11 -> 8-12)
+
+Up Tilt FaF Reduced (33 -> 30)
+
+Down Tilt Startup Decreased (7 -> 6)
+
+Dash Attack has been reworked to be more combo tuned
+
+Dash Attack Stats:
+
+
+Damage: 10.0%/9.0%/13.0%, then 10.0%/13.0%
+BKB: 80/90, then 70/93
+KBG: 60/45, then 55/58
+Angle: 77/55/361/105, then 45
+Framedata: 10-12 for Sweetspot, 13 for sourspot
+Minimal Shield Safety: -24
+Maximum Shield Safety: -18
+FAF: 43
+
+Forward Smash Hilt/Sword Damage Decreased (13.0% -> 11.0%)
+
+
+Forward Smash Tipper Damage Decreased (18.0% -> 16.0%)
+
+
+Forward Smash Active Duration Adjusted (Active: 10-13 -> 9-14)
+
+Down Smash Startup Increased (6 -> 8)
+
+
+Down Smash FaF Decreased (55 -> 50)
+
+Aerials
+
+
+Fair Duration Increased (6-8 -> 5-10)
+
+First frame of Fair Stats Adjusted:
+
+Damage (8.0%/8.0%/11.5% -> 6.0%/6.0%/9.5%)
+Angle (361/361/361 -> 50/60/70)
+
+Last 3 frames of Bair Stats Adjusted:
+
+Damage (9.0%/9.0%/12.5% -> 7.0%/7.0%/10.5%)
+Angle (361/361/361 -> 50/60/70)
+
+Uair Duration Increased (5-9 -> 5-14)
+
+Dair is now flipped so that Marth faces towards the camera, rather than away
+
+
+Dair Angles Adjusted (Hilt: 361 -> 80, Sword: 80 -> 361, Tipper: 361 -> 362)
+
+
+Dair Damage Decreased (12.0%/14.0%/15.0% -> 9.0%/11.0%/12.0%)
+
+
+Dair FaF Decreased (60 -> 45)
+
+
+Dair Autocancel Window Decreased (55 -> 45)
+
+
+Dair Spike Duration Increased (11 -> 10-12)
+
+Grabs/Throws
+
+
+Up Throw KBG Increased (102 -> 120)
+
+Specials
+
+
+Dancing Blade 1 Hitbox Range Adjusted
+
+Inner Sourspot Vertical Range Increased (5.5 -> 8.5)
+Middle Sourspot Vertical Range Increased (6.0 -> 10.0)
+Tipper Vertical Range Increased (5.5 -> 7.5)
+Tipper Horizontal Range Increased (1.5 -> 2.5)
+
+
+Dancing Blade Neutral 4 Inner Sourspot Size Decreased (7..0 -> 6.0)
+
+
+Dancing Blade Neutral 4 Middle Sourspot Size Decreased (8.0 -> 6.0)
+
+
+Aerial Dancing Blade has been replaced with Crescent Slash
+
+Crescent Slash Stats:
+
+Travels ~250% of Dolphin Slash horizontal distance
+Travels ~50% of Dolphin Slash vertical distance
+Cannot grab ledge during the animation
+Intangible from frames 1-6
+Damage: 3.0%/3.0%/4.0%, then 3.0%/3.0%/11.0%
+BKB: 70/70/20, then 70/70/60
+KBG: 74/74/90, then 74/75/125
+Angle: 30/30/361
+Framedata: 6-7 for early hit, then 8-9 for sweetspot
+FAF: N/A
+
+
+Dolphin Slash’s Hitboxes now extend to the end of the blade
+
+
+Dolphin Slash Angles Adjusted (74/361 -> 74)
+
+
+Counter has been reworked to automatically do the counterattack regardless of if someone hits Marth
+
+If Marth does Counterattack without hitting anyone, it will do 8%
+
+Counter no longer makes Marth intangible, instead giving him super armor
+Lucina
+
+
+
+
+Stats
+
+
+Walk Speed Decreased (1.575 -> 1.115)
+
+
+Traction Decreased (0.114 -> 0.0741)
+
+
+Initial Dash Decreased (2.255 -> 1.78)
+
+
+Run Speed Decreased (1.964 -> 1.8)
+
+
+Initial Jump Velocity Decreased (18.513 -> 17.425)
+
+
+Jump Height Decreased (33.66 -> 31.25)
+
+
+Short Hop Height Decreased (16.26 -> 13.25)
+
+
+Air Jump Height Decreased (33.66 -> 31.25)
+
+
+Air Acceleration Adjusted (Base: 0.01 -> 0.02, Additional: 0.07 -> 0.03)
+
+
+Air Speed Increased (1.071 -> 1.24)
+
+
+Air Friction Increased (0.00375 -> 0.005)
+
+
+Gravity Increased (0.075 -> 0.1)
+
+
+Max Fall Speed Increased (1.58 -> 1.75)
+
+
+Fast Fall Speed Increased (2.528 -> 2.8)
+
+
+Model Scale Decreased (0.95 -> 0.92)
+
+
+Shield Break Height Increased (40.85 -> 41.5)
+
+
+Lucina can now Wall Jump
+
+
+DACUS/DACDS Window: Frames 1-14
+
+
+                          Grounded Moves
+
+
+All of Lucina’s Moves now have the electric attribute, which is marked by dark blue electricity surrounding her blade
+
+
+Jab is now a Triple Jab System
+
+Jab 1 is based on Chrom's Jab
+
+Jab 1 Stats:
+
+Damage: 1.0%
+BKB: 30
+KBG: 30
+Angle: 75
+Framedata: 5-7
+FaF: 22
+Shield Safety: -10
+
+Jab 2 is based on Marth's Jab 1
+
+Jab 2 Stats:
+
+Damage: 2.0%
+BKB: 30
+KBG: 15/12
+Angle: 361/180
+Framedata: 5-6
+FaF: 25
+Shield Safety: -16
+
+Jab 3 is a lunging stab
+
+Jab 3 Stats:
+
+Damage: 3.0%
+BKB: 50
+KBG: 40
+Angle: 361
+Framedata: 7-8
+FaF: 39
+Shield Safety: -24
+
+
+Forward Tilt is now based on Chrom's Forward Tilt
+
+Forward Tilt Stats are identical to Chrom's, except it deals 10.0% instead of 11.0%
+
+Up Tilt and Down Tilt are now based on Chrom's Up Tilt/Down Tilt
+
+
+Stats are identical to Chrom's
+
+Lucina's Dash Attack is now based on Chrom's Dash Attack
+
+Dash Attack Stats are identical to Chrom's, except it has a lower angle (52 -> 35)
+
+Forward Smash is now based on Chrom's Forward Smash
+
+Forward Smash Stats are identical to Chrom's, except it deals 15.0% instead of 18.0%
+
+
+Aerials
+
+
+Nair is now a triple spinning slash
+
+
+Nair Stats:
+
+Damage: 2.0%/3.0%/5.0%
+FKB: 80/70
+BKB: 60
+KBG: 80/70/60
+Angle: 367/361
+Framedata: 5-11/13-26/28-31
+FaF: 55
+Autocancel Window: 55
+Landing Lag: 13
+Shield Safety: -10
+
+Fair is now based on Mythra's Fair
+
+Fair Stats:
+
+Damage: 9.0%
+BKB: 45
+KBG: 60
+Angle: 361
+Framedata: 10-13
+FaF: 40
+Autocancel Window: 40
+Landing Lag: 10
+Shield Safety: -9
+
+Bair is now the same as Chrom's
+
+Stats are identical to Chrom's
+
+Uair is now a duel upwards sweep
+
+Uair Stats:
+
+Damage: 3.0%/4.0%
+FKB: 60
+BKB: 40
+KBG: 40/110
+Angle: 367/80
+Framedata: 5-9, then 22-26
+FaF: 50
+Autocancel Window: 50
+Landing Lag: 12
+Shield Safety: -9
+
+Dair is now based on the diving portion of Prominence Revolt
+
+Damage: 11.0%
+BKB: 40
+KBG: 60
+Angle: 270/361
+Framedata: 16-20 for spike, then 22-35
+FaF: 70
+Autocancel Window: 60
+Landing Lag: 18
+Shield Safety: -13
+
+
+Grabs/Throws
+
+
+Forward Throw KBG Increased (45 -> 90)
+
+Specials
+
+
+Shield Special: Class Change
+
+Class Change will change Lucina’s Weapon to a Lance. This changes many of Lucina’s stats and attacks, of which will be listed when the move is implemented
+
+
+Neutral Special: Swordsmaster Dash
+
+Swordsmaster Dash has Lucina assume a similar stance to her current Neutral Special, however, it's been retooled to be an arguably better move.
+
+Starting Speed Multiplier Increased (0.5 -> 1.0)
+
+Max Charge Frame Decreased (60 -> 0)
+
+
+Max Damage Multiplier Decreased (2.2 -> 1.0)
+
+
+Neutral Special now land cancels
+
+
+Neutral Special FaF Decreased (39 -> 30)
+
+
+Neutral Special Damage Decreased (8.5% -> 6.0%)
+
+
+Neutral Special Extra Shield Damage Decreased (25 -> 0)
+
+
+Neutral Special Startup Decreased (Active: 19-20 -> 12-13)
+
+
+Neutral Special now makes Lucina dash forward quite a bit (around 1/3rd of FD), with it having some vertical gain when angled up, and having some downward velocity when angling down
+
+
+Neutral Special can be reversed during frames 1-11
+
+Using Swordsmaster Dash will disable the ability to use Up Special
+
+
+Side Special: Astra
+
+Astra is a very complicated move to describe, but it ultimately works like an even more advanced version of Dancing Blade. It now comprises of 5 hits total, and can only be activated if you land the first hit.
+
+All hits of Astra have been decreased in damage overall, which will be listed below
+
+Hits 1/2/3/4 of Astra now have fixed knockback
+
+
+Astra Neutral 5 is based on Marth's Forward Smash
+
+
+Astra Up 5 is based on Dolphin Slash, being extremely risky to use, but having insane reward for landing
+
+
+Astra Down now has a second hit, which is a downward poke, and Astra Down 5 is a slow, spinning downward swing, which is a powerful spike, but it's hard to land
+
+Astra 1 Damage Decreased (2.8% -> 1.0%)
+Astra 2 Neutral Damage Decreased (2.8% -> 1.0%)
+Astra 3 Neutral Damage Decreased (3.3% -> 2.0%)
+Astra 4 Neutral Damage Decreased (4.7% -> 2.0%)
+
+
+Astra Neutral 5 Stats:
+
+Damage: 6.0%
+BKB: 90
+KBG: 85
+Angle: 361
+Framedata: 10-13
+FaF: 60
+Minimum Shield Safety: -43
+Maximum Shield Safety: -40
+
+Astra Up 2 Damage Decreased (2.8% -> 1.0%)
+Astra Up 3 Damage Decreased (3.3% -> 2.0%)
+Astra Up 4 Damage Decreased (5.6% -> 2.0%)
+
+
+Astra Up 5 Stats:
+
+Damage: 8.0%
+BKB: 80
+KBG: 75
+Angle: 361
+Framedata: 5-11
+FaF: 80
+Minimum Shield Safety: -57
+Maximum Shield Safety: -55
+
+Astra Down 2 Stats:
+
+Damage: 6.0%
+BKB: 45
+KBG: 25
+Angle: 55
+Framedata: 8
+FaF: 40
+Shield Safety: -25
+
+Astra Down 3 Damage Decreased (3.3% -> 2.0%)
+Astra Down 4 Damage Decreased (Multihits: 2.0% -> 1.0%, Final Hit: 4.2% -> 2.0%)
+
+
+Astra Down 5 Stats:
+
+Damage: 12.0%
+BKB: 50
+KBG: 50
+Angle: 280
+Framedata: 14-16
+FaF: 65
+Minimum Shield Safety: -33
+Maximum Shield Safety: -30
+
+
+Up Special: Soaring Slash
+
+Identical to Chrom's Up Special
+
+
+Down Special: Iai Counter
+
+Iai Counter works similarly to vanilla counter, however, it will automatically do the counterattack regardless of if someone hits Lucina
+
+If Lucina does Counterattack without hitting anyone, it will do 8%
+
+Iai Counter will send opponents behind Lucina
+
+Counter no longer makes Lucina intangible, instead giving her super armor
+Young Link
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.09 -> 1.785)
+
+
+Run Speed Decreased (1.749 -> 1.65)
+
+
+Traction Decreased (0.105 -> 0.06825)
+
+
+DACUS/DACDS Window: Frames 1-9
+
+
+Specials
+
+
+Bomb is now B Reversable
+Ganondorf
+
+
+Mewtwo
+
+
+
+
+Stats
+
+Mewtwo's Tail Hurtbox has been adjusted such that it now fully covers the tail, including the bulb.
+
+Mewtwo can now cancel his dodges into Up Special.
+
+
+Mewtwo now has an install, known as Stored Power. This is filled up by landing attacks, and has 100 points. Every move that is landed fills up the meter by 7 points. Stored Power can be activated by using Shield Special, with its effects being clarified there.
+
+Initial Dash Speed Decreased (2.255 -> 1.65)
+
+
+Run Speed Decreased (2.255 -> 1.95)
+
+
+Traction Decreased (0.116 -> 0.0754)
+
+
+Initial Jump Velocity Decreased (17.1105 -> 14.0)
+
+
+Air Speed Decreased (1.313 -> 1.25)
+
+
+Air Friction Increased (0.016 -> 0.02)
+
+
+Gravity Decreased (0.082 -> 0.08)
+
+
+Fall Speed Decreased (1.55 -> 1.5)
+
+
+Fast Fall Speed Decreased (2.48 -> 2.4)
+
+
+DACUS/DACDS Window: Frames 1-11
+
+
+                          Grounded Moves
+
+
+Jab 1 Startup Decreased (5 -> 4)
+
+
+Jab 1's Hitboxes have been adjusted to match the effects
+
+
+Rapid Jab Transition Frame Decreased (12 -> 7)
+
+Rapid Jab Multihit Damage Decreased (0.8% -> 0.5%)
+
+Forward Tilt High has had it’s animation adjusted to hit higher
+
+Up Tilt now uses the animation from his vanilla Side Taunt.
+
+Up Tilt Stats:
+
+Damage: 9.0%
+BKB: 70
+KBG: 55
+Angle: 95
+Framedata: 6-20
+FaF: 40
+Shield Safety: -25
+
+Dash Attack Startup Increased (10 -> 14)
+
+
+Holding Special during Dash Attack from frames 6-12 enables Ghost Dash.
+
+
+Ghost Dash turns Mewtwo invisible, makes him intangible, and is edge cancelable, but loses its hitbox and has 10 more frames of endlag.
+
+
+Forward Smash Sweetspot Size increased to match the effects (allowing it to outrange Forward Tilt)
+
+
+Forward Smash FaF Increased (52 -> 55)
+
+Up Smash Startup Decreased (9 -> 7)
+
+
+Up Smash now has ground scooper hitboxes
+
+
+Up Smash now uses Autolink Angles
+
+
+Up Smash has 3 more frames of hitstun for each multihit
+
+
+Up Smash FaF Decreased (69 -> 60)
+
+
+Up Smash Finisher Damage Decreased (10.0% -> 9.0%)
+
+Down Smash Startup Decreased (21 -> 20)
+
+
+Down Smash FaF Increased (41 -> 50)
+
+Aerials
+
+Nair Startup Decreased (7 -> 6)
+
+
+Nair Final Hit Startup Decreased (27 -> 26)
+
+
+Nair Multihits changed to a single autolinking hitbox that covers his torso
+
+
+Nair has 10 less hitstun frames on the autolink
+
+
+Nair ASDI Multiplier Increased (1.0 -> 1.5)
+
+
+Fair Startup Decreased (7 -> 6)
+
+
+Fair Landing Lag Increased (8 -> 10)
+
+
+Fair Inner Hitbox Damage Decreased (13.0% -> 10.0%)
+
+
+Bair is now Psyshock. Psyshock has Mewtwo hold his head in the palm of his hand, while his body shakes vigorously, before rapidly turning around and releasing a large explosion behind himself.
+
+Bair Stats:
+
+Damage: 16.0%
+BKB: 45
+KBG: 70
+Angle: 30
+Framedata: 18-22
+FaF: 55
+Landing Lag: 14
+Shield Safety: -8
+
+
+Uair Duration Increased (10-14 -> 8-17)
+
+
+Uair Landing Lag Increased (8 -> 10)
+
+
+Uair Damage Decreased (12.0%/11.0%/10.0% -> 10.0%/9.0%/8.0%)
+
+
+Dair has been changed to Psionic Blast.
+
+Psionic Blast has Mewtwo charge up a ball of energy, before palm striking it below himself.
+
+Dair Stats:
+
+Damage: 12.0%/14.0%/16.0%
+BKB: 30
+KBG: 90
+Angle: 361/300/270
+Framedata: 20-21 for spike, then 22-23
+FaF: 60
+Autocancel Window: 55
+Landing Lag: 15
+Minimum Shield Safety: -10
+Maximum Shield Safety: -9
+
+Grabs/Throws
+
+
+Mewtwo slides further during Dash Grab.
+
+Down Throw is changed to Psychic Grip. 
+
+Psychic Grip has Mewtwo hold the opponent by the neck/body via psychokinesis, then lifts them above the ground. After doing so, he then tosses them straight down. This can spike opponents if they're offstage.
+
+Specials
+
+Shield Special is Stored Power. When used, several of Mewtwo's attributes get changed:
+
+Traction Decreased (0.0754 -> 0.04)
+Initial Dash Speed Decreased (1.65 -> 1.4)
+Run Speed Decreased (1.95 -> 1.6)
+Initial Jump Velocity Increased (14 -> 20)
+Gravity Increased (0.08 -> 0.2)
+Fall Speed Increased (1.5 -> 2.0)
+Fast Fall Speed Increased (2.4 -> 3.0)
+Weight Increased (79 -> 115) (Testing Weight)
+
+Alongside this, several of his specials get modifications, which will be listed in the respective special.
+
+The meter is decreased by 2 points every second, and decreased by 5 points for any move used. Additionally, any time Mewtwo gets hit, the meter is decreased by 10 points if he is hit.
+
+
+Shadow Ball now gains a charging hitbox, which has similar stats to Lucario's Aura Sphere.
+
+Shadow Ball Charge Stats:
+
+Damage: 0.5%
+BKB: 30
+KBG: 93
+Angle: 95
+
+When Stored Power is active, Mewtwo can now angle it in up to 6 directions. When angled, Mewtwo will shoot the Shadow Ball at a 45 degree angle.
+
+
+Stored Power Max Charging Time Increased (120 -> 150)
+
+
+Stored Power Life Increased (80 -> 120)
+
+
+Shadow Ball Charge/Fire is now B Reversable
+
+
+Confusion Aerial Horizontal Speed Increased (0.2x -> 1.0x)
+
+
+Confusion Aerial Horizontal Acceleration Increased (0.2x -> 1.0x)
+
+
+When Stored Power is active, Confusion becomes Future Sight. When used, Future Sight has Mewtwo place down a small orb. After 5 seconds, it will detonate into an explosion that sends towards Mewtwo.
+
+Future Sight Stats:
+
+Damage: 12.0%
+BKB: 85
+KBG: 60
+Angle: 150
+Lasts for ~20 frames
+
+
+Teleport Base Travel Speed Decreased (6 -> 3)
+
+
+Teleport Additional Travel Speed Decreased (3 -> 2)
+
+
+Teleport Travel Time Increased (6F -> 8F)
+
+
+Teleport Grounded Endlag Decreased (26F -> 20F)
+
+
+Teleport Landing Lag Increased (15F -> 20F)
+
+
+When Stored Power is active, Teleport gains two main attributes:
+
+Mewtwo can now use any move (aside from Teleport) after he reappears. This however consumes Mewtwo's Double Jump. In addition, holding the special button will stop Mewtwo's Teleport Momentum, but tapping it will preserve his momentum.
+
+When used on the ground, Teleport will be canceled on frame 4, allowing Mewtwo to Superdash. Superdashing is similar to the Super Wavedash technique Samus had in Melee. Any time Superdashing is used, it decreases Mewtwo's meter by 20 points.
+
+
+Disable is now B Reversable.
+
+
+Disable is now unblockable.
+
+
+Grounded Disable no longer uses a projectile, instead being a large hitbox (that still has the facing angle).
+
+
+Aerial Disable KBG Increased (180 -> 280)
+Roy
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.2 -> 1.89)
+
+
+Run Speed Decreased (2.145 -> 1.93)
+
+
+Traction Decreased (0.107 -> 0.06955)
+
+
+Initial Jump Velocity Decreased (17.0335 -> 13.0)
+
+
+Full Hop Height Decreased (30.97 -> 20)
+
+
+Air Jump Height Increased (28 -> 31)
+
+
+Air Speed Decreased (1.302 -> 1.2)
+
+
+Fall Speed Increased (1.8 -> 2.0)
+
+
+Fast Fall Speed Increased (2.88 -> 3.1)
+
+
+Gravity Increased (0.114 -> 0.13)
+
+
+DACUS/DACDS Window: Frames 1-14
+
+Grounded Moves
+
+
+Jab FaF Increased (22 -> 26)
+
+
+Jab Sourspot Angle Increased (38 -> 112)
+
+
+Forward Tilt is now a stabbing poke, being somewhat based on Marth's Shield Breaker
+
+Forward Tilt Stats:
+
+Forward Tilt is angleable
+Damage: 8.0%/5.5%
+BKB: 50
+KBG: 100
+Angle: 30
+Framedata: 8-9
+FaF: 30
+Minimum Shield Safety: -16
+Maximum Shield Safety: -13
+
+
+Up Tilt now has Roy twirl his blade upwards twice
+
+Up Tilt Stats:
+
+
+Damage: 4.0%/6.0% for Sweetspot, 2.0%/3.0% for Sourspot
+FKB: 60
+BKB: 80
+KBG: 110
+Angle: 90
+Framedata: 8-12, then 18-22
+FaF: 45
+Minimum Shield Safety: -33
+Maximum Shield Safety: -16
+
+
+Down Tilt Sweetspot Damage Decreased (11.0% -> 10.0%)
+
+
+Down Tilt Sourspot Damage Increased (6.5 -> 7.0%)
+
+
+Down Tilt Sourspot Angle Increased (30 -> 70)
+
+
+Down Tilt FaF Increased (21 -> 24)
+
+
+Dash Attack Sweetspot Damage Decreased (13.0% -> 10.0%)
+
+Forward Smash Sweetspot Damage Decreased (20.0% -> 16.0%)
+
+
+Forward Smash Middlespot Damage Decreased (17.0% -> 14.0%)
+
+
+Forward Smash Sourspot BKB Increased (30 -> 50)
+
+Charging Forward Smash to full capacity will nearly double the length of the attack by adding fiery disjoints
+
+The disjoints have the same strength as the sourspot
+
+Up Smash Finisher BKB Decreased (90 -> 70)
+
+
+Charging Up Smash to full capacity will create a fiery tornado into a larger explosion
+
+Down Smash has Roy perform a single spin
+
+Down Smash Stats:
+
+
+Damage: 14.0%
+BKB: 40
+KBG: 60
+Angle: 30
+Framedata: 6-17
+FaF: 60
+Minimum Shield Safety: -44
+Maximum Shield Safety: -30
+
+
+Charging Down Smash to full capacity will create a fiery tornado
+
+Said fiery tornado only deals 8.0%
+
+Aerials
+
+
+Nair has Roy spin his sword around akin to Ike's Nair
+
+Nair Stats:
+
+Damage: 10.5%/5.0%
+BKB: 25
+KBG: 100
+Angle: 70
+Framedata: 7-17
+FaF: 40
+Landing Lag: 8
+Autocancel Window: 40
+Minimum Shield Safety: -5
+Maximum Shield Safety: +1
+
+Fair Startup Decreased (10 -> 9)
+
+
+Fair Sweetspot Damage Decreased (11.0% -> 9.0%)
+
+
+Fair FaF Increased (29 -> 35)
+
+Bair KBG Decreased (107 -> 90)
+
+Grabs/Throws
+
+
+Standing Grab Startup Decreased (7 -> 6)
+
+
+Dash Grab Startup Decreased (10 -> 9)
+
+
+Pivot Grab Startup Decreased (11 -> 10)
+
+
+Specials
+
+
+Dancing Blade now comprises of 3 hits, with Hit 1 working like vanilla, Hit 2 working like Hit 3, and Hit 4 being vanilla
+
+
+Dancing Blade 4 Forward KBG Decreased (123 -> 90)
+
+
+Blazer Super Armor Duration Adjusted (4-10 -> 1-10)
+
+
+Aerial Blazer now matches Grounded Blazer
+
+
+Blazer Initial Hitbox Adjusted to follow the sword
+
+
+Blazer Multihit Hitboxes Adjusted to follow the sword
+
+
+Blazer Angle Decreased (70 -> 50)
+
+
+Blazer Height Multiplier Decreased (1.1x -> 1.0x)
+
+
+Counter has been changed to Crusher Counter:
+
+Intangibility replaced for super armor
+Angle Decreased (361 -> 300)
+Max Counter Strength Decreased (1.35x -> 0.5x)
+Chrom
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.2 -> 1.7)
+
+
+Run Speed Decreased (2.145 -> 1.8)
+
+
+Traction Decreased (0.107 -> 0.06955)
+
+
+DACUS/DACDS Window: Frames 1-14
+Mr. Game & Watch
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.98 -> 1.675)
+
+
+Run Speed Increased (1.679 -> 1.74)
+
+
+Traction Decreased (0.131 -> 0.08515)
+
+
+Air Speed Decreased (1.176 -> 1.095)
+
+
+DACUS/DACDS Window: Frames 1-7
+
+Grounded Moves
+
+Down Taunt has a windbox that KO’s at ~500%
+
+
+Down Taunt Stats:
+
+Damage: 0.0%
+BKB: 100
+KBG: 100
+Angle: 0
+Framedata: 40 - 50
+FAF: Same as Vanilla
+
+
+Forward Tilt Angle Decreased (361 -> 28)
+
+
+Forward Tilt Early Hit Duration Increased (8-9 -> 8-11)
+
+
+Forward Tilt Early Hit KBG Decreased (96/100 -> 87)
+
+
+Forward Tilt Late Hit Duration Decreased (10-20 -> 11-14)
+
+Up Tilt Startup Decreased (10 -> 8)
+
+
+Up Tilt’s Hands, Arms, and Shoulders are intangible from frames 8-22
+
+
+Up Tilt Hit 2 Angle Increased (75 -> 83)
+
+
+Up Tilt now has foot hitboxes that link into the second hit
+
+
+Down Tilt now has a windbox
+
+Down Tilt Windbox Stats:
+
+Damage: 0.0%
+FKB: 80
+KBG: 80
+Angle: 150
+Framedata: 6 - 8
+
+
+Down Tilt can now hit aerial opponents
+
+
+Down Tilt KBG Decreased (112 -> 100)
+
+
+Down Tilt FaF Decreased (42 -> 38)
+
+
+Dash Attack now has head intangibility from frames 6-9
+
+
+Forward Smash FaF Increased (42 -> 44)
+
+
+Up Smash FAF Increased (39 -> 44)
+
+
+Up Smash now has Head Intangibility from frames 4-20
+
+
+Up Smash Shieldstun Decreased (10 -> 6)
+
+
+Down Smash FaF Increased (34 -> 44)
+
+
+Down Smash Bury Hitbox Size Decreased (4.5 -> 3.0)
+
+
+Down Smash Body Sourspot KBG Decreased (80 -> 60)
+
+
+Down Smash Hammer Sourspot BKB Decreased (60 -> 40)
+
+
+Down Smash Hammer Sourspot KBG Decreased (85 -> 70)
+
+
+Down Smash Hammer Sourspot Angle Decreased (80 -> 40)
+
+Aerials
+
+Nair’s Multihit Fishbowl Hitbox is now an autolinking hitbox, and the fish send towards the bowl
+
+
+Nair Hitbox Size Increased (Fishbowl: 2.5 -> 5.0)
+
+
+Nair Multihit Damage Decreased (3.0% -> 2.0%)
+
+
+Nair Landing Lag Increased (7 -> 10)
+
+
+Fair’s Bomb will now explode if hit past frame 13 (of the bomb spawning)
+
+
+Bair Landing Lag Decreased (18 -> 16)
+
+
+Uair now only hits 3 times, but KO’s much earlier (BKB: 65 -> 75, KBG: 35 -> 125).
+
+
+Dair Early Hit now matches the Key
+
+
+Dair Late Hit now matches the Key
+
+
+Dair Late Hit Damage Decreased (11.0% -> 7.0%)
+
+Grabs/Throws
+
+Dash Grab Horizontal Disjoint Decreased (6.4 -> 2.4)
+
+
+Pivot Grab Horizontal Disjoint Decreased (10.7 -> 5.2)
+
+
+Forward Throw Angle Decreased (52 -> 30)
+
+
+Back Throw Angle Decreased (52 -> 30)
+
+
+Up Throw Damage Decreased (12.0% -> 8.0%)
+
+
+Up Throw BKB Decreased (100 -> 80)
+
+
+Up Throw KBG Increased (29 -> 40)
+
+
+Down Throw now puts opponents in the lay status
+
+
+Down Throw Angle Decreased (80 -> 270)
+
+
+Down Throw FaF Decreased (49 -> 45)
+
+
+Specials
+
+Chef can now be fast fallen.
+
+
+Maximum Chef Projectiles Decreased (5 -> 4)
+
+
+Chef Projectile Model Scale Increased (1.0 -> 1.25)
+
+
+Each level of Judge has been altered:
+
+Judge 1:
+
+Recoil Damage Reduced (12.0% -> 10.0%)
+
+
+Flips Opponents on Hit
+
+Judge 2:
+
+Trip Chance Increased (0.2 -> 1.0)
+
+Judge 3:
+
+Now inflicts 3% poison damage
+
+Judge 4:
+
+Now inflicts reversed controls
+
+Judge 5:
+
+Multihit Angle Adjusted (75 -> 367)
+
+
+Finisher Hit now inflicts paralysis
+
+Judge 6:
+
+Now inflicts sleep
+
+Judge 7:
+
+Now stuns, and heals Game & Watch for 6%.
+
+
+Apple Spawn Count Decreased (3 -> 2)
+
+Judge 8:
+
+Now plays the Freeze Sound
+
+
+KBG Increased (100 -> 110)
+
+
+BKB Increased (30 -> 50)
+
+Judge 9:
+
+ASDI Multiplier Decreased (2.0x -> 0.0x)
+
+
+Fire now has Set Weight
+
+
+Fire Angle Increased (83 -> 86)
+
+
+Fire Startup Increased (3 -> 5)
+
+
+Fire Body Angle Increased (361 -> 77)
+
+
+Fire Height Multiplier Decreased (1.1 -> 0.9)
+
+
+Parachute can now be double jumped out of
+
+
+Oil Panic FaF Decreased (43 -> 40)
+
+
+Oil Panic Gauge 1 Damage Limit Increased (10 -> 999)
+
+
+Oil Panic Gauge 2 Damage Limit Increased (20 -> 999)
+
+(This means it only fills up one unit for any projectile, regardless of damage)
+
+
+Meta Knight
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.211 -> 1.77)
+
+
+Run Speed Decreased (2.09 -> 1.83)
+
+
+Traction Decreased (0.097 -> 0.06305)
+
+
+DACUS/DACDS Window: Frames 1-8
+
+Grounded Moves
+
+Rapid Jab X Disjoint Increased (5.5 -> 7.5)
+
+
+Rapid Jab Finisher now matches the sword trail
+
+
+Forward Tilt 1 now matches the sword trail
+
+
+Forward Tilt 3 now matches the sword trail
+
+
+Forward Smash Sourspot X Disjoint Increased (12.0 -> 15.0)
+
+
+Up Smash Startup Decreased (8 -> 7)
+
+
+Up Smash now matches the sword trail
+
+Aerials
+
+Nair Startup Increased (6 -> 8)
+
+
+Nair Landing Lag Increased (7 -> 16)
+
+
+Nair FAF Increased (44 -> 50)
+
+
+Nair Initial Autocancel Window Increased (1-5 -> 1-7)
+
+
+Nair Ending Autocancel Window Decreased (40 -> 50)
+
+
+Nair now has similar range to Cloud/Corrin Nair
+
+
+Nair Minimum Shield Safety Decreased (-4 -> -13)
+
+
+Nair Maximum Shield Safety Decreased (-3 -> -11)
+
+
+Fair is reworked to Meta Chop
+
+Meta Knight does a single downward swing, akin to the third hit of vanilla Fair
+
+Fair Stats:
+
+Damage: 7.5%
+BKB: 55
+KBG: 110
+Angle: 55
+Framedata: 8-12
+Shield Safety: -6
+Landing Lag: 10
+Autocancel Window: 1-9, then 35+
+FAF of 35
+
+
+Bair now matches the sword trail
+
+
+Uair Duration Increased (6 -> 5-9)
+
+
+Uair now matches the sword trail
+
+
+Dair is reworked to the Sword Dive from Kirby Games
+
+Meta Knight raises his sword up, then dives straight down, functioning like a stall and fall.
+
+Dair Stats:
+
+Dair’s trajectory can be angled by 45 degrees by either holding forwards or backwards within the first 7 frames of Dair.
+
+Damage: 10.0%/7.0%/4.0%
+BKB: 30
+KBG: 128
+Angle: 55
+Framedata: 10-16 for early hit, 17-24 for middle hit, 25-39 for late hit
+Minimum Shield Safety: -17
+Maximum Shield Safety: -15
+Landing Lag: 20
+Autocancel Window: 1-9, then 60
+FAF of 60
+
+
+Specials
+
+
+Mach Tornado is now a multihit.
+
+Mach Tornado Stats:
+
+Damage: 0.7%/5.0%
+FKB: 80
+BKB: 50
+KBG: 100/125
+Angle: 367/90
+Framedata: 12-46 (Can be extended to frame 106). Hits every 4 frames. Finisher is frame 47-49 (107-109).
+
+
+Maximum Horizontal Speed Decreased (2.5/2.5 -> 1.2)
+Horizontal Speed Stick Influence Decreased (0.8 -> 0.3)
+Starting Rotation Speed Increased (130 -> 160)
+Maximum Rotation Limit Increased (130 -> 240)
+Ending Rotation Speed Increased (60 -> 80)
+Maximum Mashing Time Increased (60 -> 70)
+Maximum Button Inputs Increased (20 -> 25)
+Vertical Speed on Button Press Decreased (0.9 -> 0.4)
+Rotation Increase per Button Press Increased (7 -> 16)
+Gravity Decreased (0.05 -> 0.03)
+
+
+Mach Tornado is now B Reversable
+
+(Credit to: Liam Estares (LKE Studios), Ben Hall (arthur!), WuBoytH)
+Shuttle Loop has been significantly overhauled:
+
+Grounded Shuttle Loop Stats:
+
+Grants intangibility from frames 5-7
+Damage: 9.0%/6.0%/6.0%
+BKB: 90/70/0
+KBG: 50/30/100
+Angle: 70/80/45
+Framedata: 8-9 for initial hit, 10-12 for middle hit, 22-31 for late hit
+
+Aerial Shuttle Loop Stats:
+
+Damage: 9.0%/5.0%
+BKB: 60/30
+KBG: 60/80
+Angle: 30/361
+Framedata: 1-4 for initial hit, 7-20 for late hit
+
+While Meta Knight performs the initial upward sword strike, instead of performing a second strike, he now fully loops forward and soars forward.
+
+Once the move is over, Meta Knight can now begin to Glide. Gliding has Meta Knight fly forward at a relatively fast pace. This move has similarities to Steve’s Elytra, where you can angle the control stick downwards to descend, and angle it upwards to ascend. Meta Knight cannot turn around during this state.
+
+Glide Params:
+
+Maximum Upward Angle: 80
+Maximum Downward Angle: -70
+Initial Vertical Speed: 0.75
+Initial Gravity Multiplier: 1.0
+Initial Horizontal Speed Multiplier: 1.0
+Initial Horizontal Speed: 1.7
+Angle Speed Adjustment: 0.05
+Maximum Horizontal Speed: 2.2
+Minimum Horizontal Speed: 0.7
+Gravity Acceleration: 0.03
+Maximum Gravity: 0.5
+Minimum Angle to Increase Speed: -25
+Maximum Speed Increase: 0.01
+Stick Sensitivity: 0.25
+Maximum Upward Angle Acceleration: 0.55
+Maximum Downward Angle Acceleration: 0.75
+Maximum Vertical Speed: 7.0
+Added Speed when Stick is Neutral: 1.0
+
+As you ascend, Meta Knight will lose speed, and if Meta Knight comes to a halt, he will enter freefall. In addition, landing during the gliding animation will have Meta Knight enter the fallen over pose, which is similar to the tripping state.
+
+Finally, Meta Knight can perform a Glide Attack.
+
+Glide Attack Stats:
+
+Damage: 12.0%
+BKB: 30
+KBG: 80
+Angle: 70
+Framedata: 5-6
+
+
+Dimensional Cape (Non Attacking Version) FaF Increased (30 -> 45)
+Pit
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.09 -> 1.77)
+
+
+Run Speed Increased (1.828 -> 1.85)
+
+
+Traction Decreased (0.135 -> 0.08775)
+
+
+DACUS/DACDS Window: Frames 1-8
+Dark Pit
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.09 -> 1.7)
+
+
+Run Speed Decreased (1.828 -> 1.67)
+
+
+Traction Decreased (0.135 -> 0.08775)
+
+
+DACUS/DACDS Window: Frames 1-8
+Zero Suit Samus
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.42 -> 1.84)
+
+
+Run Speed Decreased (2.31 -> 2.0)
+
+
+Traction Decreased (0.116 -> 0.0754)
+
+
+DACUS/DACDS Window: Frames 1-8
+Wario
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.837 -> 1.62)
+
+
+Run Speed Decreased (1.65 -> 1.55)
+
+
+Traction Decreased (0.106 -> 0.0689)
+
+
+DACUS/DACDS Window: Frames 1-8
+Snake
+
+
+
+
+Stats
+
+
+Walk Speed Increased (0.882 -> 1.1)
+
+
+Walk Acceleration Increased (Base: 0.105 -> 0.115)
+
+
+Initial Dash Speed Decreased (1.76 -> 1.425)
+
+
+Run Speed Decreased (1.595 -> 1.5)
+
+
+Traction Decreased (0.116 -> 0.0754)
+
+
+Fall Speed Increased (1.73 -> 1.95)
+
+
+Fast Fall Speed Increased (2.768 -> 2.88)
+
+
+Weight Decreased (106 -> 102)
+
+
+DACUS/DACDS Window: Frames 1-7
+
+Grounded Moves
+
+Forward Tilt 1 Startup Increased (4 -> 6)
+
+
+Forward Tilt 1 BKB Decreased (42/20 -> 30/15)
+
+
+Forward Tilt 1 Hitbox Y Disjoint Decreased (0.0 -> -1.6)
+
+
+Forward Tilt 1 now has a head hitbox.
+
+Stats are identical to Knee Hitbox.
+
+
+Forward Tilt 1 -> 2 Transition Frame Decreased (10 -> 9)
+
+
+Forward Tilt 1 Additional Hitstun Increased (2 -> 4)
+
+
+Up Tilt is now an Uppercut.
+
+Up Tilt Stats:
+   
+Damage: 12.0%/10.0%
+BKB: 65
+KBG: 82
+Angle: 85
+Framedata: 7-11
+FaF: 38
+Shield Safety: -19/-17
+
+
+Down Tilt Damage Decreased (12.0% -> 9.0%)
+
+
+Down Tilt Angles Adjusted (80/75/70 -> 80/90/100)
+
+
+Down Tilt Horizontal Disjoint Decreased (5.5/10.5/16.0 -> 2.5/7.5/13.0)
+
+
+Down Tilt Knee Hitbox Size Decreased (4.0 -> 3.5)
+
+
+Down Tilt Foot Hitbox Size Decreased (5.0 -> 3.5)
+
+Dash Attack Startup Increased (5 -> 6)
+
+
+Dash Attack now has a Body Hitbox
+
+
+Stats are identical to Head Hitbox.
+
+
+Dash Attack Head Hitbox Size Decreased (4.5 -> 3.5)
+
+
+Dash Attack now has a further late hit (Active from 13-26)
+
+
+Said hit deals 6.0%/4.0%, and causes tripping.
+
+
+Dash Attack Arm/Shoulder Intangibility Removed
+
+If Snake currently has a Grenade on hand, or uses Dash Attack into a Grenade (from frames 1-11), he will grab the grenade and launch it forward.
+
+Said throw functions similarly to other item throws, so you can platform drop and edge cancel the move.
+
+
+Forward Smash has been replaced with a triple knife slash
+
+Forward Smash 1/2 have a type of paralysis effect, which doesn't emit particles, but functions like Paralysis.
+
+ Forward Smash 1 Stats:
+
+ Damage: 6.0%
+ BKB: 55
+ KBG: 75
+ Angle: 65
+ Framedata: Starts charging on frame 14, 17-20, can transition to F Smash 2 on frame 21
+ Minimal Shield Safety: -28
+ Maximum Shield Safety: -23
+ FAF: 50
+
+ Forward Smash 2 Stats:
+
+ Damage: 7.0%
+ BKB: 55
+ KBG: 75
+ Angle: 105
+ Framedata: 9-12, can transition into F Smash 3 on frame 13
+ Minimal Shield Safety: -25
+ Maximum Shield Safety: -20
+ FAF: 40
+
+ Forward Smash 3 Stats:
+
+ Damage: 7.5%
+ BKB: 85
+ KBG: 75
+ Angle: 361
+ Framedata: 9-12
+ Minimal Shield Safety: -40
+ Maximum Shield Safety: -35
+ FAF: 55
+
+
+Up Smash can now be angled left and right using the control stick
+
+
+Up Smash FaF Increased (55 -> 60)
+
+Down Smash now has a hip hitbox
+
+
+Down Smash Foot Hitbox Size Decreased (4.0 -> 3.3)
+
+
+Down Smash Foot Disjoint Decreased (8.0 -> 6.0)
+
+
+Down Smash Leg Disjoint Decreased (6.0 -> 4.0)
+
+Aerials
+
+Nair's Final Hit has been adjusted to shoot Snake's Leg less high.
+
+
+Nair Multihit Damage Decreased (3.0% -> 2.0%)
+
+
+Nair Finisher Hit Damage Decreased (12.0% -> 8.0%)
+
+
+Nair Landing Lag Decreased (16 -> 12)
+
+
+Fair has been adjusted to have Snake's Leg reach a lower peak.
+
+
+Fair FaF Decreased (69 -> 55)
+
+
+Fair Autocancel Window Decreased (63 -> 55)
+
+
+Fair Landing Lag Decreased (19 -> 15)
+
+
+Bair's Feet Hitbox now use the heavy kick sound
+
+
+Bair's Leg Hitbox now use the medium kick sound
+
+
+Bair Damage Decreased (16.4%/14.0% -> 14.4%/12.0%)
+
+
+Uair Vertical Disjoint Decreased (15.0/18.0/21.0 -> 9.0/12.0/15.0)
+
+Dair Startup Increased (3 -> 6)
+
+
+Dair Multihit Damage Decreased (3.0% -> 2.0%)
+
+
+Dair Knee Hitbox Size Decreased (4.5 -> 3.5)
+
+
+Dair Foot Hitbox Size Decreased (5.5 -> 4.0)
+
+
+Dair now has a hip hitbox
+
+
+Grabs/Throws
+
+
+Dash Grab Startup Decreased (11 -> 9)
+
+
+Pivot Grab Startup Increased (9 -> 10)
+Specials
+
+Grenade Generation Startup Increased (1 -> 11)
+
+
+Snake can now pull Smoke Bombs by tapping the special button.
+
+He can still pull normal grenades by holding the special button.
+
+
+Nikita Missile HP Decreased (20 -> 16)
+
+
+Nikita Maximum Horizontal Speed Decreased (2.0 -> 1.9)
+
+
+Nikita Maximum Turn Speed Decreased (4.5 -> 4.4)
+
+
+Cypher is now B Reversable
+
+
+C4 Maximum Explosion Range Increased (17.0 -> 21.0)
+
+
+C4 now has weak, medium, and strong ranges, akin to TNT
+
+C4 Weak Stats:
+
+Damage: 9.0%
+BKB: 85
+KBG: 75
+Angle: 40
+Framedata: 25
+Shield Safety: +2
+FAF: 32
+
+C4 Middle Stats:
+
+Damage: 13.0%
+BKB: 85
+KBG: 75
+Angle: 60
+Framedata: 25
+Shield Safety: +5
+FAF: 32
+
+C4 Strong Initial Size Decreased (3.0 -> 2.0)
+C4 Strong Full Size Decreased (17.0 -> 9.0)
+Ike
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.815 -> 1.7)
+
+
+Run Speed Increased (1.507 -> 1.7)
+
+
+Traction Decreased (0.112 -> 0.0728)
+
+
+DACUS/DACDS Window: Frames 1-16
+
+
+Specials
+
+
+Quick Draw is now B Reversable
+Squirtle
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.936 -> 1.755)
+
+
+Run Speed Increased (1.76 -> 1.8)
+
+
+Traction Decreased (0.088 -> 0.0572)
+
+
+Air Speed Decreased (1.01 -> 0.96)
+
+
+Fall Speed Increased (1.35 -> 1.62)
+
+
+Fast Fall Speed Increased (2.16 -> 2.88)
+
+
+Initial Jump Velocity Decreased (19.4425 -> 13.11)
+
+
+Shorthop Height Decreased (17.03 -> 15.88)
+
+
+DACUS/DACDS Window: Frames 1-9
+
+Grounded Moves
+
+Jab 1 FaF Reduced (17 -> 10)
+
+
+Jab 3 Startup Reduced (5 -> 4)
+
+Forward Tilt Duration Increased (5-6 -> 5-7)
+
+
+Forward Tilt Tail Sizes Decreased (2.0/2.6/3.6 -> 2.0/2.2/3.0)
+
+Up Tilt Startup Reduced (5 -> 4)
+
+
+Up Tilt FaF Increased (19 -> 22)
+
+
+Down Tilt is now Bubble:
+
+Bubble Stats:
+
+Causes Tripping
+Damage: 7.0%
+BKB: 45
+KBG: 75
+Angle: 55
+Framedata: 7-15
+FaF: 35
+Shield Safety: -20/-14
+
+Forward Smash is now reverted to a modified version of Brawl Forward Smash. 
+
+This has Squirtle pull into its shell and twirl forward, akin to Withdraw. Squirtle then falls onto its back and flops back up. 
+
+Unlike Brawl however, Squirtle keeps moving forward while the attack is going. He also retains previous momentum while using the move.
+
+Forward Smash Stats:
+
+Forward Smash can be canceled into Withdraw during its active duration
+Damage: 16.0%/10.0%/6.0%
+BKB: 25
+KBG: 104
+Angle: 361
+Framedata: Can start charging on frame 8, 14-16 for strong hit, 17-19 for middle hit, 20-27 for late hit
+FaF: 70
+Shield Safety: -45/-39
+
+Up Smash has it's hitboxes reworked to match the effects, with the hitboxes closer to the ground being stronger
+
+
+Up Smash Startup Decreased (19/21 -> 16/18)
+
+
+Up Smash Hitbox Size Increased by ~2 units
+
+
+If you have a fully charged Water Gun, Up Smash will instead create a windbox that lasts for 10 seconds, and will persist even if you switch Pokemon. This windbox affects you and opponents.
+
+Down Smash FaF Increased (41 -> 50)
+
+Aerial Moves
+
+Nair Size Increased (6.5 -> 7.0)
+
+
+Nair Damage Decreased (10.0% -> 8.0%)
+
+
+Nair BKB Increased (35 -> 50)
+
+
+Nair KBG Increased (85 -> 92)
+
+Fair Landing Lag Increased (6 -> 8)
+
+
+Bair now has a body hitbox that does 2.0% less total
+
+
+Bair Fallouts Fixed
+
+Uair Landing Lag Increased (6 -> 8)
+
+Dair Fallouts Fixed
+
+
+Grabs/Throws
+
+
+Grab Size decreased by 1.5 units
+
+
+Forward Throw Angle Decreased (48 -> 30)
+
+Specials
+
+Shield Special is now Rain Dance. 
+
+Rain Dance creates an area that lowers traction by 75% for anyone within the zone, including opponents. This zone lasts for 10 seconds, covers an area similar in size to a Battlefield Platform, and persists even when changing Pokémon.
+
+Canceling Water Gun will put you into an actionable state, rather than an airdodge.
+
+
+Water Gun is now B Reversable
+
+Withdraw can now be jump canceled during the spinning status, however it cannot be Jump Canceled on hit, gains a 6 frame jumpsquat, and the jump itself is inactionable for 15 frames.
+
+
+Withdraw Travel Speed Decreased (Grounded: 2.8/3.3 -> 2.2/2.6, Aerial: 2.3/2.8/3.5 -> 2.0/2.2/2.4)
+
+Waterfall Height Multiplier Increased (1.1 -> 1.3)
+Ivysaur
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.903 -> 1.83)
+
+
+Run Speed Increased (1.595 -> 1.7)
+
+
+Fall Speed Increased (1.38 -> 1.55)
+
+
+Fast Fall Speed Increased (2.208 -> 2.4)
+
+
+Traction Decreased (0.121 -> 0.07865)
+
+
+DACUS/DACDS Window: Frames 1-7
+
+Grounded Moves
+
+
+Jab 1 Startup Decreased (7 -> 4)
+
+
+Jab 1 Size Increased (2.3/2.8 -> 2.9/3.6)
+
+
+Forward Tilt Size Increased (3.5/4.0/3.0 -> 4.5/5.0/4.0)
+
+
+Forward Tilt now covers the back leaves
+
+
+Forward Tilt FaF Reduced (45 -> 38)
+
+
+Up Tilt now has vine hitboxes on frames 7-9
+
+
+Up Tilt Leg Hitbox Size Decreased (6.0 -> 3.0)
+
+
+Up Tilt FaF Reduced (32 -> 30)
+
+
+Down Tilt Outer Hitbox X Disjoint Decreased (17.0/22.0 -> 13.0/18.0)
+
+
+Down Tilt Angle Decreased (30 -> 22)
+
+
+Down Tilt KBG Increased (65 -> 95)
+
+
+Dash Attack Startup Increased (4 -> 6)
+
+
+Dash Attack FaF Decreased (43 -> 36)
+
+
+Forward Smash Angles Standardized (80/361 -> 361)
+
+Up Smash now gains invincibility from frames 1-8
+
+
+Up Smash now gains limb and head invincibility from frames 9-24
+
+
+Up Smash now has a landing hitbox on frame 24
+
+
+Up Smash Body Hitbox Size Increased (5.0 -> 7.0)
+
+
+Down Smash Startup Reduced (13 -> 10)
+
+
+Aerial Moves
+
+Nair now has a landing hitbox that has a 70 degree angle
+
+
+Nair Startup Increased (7 -> 9)
+
+Fair Startup Reduced (14 -> 11)
+
+
+Fair KBG Decreased (76/81/90 -> 70/75/80)
+
+Bair Startup Reduced (7 -> 6)
+
+
+Bair KBG Decreased (118 -> 100)
+
+Uair now has sour and sweetspots like Dair (Sourspot does 40 KBG instead of 72)
+
+
+Uair Landing Lag Increased (11 -> 14)
+
+
+Grabs/Throws
+
+
+Forward Throw Angle Decreased (45 -> 33)
+
+Back Throw KBG Decreased (70 -> 55)
+
+Down Throw KBG Increased (122 -> 130)
+
+Specials
+
+Neutral Special is now Seed Bomb.
+
+Ivysaur shoots a Seed Bomb from their bulb at an 80 degree angle.
+
+In addition, Seed Bomb creates an area of spores that enable a variety of things. Whenever Charizard uses Side Special into the Spore Area, it increases how long his Side Special lasts for. This consumes the Spore Area. It also causes very slow poison over time (1% every 5 seconds). Only one Spore Cloud is allowed at a time, and lasts for 20 seconds.
+
+Seed Bomb Stats:
+
+Damage: 5.0%
+BKB: 80
+KBG: 100
+Angle: 80
+Framedata: 20 for launching the seed
+FaF: 45
+Shield Safety: -19
+
+
+Razor Leaf Randomness Removed (3/6 -> 0/0)
+Charizard
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.288 -> 1.865)
+
+
+Run Speed Decreased (2.2 -> 1.9)
+
+
+Traction Decreased (0.11 -> 0.0715)
+
+
+Air Speed Increased (1.103 -> 1.2)
+
+
+Air Friction Increased (0.008 -> 0.01)
+
+
+DACUS/DACDS Window: Frames 1-11
+
+Grounded Moves
+
+Up Tilt now grants Wing Intangibility from frames 9-13
+
+
+Forward Smash has been changed to Flame Burst
+
+Flame Burst has Charizard conjure an ember between his hands, continue to breathe fire into the ember, and crush it, causing it to detonate.
+
+Forward Smash Stats:
+
+Damage: 21.0% Uncharged
+BKB: 60
+KBG: 80
+Angle: 50
+Framedata: Can be charged on frame 13, hits on frame 19-24
+Minimum Shield Safety: -27
+Maximum Shield Safety: -17
+FAF: 60
+
+
+Up Smash Startup Decreased (6 -> 7)
+
+Aerial Moves
+
+Fair Landing Lag Decreased (19 -> 12)
+
+
+Bair Landing Lag Decreased (20 -> 15)
+
+
+Bair’s Sourspots have been weakened in K.O. Power:
+
+Bair Knockback Changes:
+
+Frame 14:
+
+Priority 0/1 Unchanged
+Priority 2 Hitbox KBG Decreased (90 -> 79)
+Priority 3 Hitbox KBG Decreased (90 -> 85)
+Priority 3 Hitbox BKB Decreased (50 -> 49)
+
+Frame 15:
+
+Priority 0 Unchanged
+Priority 1 Hitbox KBG Decreased (90 -> 82)
+Priority 2 Hitbox KBG Decreased (90 -> 87)
+Priority 3 Hitbox KBG Decreased (90 -> 74)
+Priority 3 Hitbox BKB Decreased (50 -> 49)
+
+Frame 16:
+
+Priority 0 Unchanged
+Priority 1 Hitbox KBG Decreased (90 -> 79)
+Priority 1 Hitbox BKB Decreased (50 -> 49)
+Priority 2 Hitbox KBG Decreased (90 -> 67)
+Priority 3 Hitbox KBG Decreased (90 -> 74)
+Priority 3 Hitbox BKB Increased (50 -> 51)
+
+Specials
+
+
+Up Special Distance Multiplier Increased (0.95 -> 1.1)
+Diddy Kong
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.09 -> 1.88)
+
+
+Run Speed Decreased (2.002 -> 1.975)
+
+
+Traction Decreased (0.093 -> 0.06045)
+
+
+DACUS/DACDS Window: Frames 1-9
+Lucas
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.815 -> 1.78)
+
+
+Run Speed Increased (1.65 -> 1.75)
+
+
+Traction Decreased (0.116 -> 0.0754)
+
+
+DACUS/DACDS Window: Frames 1-14
+Sonic
+
+
+
+
+Stats
+
+
+Walk Acceleration Adjusted (Base: 0.105 -> 0.0, Additional: 0.105 -> 0.15)
+
+
+Walk Speed Decreased (1.444 -> 1.4)
+
+
+Traction Decreased (0.138 -> 0.0655)
+
+
+Initial Dash Decreased (2.31 -> 1.77)
+
+
+Run Acceleration Adjusted (Base: 0.044 -> 0.0325, Additional: 0.165 -> 0.2)
+
+
+Run Speed Decreased (3.85 -> 2.5)
+
+
+Initial Jump Velocity Decreased (19.25 -> 12.0)
+
+
+Shorthop Height Decreased (16.89 -> 13.0)
+
+
+Airspeed Decreased (1.208 -> 1.115)
+
+
+Gravity Increased (0.09 -> 0.17)
+
+
+Fall Speed Decreased (1.65 -> 1.5)
+
+
+Fast Fall Speed Increased (2.64 -> 3.2)
+
+
+Weight Decreased (86 -> 80)
+
+
+Model Scale Increased (0.95 -> 0.99)
+
+
+Shield Size Increased (9.9 -> 10.6)
+
+
+DACUS/DACDS Window: Frames 1-5
+
+Grounded Moves
+
+
+Sonic can cancel his Jabs into any tilt
+
+
+Jab 1 FaF Decreased (19 -> 13)
+
+
+Jab 2 FaF Decreased (21 -> 16)
+
+
+Jab 3 FAF Decreased (35 -> 28)
+
+
+Sonic now has a Rapid Jab based on the Sonic Movie
+
+Rapid Jab Stats:
+
+Damage: 0.3% per Jab
+BKB: 7
+KBG: 20
+Angle: 361
+Framedata: 2/4/6/8/…, hits every 2 frames
+
+
+Dash Attack has been changed to the slide that can be performed at high speeds in Modern Sonic Games
+
+Dash Attack Stats:
+
+Edge Cancelable at any point
+Travels ~25% of FD
+This move stops on shield
+Damage: 8.0%/6.0%/4.0%
+BKB: 91/80/60
+KBG: 63/55/40
+Angle: 60
+Framedata: 5-7 for Early Hit, 8-16 for Middle Hit, 17-22 for Late Hit
+Minimum Shield Safety: -29
+Maximum Shield Safety: -15
+FAF: ~40
+
+
+Forward Tilt FAF Decreased (36 -> 33)
+
+
+Up Tilt has been changed to Sonic Updraft from Sonic Battle
+
+Up Tilt Stats:
+
+Damage: 8.0%/6.0%
+BKB: 80/70
+KBG: 50/70
+Angle: 100
+Framedata: 8-12 for Early Hit, 13-15 for Late Hit
+Minimum Shield Safety: -19
+Maximum Shield Safety: -9
+FAF: 30
+
+
+Down Tilt has been changed to the Sweep Kick from Sonic Unleashed
+
+Down Tilt Stats:
+
+Damage: 7.0%/6.0%
+BKB: 50
+KBG: 80
+Angle: 100/90
+Framedata: 6-7, then 16-17, then 23-24
+Minimum Shield Safety: -27
+Maximum Shield Safety: -18
+FAF: 26 on hit, ~50 on shield
+
+
+Up Smash Finisher KBG Decreased (170 -> 130)
+
+
+Up Smash is now Jump Cancelable on Hit
+
+Up Smash turns into Thunder Shield for 3 seconds when parrying a move
+
+Thunder Shield Stats:
+
+Damage: 14.0% uncharged
+BKB: 73
+KBG: 73
+Angle: 90
+Framedata: Can be charged on frame 14, hits on frame 16 for launcher, hits on frame 18-29 for main hit
+Minimum Shield Safety: -42
+Maximum Shield Safety: -18
+FAF: 61
+
+
+Down Smash has been changed into Sonic Flare from Sonic Battle
+
+Down Smash Stats:
+
+Damage: 13.0% uncharged
+BKB: 60
+KBG: 60
+Angle: 20
+Framedata: Can be charged on frame 6, hits on frame 10-19
+Minimum Shield Safety: -40
+Maximum Shield Safety: -28
+FAF: 60
+
+
+Aerial Moves
+
+
+Nair has been changed to more closely resemble Instashield from Sonic 3
+
+Nair Stats:
+
+Invincible from frames 4-5
+Damage: 12.0%/9.0%, then 8.0%, then 5.0%
+BKB: 60/50/40
+KBG: 80/85/90
+Angle: 75
+Framedata: 4-7 for Early Hit, 8-17 for Middle Hit, 18-22 for Late Hit
+Landing Lag: 10
+Autocancel Window: 40
+Minimum Shield Safety: -7
+Maximum Shield Safety: -5
+FAF: 40
+
+
+Fair has been changed to Sonic Eagle from Sonic Battle
+
+Fair Stats:
+
+Damage: 12.0%/11.0%/10.0%
+BKB: 10 for heel, 60 for rest
+KBG: 89 for heel, 60 for rest
+Angle: 285 for heel, 361 for rest
+Framedata: 14-17
+Landing Lag: 11
+Autocancel Window: 45
+Shield Safety: -6
+FAF: 35
+
+
+Bair has changed to Humming Top Trick from Sonic Advance
+
+Bair Stats:
+
+Damage: 3.0%/3.0%/10.0%
+FKB: 60 for Initial Hits 
+BKB: 30 for Finisher
+KBG: 100 for Initial Hits, 65 for Finisher
+Angle: 367 for Initial Hits, 361 for Finisher
+Framedata: 8-10 for first hit, 22-24 for second hit, 34-37 for finisher
+Landing Lag: 15
+Autocancel Window: 55
+Minimum Shield Safety: -12
+Maximum Shield Safety: -10
+FAF: 55
+
+
+Uair uses a mix of Brawl and Ultimate’s animation
+
+
+Uair Fallouts Fixed
+
+
+Uair Landing Lag Decreased (13 -> 10)
+
+
+Uair Autocancel Window Increased (16 -> 45)
+
+
+Dair has been renamed to Sonic Rocket
+
+Dair’s Sourspot has been moved to his knee, and is now the same size as the Sweetspot
+Dair Active Duration Adjusted (17-19 (Spike)/20-32 -> 10-14 (Spike)/15-24)
+Dair FAF Decreased (45 -> 33)
+Dair can now spike grounded opponents
+Dair is no longer a stall and fall
+
+
+Grabs/Throws
+
+
+Forward Throw BKB Increased (70 -> 90)
+
+
+Forward Throw KBG Decreased (75 -> 70)
+
+
+Back Throw KBG Decreased (79 -> 60)
+
+
+Back Throw BKB Increased (70 -> 90)
+
+
+Down Throw KBG Increased (35 -> 75)
+
+
+Down Throw BKB Decreased (75 -> 35)
+
+
+Down Throw Angle Increased (20 -> 75)
+
+Specials
+
+Max Neutral Special Damage Decreased (20.0% -> 12.0%)
+
+
+Max Homing Attack Range Decreased (67.0 -> 45.0)
+
+
+Homing Attack Startup Decreased (13 -> 9)
+
+
+Homing Attack Max Charge Decreased (80 -> 30)
+
+
+Homing Attack On Hit FaF Decreased (26 -> 15)
+
+
+Homing Attack Landing Lag Decreased (40 -> 26)
+
+
+Side Special has been changed to Boost
+
+Boost Stats:
+
+Boost can be canceled into Jump, can be canceled into Dash Attack by holding down on the control stick, and can be canceled into Run if you’re on the ground and hold the control stick to the side after the animation is over.
+
+
+Boost can also be canceled into any move on hit.
+Boost’s speed is determined by your previous speed, with the specifics looking like this:
+
+If your previous speed is less than 2.0, Boosts Speed will be equal to 2.0. If your previous speed is greater than 2.0 but less than 2.55, Boosts Speed will be equal to 1.15x your previous speed. If your previous speed is greater than 2.55, Boost’s Speed will be equal to 3.0
+
+This move will not stop at ledges
+Aerial Boost is affected by gravity
+Boost travels ~75% of Final Destination
+Boost requires being charged up in order to use. Boost requires 25 charge increments to fill up the meter. In order to fill up this meter, you need to hit any normal (this includes Tilts, Dash Attack, Smash Attacks, Aerials, Pummel, and Throws), or Homing Attack. 
+
+Damage: 12.0%
+BKB: 40
+KBG: 100
+Angle: 30
+Framedata: 10-52
+Minimum Shield Safety: -28
+Maximum Shield Safety: +12
+FAF: 10/~80
+
+
+Down Special Shield Safety Decreased (-1 -> -20)
+
+
+Down Special can now cancel into Dash Attack when holding down on the control stick
+
+
+Spin Dash has its momentum instantly reversed when turning around on ledge
+
+
+Aerial Down Special is changed to Bounce Bracelet from Sonic Adventure I
+
+Aerial Down Special Stats:
+
+Due to how rapidly Sonic descends, if you miss offstage, you will careen towards the blastzone.
+
+Landing on-stage will allow Sonic to charge up Grounded Down Special by continuing to mash the special button. This is similar to the Drop Dash feature.
+
+Hitting someone with Bounce Bracelet will make Sonic bounce off of the opponent.
+
+Damage: Depends on how long you’ve fallen for, ranging from 1.0% - 14.0%. Maxes out in power on frame 30.
+BKB: 30
+KBG: 90
+Angle: 270
+Framedata: 12-52
+Shield Safety: -17
+King Dedede
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.815 -> 1.68)
+
+
+Run Speed Increased (1.496 -> 1.5)
+
+
+Traction Decreased (0.085 -> 0.05525)
+
+
+Fall Speed Decreased (1.95 -> 1.75)
+
+
+Air Speed Increased (0.735 -> 1.0)
+
+
+DACUS/DACDS Window: Frames 1-23
+
+Grounded Moves
+
+Jab 1 Startup Decreased (10 -> 6)
+
+
+Jab 1 FAF Decreased (32 -> 22)
+
+
+Jab 2 Startup Decreased (11 -> 8)
+
+
+Jab 2 FAF Decreased (27 -> 23)
+
+
+Rapid Jab Finisher FAF Decreased (49 -> 28)
+
+
+Dash Attack now has 10% damage armor from frames 4-19
+
+
+Dash Attack Startup Decreased (26 -> 22)
+
+
+Forward Tilt Startup Decreased (12 -> 10)
+
+
+Forward Tilt FAF Decreased (49 -> 40)
+
+
+Up Tilt FAF Decreased (38 -> 33)
+
+Aerial Moves
+
+Nair now covers his limbs
+
+
+Nair no longer decreases in size
+
+
+Fair Landing Lag Decreased (18 -> 12)
+
+
+Fair Startup Decreased (13 -> 9)
+
+
+Bair has him kick his right foot behind him
+
+Bair Stats:
+
+Damage: 13.0%/11.0%, then 9.0%/7.0%
+BKB: 20
+KBG: 100
+Angle: 361
+Framedata: 6-8 for Early Hit, 9-14 for Late Hit
+Landing Lag: 8
+Autocancel Window: 25
+Minimum Shield Safety: -4
+Maximum Shield Safety: -3
+FAF: 30
+Grabs/Throws
+
+Standing Grab FAF Decreased (39 -> 30)
+
+
+Dash Grab FAF Decreased (47 -> 38)
+
+
+Pivot Grab FAF Decreased (42 -> 40)
+
+Specials
+
+Neutral Special FAF Decreased (74 -> 45)
+
+
+Neutral Special Spit FAF Decreased (29 -> 20)
+
+
+Jet Hammer doesn’t decrease in power when used in the air
+Olimar
+
+
+
+
+Stats
+
+
+Initial Dash Speed Increased (1.606 -> 1.615)
+
+
+Run Speed Increased (1.617 -> 1.63)
+
+
+Traction Decreased (0.093 -> 0.06045)
+
+Shield Size Increased (9.6 -> 10.6)
+
+
+Pikmin Intangibility Inconsistencies fixed 
+
+
+DACUS/DACDS Window: Frames 1-9
+
+
+Specials
+
+
+Pikmin Pluck is now B Reversable
+
+
+Pikmin Order is now B Reversable
+Lucario
+
+
+
+
+Stats
+
+
+All of Lucario’s moves have Hitflow, with a multiplier of 1.65x
+
+
+Aura Starting Multiplier Increased (0.65x -> 0.85x)
+
+
+Aura Max Multiplier Decreased (1.6x -> 0.85x)
+
+
+Aura Stock Multiplier Removed
+
+
+Initial Dash Speed Decreased (2.255 -> 1.6)
+
+
+Run Speed Decreased (1.705 -> 1.5)
+
+
+Traction Decreased (0.116 -> 0.0754)
+
+
+Fall Speed Increased (1.68 -> 2.5)
+
+
+Fast Fall Speed Increased (2.688 -> 3.05)
+
+
+Gravity Increased (0.084 -> 0.13)
+
+
+Weight Increased (92 -> 100)
+
+
+DACUS/DACDS Window: Frames 1-8
+
+Specials
+
+
+Up Special Max Added Speed (based on aura) Decreased (3 -> 2)
+
+
+Up Special Max Angle Adjustment (per frame) Decreased (10 -> 1)
+R.O.B.
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.002 -> 1.565)
+
+
+Run Speed Decreased (1.725 -> 1.6)
+
+
+Traction Decreased (0.105 -> 0.06825)
+
+
+DACUS/DACDS Window: Frames 1-8
+
+
+Grounded Moves
+
+Up Tilt Fallouts Fixed
+
+
+Down Tilt Startup Increased (3 -> 5)
+
+
+Down Tilt FAF on Shield Increased (14 -> 17)
+
+
+Down Tilt always trips
+
+
+Up Smash Fallouts Fixed
+
+
+Down Smash Fallouts Fixed
+
+Aerial Moves
+
+
+Nair Landing Lag Increased (7 -> 12)
+
+
+Fair’s hitboxes now follow his arms
+
+
+Uair Fallouts Fixed
+
+
+Uair only sends forward
+
+
+Dair now only comprises of a single spiking hitbox that lasts for 2 frames, then sends out for 5 frames
+
+Specials
+
+
+Side Special is now projectile invincible instead of reflecting them
+
+
+Side Special’s hitbox now matches the arms
+
+
+Side Special Finisher Hit KBG Decreased (210 -> 180)
+Toon Link
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.914 -> 1.865)
+
+
+Run Speed Increased (1.906 -> 1.95)
+
+
+Traction Decreased (0.086 -> 0.0559)
+
+
+DACUS/DACDS Window: Frames 1-8
+
+
+Specials
+
+
+Bomb is now B Reversable
+Wolf
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.09 -> 1.8)
+
+
+Run Speed Increased (1.54 -> 1.89)
+
+
+Traction Decreased (0.11 -> 0.0715)
+
+
+DACUS/DACDS Window: Frames 1-8
+Villager
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.815 -> 1.75)
+
+
+Run Speed Increased (1.397 -> 1.46)
+
+
+Traction Decreased (0.131 -> 0.08515)
+
+
+DACUS/DACDS Window: Frames 1-10
+
+
+Specials
+
+
+Lloid Rocket is now B Reversable
+
+
+Tree Plant is now B Reversable
+
+
+Tree Water is now B Reversable
+Mega-Man
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.958 -> 1.58)
+
+
+Run Speed Increased (1.602 -> 1.65)
+
+
+Traction Decreased (0.094 -> 0.0611)
+
+
+DACUS/DACDS Window: Frames 1-8
+Wii Fit Trainer
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.024 -> 1.788)
+
+
+Run Speed Decreased (1.866 -> 1.72)
+
+
+Traction Decreased (0.128 -> 0.0832)
+
+
+DACUS/DACDS Window: Frames 1-7
+
+
+Specials
+
+
+Header is now B Reversable
+
+
+Deep Breathing is now B Reversable
+Rosalina & Luma
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.035 -> 1.8)
+
+
+Run Speed Increased (1.795 -> 1.8)
+
+
+Traction Decreased (0.099 -> 0.06435)
+
+
+Luma HP Increased (40 -> 50) 
+
+
+DACUS/DACDS Window: Frames 1-7
+
+Aerial Moves
+
+Fair Fallouts Fixed
+
+Specials
+
+Down Special Item Grab Duration Increased (4-29 -> 4-44)
+Little Mac
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.365 -> 1.88)
+
+
+Run Speed Decreased (2.46 -> 2.25)
+
+
+Traction Decreased (0.116 -> 0.0754)
+
+
+DACUS/DACDS Window: Frames 1-8
+
+
+Specials
+
+
+Neutral Special is now B Reversable
+
+
+Rising Uppercut is now B Reversable
+Greninja
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.178 -> 1.9)
+
+
+Run Speed Decreased (2.288 -> 2.05)
+
+
+Traction Decreased (0.087 -> 0.05655)
+
+
+DACUS/DACDS Window: Frames 1-8
+
+
+Specials
+
+
+Shadow Sneak is now B Reversable
+
+
+Hydro Pump is now B Reversable
+Mii Brawler
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.87 -> 1.8)
+
+
+Run Speed Increased (1.92 -> 2.0)
+
+
+Traction Decreased (0.12 -> 0.078)
+
+
+DACUS/DACDS Window: Frames 1-7
+
+Aerial Moves
+
+Fair 1 Angle Adjusted (25 -> 367)
+
+
+Uair Autocancel Window Decreased (23 -> 20)
+
+Specials
+Flashing Mach Punch is now B Reversable
+
+
+Neutral Special 3 is now B Reversable
+
+
+Non Connected Grounded Onslaught FAF Decreased (74 -> 60)
+
+
+Connected Grounded Onslaught FAF Decreased (70 -> 60)
+
+
+Aerial Onslaught no longer puts you into freefall
+
+
+Onslaught can only be used once per airtime
+
+
+Feint Jump Kick can grab ledge and edge cancel for its whole duration
+Mii Swordfighter
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.74 -> 1.68)
+
+
+Run Speed Increased (1.58 -> 1.6)
+
+
+Traction Decreased (0.11 -> 0.0715)
+
+
+DACUS/DACDS Window: Frames 1-10
+
+
+Specials
+
+
+Power Thrust is now B Reversable
+Mii Gunner
+
+
+
+
+Stats
+
+
+Run Speed Increased (1.37 -> 1.55)
+
+
+Traction Decreased (0.076 -> 0.0494)
+
+
+DACUS/DACDS Window: Frames 1-11
+
+
+Specials
+
+
+Gunner Missile is now B Reversable
+Palutena
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.035 -> 1.9)
+
+
+Run Speed Decreased (2.077 -> 2.0)
+
+
+Traction Decreased (0.106 -> 0.0689)
+
+
+DACUS/DACDS Window: Frames 1-7
+
+
+Specials
+
+
+Side Special is now B Reversable
+
+
+Counter/Reflect is now B Reversable
+Pac-Man
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.87 -> 1.7425)
+
+
+Traction Decreased (0.116 -> 0.0754)
+
+
+DACUS/DACDS Window: Frames 1-11
+
+Grounded Moves
+
+Up Tilt is now an upward headbutt
+
+Up Tilt Stats:
+
+Damage: 7.0%
+BKB: 70
+KBG: 100
+Angle: 96
+Framedata: 7-10
+Minimum Shield Safety: -19
+Maximum Shield Safety: -16
+FAF: 34
+
+
+Up Smash now has a scooping hitbox
+
+Aerial Moves
+
+Dair’s Initial Hits Angle Changed (245/130/100 -> 367)
+
+Specials
+Bonus Fruit Charge is now B Reversable
+
+
+Power Pellet is now B Reversable
+
+
+Hydrant is now B Reversable
+
+
+Hydrant Damage Threshold Decreased (13.0% -> 11.0%)
+Robin
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.815 -> 1.77)
+
+
+Run Speed Increased (1.265 -> 1.5)
+
+
+Traction Decreased (0.105 -> 0.06825)
+
+
+DACUS/DACDS Window: Frames 1-9
+Shulk
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.87 -> 1.69)
+
+
+Run Speed Decreased (1.672 -> 1.46)
+
+
+Traction Decreased (0.094 -> 0.0611)
+
+
+DACUS/DACDS Window: Frames 1-13
+
+
+Specials
+
+
+Monado Arts are now B Reversable
+Bowser Jr.
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.76 -> 1.7)
+
+
+Run Speed Increased (1.566 -> 1.6)
+
+
+Traction Decreased (0.085 -> 0.05525)
+
+
+DACUS/DACDS Window: Frames 1-9
+Duck Hunt
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.76 -> 1.72)
+
+
+Run Speed Increased (1.793 -> 1.9)
+
+
+Traction Decreased (0.09 -> 0.0585)
+
+
+DACUS/DACDS Window: Frames 1-11
+Ryu
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.76 -> 1.64)
+
+
+Traction Decreased (0.11 -> 0.0715)
+
+
+DACUS/DACDS Window: Frames 1-8
+Ken
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.936 -> 1.845)
+
+
+Run Speed Increased (1.765 -> 1.85)
+
+
+Traction Decreased (0.11 -> 0.0715)
+
+
+DACUS/DACDS Window: Frames 1-8
+Cloud
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.145 -> 1.82)
+
+
+Run Speed Decreased (2.167 -> 1.7)
+
+
+Traction Decreased (0.106 -> 0.0689)
+
+
+DACUS/DACDS Window: Frames 1-10
+
+
+Specials
+
+
+Limit Charge is now B Reversable
+Corrin
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.892 -> 1.78)
+
+
+Run Speed Increased (1.595 -> 1.67)
+
+
+Traction Decreased (0.129 -> 0.08385)
+
+
+DACUS/DACDS Window: Frames 1-13
+
+
+Specials
+
+
+Dragon Lunge is now B Reversable
+Bayonetta
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.938 -> 1.675)
+
+
+Run Speed Decreased (1.76 -> 1.72)
+
+
+Traction Decreased (0.11 -> 0.0715)
+
+
+DACUS/DACDS Window: Frames 1-16
+
+
+Specials
+
+
+Afterburner Kick is now B Reversable
+Inkling
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.118 -> 1.835)
+
+
+Run Speed Increased (1.925 -> 1.97)
+
+
+Traction Decreased (0.102 -> 0.0663)
+
+
+DACUS/DACDS Window: Frames 1-9
+
+Specials
+
+
+Inkling can walk and run during Neutral Special
+
+
+Minimum Fired Bullets to Exit Neutral Special Decreased (4 -> 1)
+
+
+Shooting Interval Increased (4 -> 6)
+
+
+Splat Roller is now B Reversable
+Ridley
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.85 -> 1.625)
+
+
+Run Speed Decreased (2.2 -> 1.95)
+
+
+Traction Decreased (0.08 -> 0.052)
+
+
+Ridley now has a total of 4 Jumps
+
+
+Shorthop Height Decreased (14.2 -> 13.33)
+
+
+Double Jump Height Increased (32 -> 40)
+
+
+Double Jump Height Acceleration Increased (0.9 -> 1.0)
+
+
+Additional Air Acceleration Increased (0.01 -> 0.03)
+
+
+Air Speed Increased (1.05 -> 1.115) 
+
+
+Fall Speed Increased (1.78 -> 2.23)
+
+
+Fast Fall Speed Increased (2.848 -> 3.05)
+
+
+Gravity Increased (0.09 -> 0.115)
+
+
+Weight Increased (107 -> 120)
+
+
+Model Scale Increased (0.95 -> 1.15)
+
+
+Mouth1 Hurtbox Removed
+
+
+DACUS/DACDS Window: Frames 1-13
+
+Grounded Moves
+
+
+Jab 1 FAF Decreased (24 -> 17)
+
+
+Jab 1 Inner Hitbox Angle Adjusted (361 -> 45)
+
+
+Jab 1 Center Hitbox Angle Adjusted (361 -> 60)
+
+
+Jab 1 Outer Hitbox Angle Adjusted (361 -> 90)
+
+
+Jab 2 FAF Decreased (27 -> 22)
+
+
+Jab 2 Inner Hitbox Angle Adjusted (361 -> 30)
+
+
+Jab 2 Center Hitbox Angle Adjusted (361 -> 55)
+
+
+Jab 2 Outer Hitbox Angle Adjusted (361 -> 120)
+
+Jab 3 FAF Decreased (35 -> 29)
+
+
+Rapid Jab Finisher FAF Decreased (45 -> 39)
+
+
+Forward Tilt now no longer has Ridley hold his tail (grants increased range)
+
+
+Forward Tilt Inner Hitbox Size Decreased (7.0 -> 5.0)
+
+
+Forward Tilt Center Hitbox Size Decreased (5.5 -> 5.0)
+
+
+Forward Tilt Inner/Center Hitbox Damage Decreased (10.0% -> 6.0%)
+
+
+Forward Tilt Up Tipper Angle Increased (361 -> 55)
+
+
+Forward Tilt Center Tipper Angle Decreased (361 -> 30)
+
+
+Forward Tilt Down Tipper Angle Decreased (361 -> 15)
+
+
+Up Tilt Duration Increased (8-12 -> 6-19)
+
+
+Early and Late Hits of Up Tilt deal 3% less damage
+
+
+Up Tilt FaF Increased (29 -> 38)
+
+
+Up Tilt Early Hit Angle Adjusted (88 -> 110)
+
+
+Up Tilt Late Hit Angle Adjusted (88 -> 75)
+
+
+Down Tilt Tipper Angle Increased (80 -> 115)
+
+
+Down Tilt Tipper Damage Increased (9.0% -> 10.0%)
+
+
+Down Tilt Tail Damage Decreased (6.0% -> 5.0%)
+
+
+Forward Smash deals 8% more (28% total) for 3 seconds if you parry a move
+
+
+Up Smash Active Duration Increased (12-17 -> 11-20)
+
+
+Up Smash FaF Increased (48 -> 55)
+
+Aerial Moves
+
+
+Nair now consists of 8 hitboxes, however this overall makes the move smaller
+
+
+Nair Landing Lag Increased (12 -> 14)
+
+
+Nair Sourspot Damage Decreased (9.0% -> 6.0%)
+
+
+Fair now has him fully extend his tail out (increasing it’s range)
+
+
+Fair Duration Altered (10-11/13-14/16-17 -> 8-10/14-16/21)
+
+
+Fair Multihit BKB Increased (45 -> 60)
+
+
+Fair Landing Lag Increased (16 -> 19)
+
+
+Fair Multihit Tipper Damage Decreased (5.0% -> 4.0%)
+
+
+Fair Multihit Tail Damage Decreased (3.0% -> 2.0%)
+
+
+Fair Finisher Tipper Damage Decreased (7.0% -> 5.0%)
+
+
+Fair Finisher Tail Damage Decreased (5.0% -> 3.0%)
+
+
+Bair now has him wind up before bashing his wings behind himself, akin to Corrin Bair
+
+Bair Stats:
+
+Bair propels Ridley in the direction he's facing
+Damage: 13.0%
+BKB: 40
+KBG: 100
+Angle: 361
+Framedata: 13-15
+Autocancel Window: 40
+Landing Lag: 14
+FAF: 50
+
+
+Uair Sourspot Size Decreased (12.0 -> 11.0)
+
+
+Uair Sourspot Damage Decreased (14.0% -> 8.0%)
+
+
+Dair is now the tail sweep from Super Metroid
+
+Dair Stats:
+
+Damage: 4.0%/7.0%, then 4.0%
+BKB: 50/55
+KBG: 70/65
+Angle: 361/300, then 361
+Framedata: 21-24 for the spike, then 25-27 for the late hit
+Autocancel Window: 45
+Landing Lag: 16
+FAF: 45
+
+Ridley now has a Zair. This Zair functions like an aerial cargo throw.
+
+Forward Zair has Ridley pierce his opponent with his tail, grab them by the shoulders, then kick them off
+
+Back Zair has Ridley pierce his opponent with his tail, then sweep them behind himself
+
+Up Zair has Ridley grab his opponent with his talons, then rise into the sky, before crashing down, creating an explosion
+
+Down Zair has Ridley breath Plasma on his opponent, then spike them downwards
+
+
+Grabs/Throws
+
+
+Back Throw now more closely resembles King K Rool's Back Throw
+
+
+Down Throw now has him pierce the opponent, before breathing plasma on them
+Specials
+
+
+Ridley can hold back to make the Plasma Breath have a more vertical trajectory
+
+
+Space Pirate Rush can now grab ledge for the entire duration
+
+
+Space Pirate Rush now gains the grab mechanics of EXO
+
+Evisceration has Ridley slam the opponent to the floor, then look to the camera, then start ripping at the opponent. This puts them in the lay animation
+
+
+Skewer can break shields if you parry a move (lasts for 3 seconds)
+
+
+Skewer ignores shields
+
+
+Skewer instantly KO’s above 100%
+
+
+Aerial Down Special is now the Tail Pogo move from Super Metroid
+
+Aerial Down Special Stats:
+
+Ridley can bounce off of the stage and opponents with this move. Doing so grants less endlag
+
+Damage: 5.0%/16.0%
+BKB: 40
+KBG: 55
+Angle: 361/300
+Framedata: 21-23
+Autocancel Window: 50
+Landing Lag: 23
+FAF: 70
+Simon
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.73 -> 1.675)
+
+
+Run Speed Increased (1.52 -> 1.57)
+
+
+Traction Decreased (0.085 -> 0.05525)
+
+
+DACUS/DACDS Window: Frames 1-11
+
+
+Specials
+
+
+Holy Water is now B Reversable
+Richter
+
+
+
+
+Stats
+
+
+Initial Dash Speed Increased (1.73 -> 1.8)
+
+
+Run Speed Increased (1.52 -> 1.75)
+
+
+Traction Decreased (0.085 -> 0.05525)
+
+
+DACUS/DACDS Window: Frames 1-11
+
+
+Specials
+
+
+Down Special is now B Reversable
+King K Rool
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.936 -> 1.7325)
+
+
+Run Speed Increased (1.485 -> 1.88)
+
+
+Traction Decreased (0.105 -> 0.06825)
+
+
+King K Rool can now Wall Jump
+
+
+DACUS/DACDS Window: Frames 1-8
+
+Grounded Moves
+
+Forward Smash Startup Decreased (19 -> 17)
+
+Aerial Moves
+
+Uair FAF Decreased (71 -> 58)
+
+
+Using Uair more than once in the air will not allow King K Rool to gain height boost from Uair until he lands, loses a stock, or manages to use a third Uair
+
+Specials
+Propellerpack is now B Reversable
+
+
+Up Special can be canceled into any of King K Rool’s aerials beyond frame 10.
+
+After the aerial is over, King K Rool automatically enters free fall.
+
+
+Gut Check is now B Reversable
+Isabelle
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.815 -> 1.8)
+
+
+Run Speed Increased (1.48 -> 1.54)
+
+
+Traction Decreased (0.131 -> 0.08515)
+
+
+DACUS/DACDS Window: Frames 1-8
+
+
+Specials
+
+
+Fishing Rod is now B Reversable
+
+
+Lloid Trap is now B Reversable
+Incineroar
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.76 -> 1.65)
+
+
+Run Speed Increased (1.18 -> 1.2)
+
+
+Traction Decreased (0.114 -> 0.0741)
+
+
+DACUS/DACDS Window: Frames 1-9
+Piranha Plant
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.82 -> 1.66)
+
+
+Run Speed Increased (1.72 -> 1.82)
+
+
+Traction Decreased (0.088 -> 0.0572)
+
+
+Air Speed Increased (1.0 -> 1.075)
+
+
+DACUS/DACDS Window: Frames 1-8
+
+Grounded Moves
+
+Dash Attack FAF Decreased (47 -> 40)
+
+
+Dash Attack has Pot Intangibility from frames 7-14
+
+
+Forward Tilt 1 Duration Increased (7-8 -> 6-8)
+
+
+Forward Tilt 2 Knockback Growth Increased (117 -> 135)
+
+
+Forward Tilt 2 Duration Increased (5-6 -> 5-7)
+
+
+Up Tilt Startup Decreased (6 -> 5)
+
+Up Tilt now has Sweetspot Priority
+
+
+Up Tilt FAF Decreased (26 -> 24)
+
+
+Down Tilt Range Increased (Z: 5.5/9.5/13.0/17.0 -> 5.5/10.5/15.0/20.0)
+
+
+Down Tilt FAF Decreased (29 -> 26)
+
+
+Forward Smash Startup Decreased (16 -> 12)
+
+
+Forward Smash KBG Decreased (99 -> 80)
+
+
+Forward Smash has Sweetspot Priority
+
+
+Up Smash Fallouts Fixed
+
+
+Down Smash Lower Vertical Range Increased (Y: 4.0/4.0 -> 4.0/1.0)
+
+
+Down Smash has Pot Intangibility from frames 10-20
+
+Aerial Moves
+
+Nair Landing Lag Reduced (15 -> 11)
+
+
+Nair Startup Decreased (8 -> 6)
+
+
+Nair has a head hitbox
+
+
+Nair Autocancel Window Decreased (40 -> 30)
+
+
+Nair Multihit Hitstun Increased (0 -> 5)
+
+
+Nair Finisher Hit adjusted to a single hitbox around the size of Plant’s leaves
+
+
+Nair Finisher Hit Hitstun Increased (0 -> 3)
+
+
+Nair Finisher Hit KBG Decreased (140 -> 135)
+
+
+Nair Finisher Hit Angle Increased (361 -> 50)
+
+
+Fair Duration Increased (7-9 -> 6-12)
+
+
+Fair Sourspot Size Increased (4.5 -> 5.5)
+
+
+Fair Range Increased (X: 3.0/-3.0 -> 2.0/-4.0)
+
+Fair has Pot Intangibility from frames 6-12
+
+
+Fair Landing Lag Decreased (13 -> 11)
+
+
+Bair Landing Lag Decreased (16 -> 11)
+
+
+Bair FAF Decreased (62 -> 55)
+
+
+Bair Hitbox Height Increased (Y: 4.0 -> 4.5)
+
+
+Bair now has a late hit.
+Said late hit deals 4.5% less damage, and is active from frames 16-18
+
+
+Uair Duration Increased (7-9 -> 7-10)
+
+
+Uair now gains stem sourspots that deal 2.5% less damage
+
+
+Dair Damage Increased (11.0% -> 14.0%)
+
+
+Dair has Pot Intangibility from frames 9-13
+
+
+Dair now has spike priority
+
+
+Dair Spike Hitbox Size Decreased (4.5 -> 3.75)
+
+Specials
+Piranhacopter is now B Reversable
+
+
+Up Special Horizontal Starting Speed Increased (0.4 -> 0.6)
+
+
+Up Special Vertical Starting Speed Increased (0.15 -> 0.35)
+
+
+Long Stem Strike is now B Reversable
+
+
+Down Special Max Tilt Angle Increased (115 -> 360)
+
+
+Down Special Max Tilt Speed Increased (4 -> 6)
+Joker
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.9 -> 1.85)
+
+
+Run Speed Increased (2.06 -> 2.1)
+
+
+Traction Decreased (0.13 -> 0.0845)
+
+
+DACUS/DACDS Window: Frames 1-7
+Hero
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.88 -> 1.55)
+
+
+Run Speed Decreased (1.84 -> 1.55)
+
+
+Traction Decreased (0.11 -> 0.0715)
+
+
+DACUS/DACDS Window: Frames 1-22
+
+
+Specials
+
+
+Woosh/Swoosh/Kaswoosh is now B Reversable
+
+
+Command Select is now B Reversable
+Banjo & Kazooie
+
+
+
+
+Stats
+
+
+Initial Dash Speed Increased (1.68 -> 1.7)
+
+
+Run Speed Decreased (2.18 -> 1.9)
+
+
+Traction Decreased (0.076 -> 0.0494)
+
+
+DACUS/DACDS Window: Frames 1-10
+Terry
+
+
+
+
+Stats
+
+
+Run Speed Decreased (1.72 -> 1.7)
+
+
+Traction Decreased (0.111 -> 0.07215)
+
+
+DACUS/DACDS Window: Frames 1-11
+Byleth
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.8 -> 1.74)
+
+
+Run Speed Increased (1.43 -> 1.6)
+
+
+Traction Decreased (0.125 -> 0.08125)
+
+
+DACUS/DACDS Window: Frames 1-10
+
+
+Specials
+
+
+Areadbhar is now B Reversable
+
+
+Aymr is now B Reversable
+Min-Min
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.9 -> 1.5)
+
+
+Run Speed Decreased (1.55 -> 1.25)
+
+
+Traction Decreased (0.13 -> 0.0845)
+
+
+DACUS/DACDS Window: Frames 1-8
+Steve
+
+
+
+
+Stats
+
+
+Initial Dash Speed Increased (1.45 -> 1.5)
+
+
+Run Speed Increased (1.45 -> 1.5)
+
+
+Traction Decreased (0.095 -> 0.06175)
+
+
+DACUS/DACDS Window: Frames 1-9
+
+
+Specials
+
+
+Minecart is now B Reversable
+Sephiroth
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.92 -> 1.815)
+
+
+Run Speed Decreased (1.86 -> 1.7)
+
+
+Traction Decreased (0.11 -> 0.0715)
+
+
+Sephiroth can now Wall Jump
+
+
+Sephiroth’s Foot/Leg becomes intangible during dash and turn dash
+(Dash: Left Foot Intangible from frames 4-25, Turn Dash: Left Leg Intangible from frames 1-3, and Right Foot/Knee Intangible from frames 6-34)
+
+
+DACUS/DACDS Window: Frames 1-15
+
+Grounded Moves
+
+Forward Smash Inner Sourspot Damage Increased (13.5% -> 16.5%)
+
+Aerial Moves
+
+Uair Landing Lag Decreased (21 -> 17)
+
+
+Grabs/Throws
+
+Standing Grab Hitbox Increased (3.3 -> 5.3)
+
+
+Grab Length Increased (X: 4.7 - 9.0 -> 4.7 - 13.0)
+
+
+Down Throw Startup Decreased (40 -> 30)
+
+
+Down Throw Angle Increased (56 -> 75)
+
+
+Specials
+
+Flare Release Time Decreased (The time it takes for Sephiroth to be able to release Flare from the charging animation (19 -> 5))
+
+
+Flare Hitbox Increased (3.0 -> 4.0)
+
+
+Blade Dash is now edge cancelable
+Pyra
+
+
+
+
+Stats
+
+
+Initial Dash Speed Increased (1.69 -> 1.75)
+
+
+Run Speed Increased (1.38 -> 1.48)
+
+
+Traction Decreased (0.8 -> 0.052)
+
+
+DACUS/DACDS Window: Frames 1-18
+
+
+Specials
+
+
+Swap to Mythra is now B Reversable
+Mythra
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (2.45 -> 1.93)
+
+
+Run Speed Decreased (2.41 -> 2.15)
+
+
+Traction Decreased (0.121 -> 0.07865)
+
+
+DACUS/DACDS Window: Frames 1-10
+
+
+Specials
+
+
+Photon Edge is now B Reversable
+
+
+Swap to Pyra is now B Reversable
+Kazuya
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.58 -> 1.52)
+
+
+Traction Decreased (0.115 -> 0.07475)
+
+
+DACUS/DACDS Window: Frames 1-16
+Sora
+
+
+
+
+Stats
+
+
+Initial Dash Speed Decreased (1.78 -> 1.7325)
+
+
+Run Speed Increased (1.58 -> 1.66)
+
+
+Traction Decreased (0.086 -> 0.0559)
+
+
+DACUS/DACDS Window: Frames 1-8
+
+
+Specials
+
+
+Counterattack is now B Reversable
+
+Senator Armstrong
+
+
+Introduction
+
+So, whenever you ask the average smash fan who they would give Ganondorf's vanilla moveset to, the most likely answer you'll hear is Black Shadow. However, through doing some research on my own, and the current circumstances with models and the like, I found that Black Shadow doesn't actually fit the archetype of Smash Ganon that well, and for a few reasons. 
+
+
+First, since Falcon's playstyle is loosely based on F-Zero's Speed, it should make sense that Black Shadow should also do that, however, in F-Zero, Black Shadow is actually faster than Falcon, but he has the downside of being really hard to control, so his playstyle could be described as "Sonic on Ice", which doesn't really fit the same archetype as Smash Ganondorf. However, I did find a character that would fit even better than Black Shadow: Senator Steven Armstrong, from Metal Gear Rising: Revengeance. 
+
+
+Now, let me explain why I find him to be a better candidate. First, as I just mentioned, Black Shadow wouldn't actually play as close to Vanilla Ganon as most people think he would, but, in Armstrong's final battle, he fights like Smash Ganon almost to a tee, using really hard hitting attacks (1/4-1/8th of your health), but they have a long windup. Second, he's a much more unique choice compared to Black Shadow, and given how people seem to prefer Third Party additions over First Party additions, I figured this is a better option. Third, he has a lot of memorable and memeable voice clips that I can use for his voice (even though this is a serious addition). 
+
+
+So, now that I've given my justifications for having him instead of Black Shadow, let me go over how he's changed from Vanilla Ganondorf.
+
+
+Cosmetics
+
+
+Credit to WTails for fixing up model textures
+(https://www.youtube.com/channel/ucglnbqohhisaf-fy4xqqpug)
+
+
+Credit to GreenRedMario for remastering the model and adding the alts
+(https://www.youtube.com/channel/ucglnbqohhisaf-fy4xqqpug)
+
+Credit to Curve for obtaining the voice clips for Senator Armstrong
+(https://www.youtube.com/channel/UCbW3EN_WqH6SL3k27A8xvmA)
+
+Alt 1 is Default Armstrong
+
+Alt 2 is a red and brown color scheme based on Monsoon
+
+Alt 3 is a white and gray color scheme based on Raiden
+
+Alt 4 is a Red, White, and Blue color scheme, because Patriotism
+
+(Alts 5-8 are shirtless)
+
+Alt 5 is his shirtless form during the second phase of his boss battle
+
+Alt 6 has him adorn blue Navy pants, because he served in the Navy
+
+Alt 7 is mostly identical to Alt 5, but his skin has been turned into Nanomachines
+
+Alt 8 has him adorn beige green pants and white hair, in reference to Liquid Ocelot
+
+Up Taunt has him pose his fist triumphantly while exclaiming 
+“Making the Mother of All Omelets”
+
+Side Taunt has him pull his left arm outwards while saying
+“Nanomachines Son”
+
+(Based on this scene)
+
+
+Down Taunt has him stand straight up, almost completely stops moving, and anticipates the opponent to attack them. This taunt can be looped, and it gains both Super Armor and Ungrabbability; however, canceling the taunt after being hit will cause Armstrong to automatically enter Side Taunt.
+
+(Based on this scene)
+
+
+
+Stats
+
+
+Armstrong has two passive mechanics that both enhance his survivability and increase his threat range. Instadrop, and Crouch Canceling.
+
+Whenever fast falling, Armstrong's body generates a hitbox. Said hitbox deals 1%. In addition, Armstrong's gravity increases triplefold whenever fast falling.
+
+Whenever Armstrong fully crouches down, he now only takes 77% knockback from any attack.
+
+
+Walk Speed Decreased (0.767 -> 0.7325)
+
+
+Traction Decreased (0.125 -> 0.04)
+
+
+Initial Dash Speed Decreased (1.87 -> 1.5)
+
+
+Run Speed Increased (1.34 -> 1.4)
+
+
+Initial Jump Velocity Increased (14.0195 -> 25.0625)
+
+
+Fullhop Height Increased (25.49 -> 33.25)
+
+
+Shorthop Height Increased (12.24 -> 15.0)
+
+
+Air Jump Height Increased (26.0 -> 30.35)
+
+
+Air Acceleration Increased (Base: 0.01 -> 0.02, Additional: 0.03 -> 0.05)
+
+
+Air Speed Increased (0.83 -> 0.875)
+
+
+Air Friction Decreased (0.015 -> 0.01)
+
+
+Gravity Increased (0.108 -> 0.11)
+
+
+Fall Speed Increased (1.65 -> 1.62)
+
+
+Fast Fall Speed Increased (2.64 -> 4.86)
+
+
+Shield Size Increased (15.0 -> 20.0)
+
+
+DACUS/DACDS Window: Frames 1-11
+
+Grounded Moves
+
+Armstrong has a mechanic related to all of his grounded attacks. 
+
+While Armstrong is performing the move, he gains a various amount of damage based armor, depending on the speed of the move. In addition, Armstrong only takes 35% knockback during the attack. 
+
+In addition, any time Armstrong's limbs contact the ground during an attack, it will create a disjointed shockwave. Said shockwave deals half the damage of the normal attack.
+
+
+Every single one of Armstrong’s grounded moves are now transcendent
+
+
+Jab 1 Armor: 1.2%
+
+
+Jab 1 Startup Decreased (7 -> 4)
+
+
+Jab 1 Damage Decreased (11.0% -> 8.0%)
+
+
+Jab 1 Y Disjoint Decreased (12.0 -> 9.5)
+
+
+Jab 1 FaF Decreased (26 -> 19)
+
+
+Jab 1 now uses the normal attribute
+
+
+Forward Tilt Armor: 6.0%
+
+
+Forward Tilt is now angleable
+
+
+Up Tilt is now an upward stretch kick.
+
+Up Tilt Stats:
+   
+Up Tilt Armor: 5.0%
+Damage: 12.5%
+BKB: 60
+KBG: 67
+Angle: 85
+Framedata: 13-15
+FaF: 42
+Minimum Shield Safety: -17
+Maximum Shield Safety: -15
+
+
+Down Tilt Armor: 4.5%
+
+
+Down Tilt Damage Decreased (14.0% -> 12.0%)
+
+
+Down Tilt FaF Decreased (35 -> 30)
+
+
+Down Tilt Angles Adjusted (60/70/80 -> 80/90/100)
+
+
+Dash Attack Armor: 6.0%
+
+
+Forward Smash is now a fiery windup punch (A significantly faster but slightly weaker version of Falcon Punch)
+
+
+Forward Smash Stats:
+
+
+Forward Smash Armor: 9.5%
+Damage: 24.0%
+BKB: 60
+KBG: 60
+Angle: 40
+Framedata: Can be charged on frame 18, hits on frames 24-26
+FaF: 60
+Minimum Shield Safety: -20
+Maximum Shield Safety: -13
+
+Up Smash is now a heavy uppercut, akin to Terry's Up Smash
+
+Up Smash Stats:
+
+Up Smash Armor: 8.5%
+Damage: 22.0%
+BKB: 40
+KBG: 70
+Angle: 80
+Framedata: Can be charged on frame 16, hits on frames 20-22
+FaF: 55
+Minimum Shield Safety: -21
+Maximum Shield Safety: -15
+
+
+Down Smash is a one handed punch
+
+Down Smash Stats:
+
+Damage: 20.0%/19.0%/18.0%
+BKB: 50
+KBG: 50
+Angle: 300 for Fist, 361 for Arm/Shoulder
+The Grounded Fist Hitbox inflicts Crumple
+Armor Duration: 5-24
+Framedata: Can be charged on frame 4, hits on frame 20-24
+Minimum Shield Safety: -28
+Maximum Shield Safety: -18
+FAF: 60
+
+(Based on this scene)
+
+
+
+Aerials
+
+Nair's animation has been adjusted to have the left leg hit lower and more horizontally
+
+
+Nair 1 Damage Adjusted (7.0%/5.25% -> 6.0%)
+
+
+Nair 1 Angle Adjusted (55/75/100 -> 75 (Grounded)/367 (Aerial))
+
+
+Nair 1 BKB Increased (20/50 -> 55)
+
+
+Nair 1 KBG Increased (30/110 -> 40)
+
+
+Nair 2 Damage Adjusted (12.0%/9.0% -> 10.5%)
+
+
+Nair 2 Angle Increased (361 -> 50)
+
+
+Fair Damage Adjusted (17.0%/18.0% -> 17.0%)
+
+
+Fair BKB Increased (20 -> 60)
+
+
+Fair KBG Decreased (93 -> 70)
+
+
+Fair Starting Angle Increased (361 -> 60 (Frames 14-15))
+
+
+Fair FaF Decreased (45 -> 40)
+
+
+Fair Autocancel Window Decreased (45 -> 38)
+
+
+Bair Damage Decreased (17.0%/18.5% -> 15.0%/16.5%)
+
+
+Bair BKB Decreased (40 -> 30)
+
+
+Bair KBG Increased (86 -> 90)
+
+
+Bair FaF Decreased (36 -> 30)
+
+
+Uair Duration Adjusted (8-16 -> 7-20)
+
+
+Uair Late Hit Angle Decreased (0 -> 230)
+
+
+Uair FaF Decreased (33 -> 30)
+
+
+Uair Landing Lag Decreased (11 -> 10)
+
+
+Dair FaF Decreased (45 -> 40)
+
+
+Dair Landing Lag Decreased (16 -> 15)
+
+
+Grabs/Throws
+
+
+Forward Throw BKB Decreased (68 -> 45)
+
+
+Forward Throw KBG Increased (70 -> 100)
+
+
+Forward Throw Angle Increased (43 -> 45)
+
+
+Forward Throw FaF Decreased (39 -> 36)
+
+
+Back Throw KBG Increased (130 -> 155)
+
+
+Back Throw FaF Decreased (49 -> 40)
+
+
+Up Throw KBG Increased (105 -> 165)
+
+
+Up Throw FaF Decreased (43 -> 38)
+
+
+Down Throw BKB Increased (70 -> 75)
+
+
+Down Throw KBG Decreased (50 -> 45)
+
+
+Down Throw Angle Increased (65 -> 80)
+
+
+Specials
+
+Neutral Special is now Overdrive Fire Punch/Diving Fire Punch:
+
+Armstrong raises his fist forward, before winding it up and striking the ground. Upon striking the ground, several shockwaves are shot forward. This covers about a third of FD in length.
+
+Overdrive Fire Punch Stats:
+
+Overdrive Fire Punch Armor: Infinite
+Overdrive Fire Punch has Armstrong only take 35% knockback
+Damage: 40.0%/20.0%
+BKB: 80
+KBG: 46
+Angle: 361
+Framedata: 80 for the Punch, 95-115 for the Shockwave
+FAF: 140
+Minimum Shield Safety: -26
+Maximum Shield Safety: -7
+
+Using the move in the air will have him initiate Diving Fire Punch, where he dives straight down from the raised fist pose.
+
+Diving Fire Punch has identical stats to Vanilla Wizards Foot.
+
+
+Diving Fire Punch restores Armstrong's Double Jump on use.
+
+
+Side Special is now Fiery Dropkick. Armstrong performs a Flying Dropkick engulfed in flames. When used in the air, the angle is more steep, around a 45 degree angle.
+
+Fiery Drop Kick’s Stats are also identical to Wizards Foot, however the aerial version doesn’t spike
+
+
+Up Special Height Multiplier Increased (1.0x -> 1.1x)
+
+
+Landing Up Special Grab will transition directly into a falling dive. This can be used to "Senatorcide".
+
+
+Down Special is Blasting Shockwave. This has Armstrong curl up, before uncurling and striking a pose, which creates a blast of wind. Said blast of wind also reflects projectiles.
+
+    Blasting Shockwave Stats:
+
+    Reflector Multiplier: 1.1x
+    Damage: 0.0%
+    BKB: 100
+    KBG: 100
+    Framedata: 20-25
+    FaF: 50
+
+
+Final Smash is called Energetic Overdrive. Armstrong curls up, absorbing energy around himself. This initial energy absorption has a paralyzing hitbox. After he is overloaded on energy, he unleashes it in a massive energetic shockwave.
